@@ -1,0 +1,35 @@
+name: Lint Commit Messages
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  check-commit-message:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check Out Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Validate Commit Message Format
+        run: |
+          REGEXP="^(add|delete|modify|refactor|fix): .+$"
+
+          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+            echo "Checking PR title..."
+            TITLE="${{ github.event.pull_request.title }}"
+            if [[ ! $TITLE =~ $REGEXP ]]; then
+              echo "ERROR: PR Title '$TITLE' does not match format '$REGEXP'"
+              exit 1
+            fi
+          fi
+
+          echo "Checking commit messages..."
+          git log --format=%s ${{ github.event.before }}..${{ github.event.after }} | while read commit_msg; do
+            if [[ ! $commit_msg =~ $REGEXP ]]; then
+              echo "ERROR: Commit message '$commit_msg' does not match format '$REGEXP'"
+              exit 1
+            fi
+          done
