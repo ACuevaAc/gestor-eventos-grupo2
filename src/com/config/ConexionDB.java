@@ -1,5 +1,5 @@
-package com.config;
+package src.com.config;
 
-public class ConexionDB {
+//public class ConexionDB {
 
-}
+//}
