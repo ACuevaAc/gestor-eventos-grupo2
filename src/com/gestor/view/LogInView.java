@@ -20,7 +20,7 @@ public class LogInView extends JFrame {
 	private JPanel contentPane;
 	private JTextField textField;
 	private JPasswordField passwordField;
-
+	
 	/**
 	 * Create the frame.
 	 */
