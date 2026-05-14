@@ -16,20 +16,33 @@ jobs:
       - name: Validate Commit Message Format
         run: |
           REGEXP="^(add|delete|modify|refactor|fix): .+$"
+          EXIT_CODE=0
 
           if [[ "${{ github.event_name }}" == "pull_request" ]]; then
-            echo "Checking PR title..."
             TITLE="${{ github.event.pull_request.title }}"
             if [[ ! $TITLE =~ $REGEXP ]]; then
-              echo "ERROR: PR Title '$TITLE' does not match format '$REGEXP'"
-              exit 1
+              echo "ERROR: PR Title '$TITLE' invalid."
+              EXIT_CODE=1
             fi
           fi
 
-          echo "Checking commit messages..."
-          git log --format=%s ${{ github.event.before }}..${{ github.event.after }} | while read commit_msg; do
-            if [[ ! $commit_msg =~ $REGEXP ]]; then
-              echo "ERROR: Commit message '$commit_msg' does not match format '$REGEXP'"
-              exit 1
+          if [[ "${{ github.event.before }}" == "0000000000000000000000000000000000000000" || -z "${{ github.event.before }}" ]]; then
+            echo "New branch detected. Checking commits against origin/main..."
+            COMMIT_LIST=$(git log origin/main..HEAD --format=%s)
+          else
+            echo "Existing branch push. Checking range ${{ github.event.before }}..${{ github.event.after }}"
+            COMMIT_LIST=$(git log ${{ github.event.before }}..${{ github.event.after }} --format=%s)
+          fi
+
+          while read -r commit_msg; do
+            if [[ -n "$commit_msg" ]]; then
+              if [[ ! $commit_msg =~ $REGEXP ]]; then
+                echo "ERROR: Commit message '$commit_msg' does not match format."
+                EXIT_CODE=1
+              else
+                echo "VALID: '$commit_msg'"
+              fi
             fi
-          done
+          done <<< "$COMMIT_LIST"
+
+          exit $EXIT_CODE
