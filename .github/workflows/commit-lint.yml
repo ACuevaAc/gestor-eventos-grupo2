@@ -1,0 +1,48 @@
+name: Lint Commit Messages
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  check-commit-message:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check Out Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Validate Commit Message Format
+        run: |
+          REGEXP="^(add|delete|modify|refactor|fix|merge): .+$"
+          EXIT_CODE=0
+
+          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+            TITLE="${{ github.event.pull_request.title }}"
+            if [[ ! $TITLE =~ $REGEXP ]]; then
+              echo "ERROR: PR Title '$TITLE' invalid."
+              EXIT_CODE=1
+            fi
+          fi
+
+          if [[ "${{ github.event.before }}" == "0000000000000000000000000000000000000000" || -z "${{ github.event.before }}" ]]; then
+            echo "New branch detected. Checking commits against origin/main..."
+            COMMIT_LIST=$(git log origin/main..HEAD --format=%s)
+          else
+            echo "Existing branch push. Checking range ${{ github.event.before }}..${{ github.event.after }}"
+            COMMIT_LIST=$(git log ${{ github.event.before }}..${{ github.event.after }} --format=%s)
+          fi
+
+          while read -r commit_msg; do
+            if [[ -n "$commit_msg" ]]; then
+              if [[ ! $commit_msg =~ $REGEXP ]]; then
+                echo "ERROR: Commit message '$commit_msg' does not match format."
+                EXIT_CODE=1
+              else
+                echo "VALID: '$commit_msg'"
+              fi
+            fi
+          done <<< "$COMMIT_LIST"
+
+          exit $EXIT_CODE
