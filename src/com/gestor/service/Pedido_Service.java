@@ -1,5 +1,5 @@
 package com.gestor.service;
 
-public class test {
+public class Pedido_Service {
 
 }
