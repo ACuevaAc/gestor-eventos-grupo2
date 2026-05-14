@@ -35,12 +35,13 @@ jobs:
           fi
 
           while read -r commit_msg; do
-            if [[ -z "$commit_msg" ]]; continue; fi
-            if [[ ! $commit_msg =~ $REGEXP ]]; then
-              echo "❌ ERROR: Commit message '$commit_msg' does not match format."
-              EXIT_CODE=1
-            else
-              echo "VALID: '$commit_msg'"
+            if [[ -n "$commit_msg" ]]; then
+              if [[ ! $commit_msg =~ $REGEXP ]]; then
+                echo "ERROR: Commit message '$commit_msg' does not match format."
+                EXIT_CODE=1
+              else
+                echo "VALID: '$commit_msg'"
+              fi
             fi
           done <<< "$COMMIT_LIST"
 
