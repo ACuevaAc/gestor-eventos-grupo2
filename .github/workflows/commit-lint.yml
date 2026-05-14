@@ -15,7 +15,7 @@ jobs:
 
       - name: Validate Commit Message Format
         run: |
-          REGEXP="^(add|delete|modify|refactor|fix): .+$"
+          REGEXP="^(add|delete|modify|refactor|fix|merge): .+$"
           EXIT_CODE=0
 
           if [[ "${{ github.event_name }}" == "pull_request" ]]; then
