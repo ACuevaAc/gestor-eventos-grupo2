@@ -1,4 +1,4 @@
-package com.config;
+package src.com.config;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -27,4 +27,4 @@ public class ConexionDB {
 		}
 	}
 
-}
+//}
