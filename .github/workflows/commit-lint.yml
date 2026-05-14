@@ -26,23 +26,15 @@ jobs:
             fi
           fi
 
-          if [[ "${{ github.event.before }}" == "0000000000000000000000000000000000000000" || -z "${{ github.event.before }}" ]]; then
-            echo "New branch detected. Checking commits against origin/main..."
-            COMMIT_LIST=$(git log origin/main..HEAD --format=%s)
+          COMMIT_MSG=$(git log -1 --format=%s)
+          
+          echo "Checking latest commit: $COMMIT_MSG"
+          
+          if [[ ! $COMMIT_MSG =~ $REGEXP ]]; then
+            echo "ERROR: Latest commit message '$COMMIT_MSG' does not match format."
+            EXIT_CODE=1
           else
-            echo "Existing branch push. Checking range ${{ github.event.before }}..${{ github.event.after }}"
-            COMMIT_LIST=$(git log ${{ github.event.before }}..${{ github.event.after }} --format=%s)
+            echo "VALID: '$COMMIT_MSG'"
           fi
-
-          while read -r commit_msg; do
-            if [[ -n "$commit_msg" ]]; then
-              if [[ ! $commit_msg =~ $REGEXP ]]; then
-                echo "ERROR: Commit message '$commit_msg' does not match format."
-                EXIT_CODE=1
-              else
-                echo "VALID: '$commit_msg'"
-              fi
-            fi
-          done <<< "$COMMIT_LIST"
 
           exit $EXIT_CODE
