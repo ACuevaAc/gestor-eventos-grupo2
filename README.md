@@ -38,3 +38,12 @@ String url = "jdbc:postgresql://YOUR_VPS_IP:5432/gegdb";
 String user = "adm";
 String password = "your_secure_password";
 ```
+
+## Default Credentials
+Use these credentials for the initial login after running the database migration script.
+| Role | Email | Password |
+| :--- | :---  | :---     |
+| Administrador | admin@gegdb.com | admin123 |
+
+[!IMPORTANT]
+The default admin password is encrypted using SHA-512. If you are manually inserting users into the database, ensure the password string is hashed before the INSERT operation.
