@@ -1,4 +1,4 @@
-package src.com.config;
+package com.config;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -26,5 +26,5 @@ public class ConexionDB {
 			cnx.close();
 		}
 	}
+}
 
-//}
