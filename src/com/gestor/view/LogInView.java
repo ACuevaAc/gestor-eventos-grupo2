@@ -120,14 +120,14 @@ public class LogInView extends JFrame {
 
 		btnLogIn = new JButton("Iniciar Sesión");
 		btnLogIn.setFont(FUENTE_BOTON);
-		btnLogIn.setForeground(COLOR_PRINCIPAL);
+		btnLogIn.setForeground(Color.white);
 		btnLogIn.setBackground(COLOR_PRINCIPAL);
 		btnLogIn.setFocusPainted(false);
 		btnLogIn.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		btnLogIn.setPreferredSize(new Dimension(0, 45));
 		btnLogIn.setBorder(BorderFactory.createEmptyBorder());
-		actionPanel.add(btnLogIn);
 
+		actionPanel.add(btnLogIn);
 		btnSignUp = new JButton("Registrar Nuevo Usuario");
 		btnSignUp.setFont(FUENTE_LABEL);
 		btnSignUp.setForeground(COLOR_PRINCIPAL);
@@ -174,19 +174,14 @@ public class LogInView extends JFrame {
 
 	public static void main(String[] args) {
 		try {
-			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+			com.formdev.flatlaf.FlatLightLaf.setup();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				try {
-					LogInView frame = new LogInView();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+				new LogInView().setVisible(true);
 			}
 		});
 	}
