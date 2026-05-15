@@ -11,7 +11,7 @@ public class ConexionDB {
 	public static Connection obtener() throws SQLException, ClassNotFoundException {
 		if(cnx==null) {
 			try {
-				Class.forName("com.mysql.cj.jdbc.Driver");
+				Class.forName("org.postgresql.Driver");
 				cnx=DriverManager.getConnection("jdbc:postgresql://5.78.178.225:5432/gegdb","adm","l9nMñ44.aa1.j0s3mA");
 			} catch (SQLException ex) {
 				throw new SQLException(ex);
@@ -22,7 +22,7 @@ public class ConexionDB {
 		return cnx;
 	}
 	public static void cerrar() throws SQLException {
-		if(cnx==null) {
+		if(cnx!=null) {
 			cnx.close();
 		}
 	}
