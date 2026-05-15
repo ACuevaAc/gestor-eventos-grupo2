@@ -5,13 +5,17 @@ public class Usuario {
 	private String nombreUsuario,emailUsuario,pswUsuario,rolUsuario;
 	private int edad;
 	
-	public Usuario(int idUser,String nom,String email,int edadUser,String psw,String rol) {
+	public Usuario(int idUser,String nom,String email,int edadUser,String psw) {
 		this.idUsuario=idUser;
 		this.nombreUsuario=nom;
 		this.emailUsuario=email;
 		this.edad=edadUser;
 		this.pswUsuario=psw;
-		this.rolUsuario=rol;
+		this.rolUsuario="USER";
+	}
+
+	public Usuario() {
+		
 	}
 
 	public int getIdUsuario() {
