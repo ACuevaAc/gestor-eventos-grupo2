@@ -15,35 +15,55 @@ public class usuarioService {
 		try {
 			con=ConexionDB.obtener();
 		} catch (ClassNotFoundException | SQLException e) {
-			
+			e.printStackTrace();
 		}
 	}
+	public boolean existeEmail(String email) {
+		String sql="SELECT * FROM usuario WHERE email=?";
+		try {
+			PreparedStatement ps=con.prepareStatement(sql);
+			ps.setString(1, email);
+			
+			ResultSet rs=ps.executeQuery();
+			return rs.next();
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		}
+		return false;
+	}
 	public boolean registrar(Usuario usuario) {
-		String sql="INSERT INTO usuarios(nombre,email,password) VALUES (?,?,?)";
+		
+		if(existeEmail(usuario.getEmailUsuario())) {
+			return false;
+		}
+		String sql="INSERT INTO usuario(nombre,email,edad,password,rol) VALUES (?,?,?,?,?)";
+		
 		
 		try {
 			PreparedStatement ps=con.prepareStatement(sql);
 			ps.setString(1, usuario.getNombreUsuario());
 			ps.setString(2, usuario.getEmailUsuario());
-			ps.setString(3, usuario.getPswUsuario());
-			ps.setString(4, usuario.getRolUsuario());
+			ps.setInt(3, usuario.getEdad());
+			ps.setString(4, usuario.getPswUsuario());
+			ps.setString(5, usuario.getRolUsuario());
 			
 			ps.executeUpdate();
 			return true;
 		} catch( Exception ex) {
-			
+			ex.printStackTrace();
 		}
 		
 		return false;
 		
 	}
 	public Usuario login(String email,String psw) {
-		String sql="SELECT * FROM usuarios WHERE email=? AND password=?";
+		String sql="SELECT * FROM usuario WHERE email=? AND password=?";
 		
 		try {
 			PreparedStatement ps=con.prepareStatement(sql);
 			ps.setString(1, email);
-			ps.setString(2, psw);
+			String contra=SecurityService.hashString(psw);
+			ps.setString(2, contra);
 			
 			ResultSet rs= ps.executeQuery();
 			
