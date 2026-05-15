@@ -62,7 +62,8 @@ public class usuarioService {
 		try {
 			PreparedStatement ps=con.prepareStatement(sql);
 			ps.setString(1, email);
-			ps.setString(2, psw);
+			String contra=SecurityService.hashString(psw);
+			ps.setString(2, contra);
 			
 			ResultSet rs= ps.executeQuery();
 			

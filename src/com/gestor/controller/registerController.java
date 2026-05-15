@@ -8,6 +8,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import com.gestor.model.entity.Usuario;
+import com.gestor.service.SecurityService;
 import com.gestor.service.usuarioService;
 import com.gestor.view.loginView;
 import com.gestor.view.signupView;
@@ -52,7 +53,9 @@ public class registerController {
 		user.setNombreUsuario(view.getTxtNombre().getText());
 		user.setEmailUsuario(view.getTxtConfirmEmail().getText());
 		user.setEdad(Integer.parseInt(view.getTxtEdad().getText()));
-		user.setPswUsuario(String.valueOf(view.getTxtConfirmPassword().getPassword()));
+		String psw=String.valueOf(view.getTxtConfirmPassword().getPassword());
+		String hash=SecurityService.hashString(psw);
+		user.setPswUsuario(hash);
 		user.setRolUsuario("USER");
 		
 		boolean registrar=false;

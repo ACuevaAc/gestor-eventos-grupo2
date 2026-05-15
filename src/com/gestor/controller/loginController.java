@@ -27,6 +27,7 @@ public class loginController {
 	public void login() {
 		String email=view.getTxtEmail().getText();
 		String psw=String.valueOf(view.getPasswordField().getPassword());
+		
 		Usuario usuario=uService.login(email, psw);
 		if(usuario!=null) {
 			JOptionPane.showMessageDialog(null, "Login Correcto ");
