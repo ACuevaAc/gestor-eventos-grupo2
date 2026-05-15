@@ -31,6 +31,8 @@ public class SignUpView extends JFrame {
 	private JTextField txtConfirmEmail;
 	private JPasswordField txtPassword;
 	private JPasswordField txtConfirmPassword;
+	private JButton btnCreate;
+	private JButton btnBack;
 
 	private final Color COLOR_FONDO = new Color(248, 249, 250);
 	private final Color COLOR_TEXTO = new Color(43, 43, 43);
@@ -152,7 +154,7 @@ public class SignUpView extends JFrame {
 		JPanel actionPanel = new JPanel(new GridLayout(2, 1, 0, 10));
 		actionPanel.setOpaque(false);
 
-		JButton btnCreate = new JButton("Crear Cuenta");
+		btnCreate = new JButton("Crear Cuenta");
 		btnCreate.setFont(FUENTE_BOTON);
 		btnCreate.setForeground(COLOR_SECUNDARIO);
 		btnCreate.setBackground(COLOR_PRINCIPAL);
@@ -162,7 +164,7 @@ public class SignUpView extends JFrame {
 		btnCreate.setBorder(BorderFactory.createEmptyBorder());
 		actionPanel.add(btnCreate);
 
-		JButton btnBack = new JButton("Volver al Login");
+		btnBack = new JButton("Volver al Login");
 		btnBack.setFont(FUENTE_LABEL);
 		btnBack.setForeground(COLOR_SECUNDARIO);
 		btnBack.setContentAreaFilled(false);
@@ -172,6 +174,70 @@ public class SignUpView extends JFrame {
 		actionPanel.add(btnBack);
 
 		contentPane.add(actionPanel, BorderLayout.SOUTH);
+	}
+
+	public JTextField getTxtNombre() {
+		return txtNombre;
+	}
+
+	public void setTxtNombre(JTextField txtNombre) {
+		this.txtNombre = txtNombre;
+	}
+
+	public JTextField getTxtEdad() {
+		return txtEdad;
+	}
+
+	public void setTxtEdad(JTextField txtEdad) {
+		this.txtEdad = txtEdad;
+	}
+
+	public JTextField getTxtEmail() {
+		return txtEmail;
+	}
+
+	public void setTxtEmail(JTextField txtEmail) {
+		this.txtEmail = txtEmail;
+	}
+
+	public JTextField getTxtConfirmEmail() {
+		return txtConfirmEmail;
+	}
+
+	public void setTxtConfirmEmail(JTextField txtConfirmEmail) {
+		this.txtConfirmEmail = txtConfirmEmail;
+	}
+
+	public JPasswordField getTxtPassword() {
+		return txtPassword;
+	}
+
+	public void setTxtPassword(JPasswordField txtPassword) {
+		this.txtPassword = txtPassword;
+	}
+
+	public JPasswordField getTxtConfirmPassword() {
+		return txtConfirmPassword;
+	}
+
+	public void setTxtConfirmPassword(JPasswordField txtConfirmPassword) {
+		this.txtConfirmPassword = txtConfirmPassword;
+	}
+
+	public JButton getBtnCreate() {
+		return btnCreate;
+	}
+
+	public void setBtnCreate(JButton btnCreate) {
+		this.btnCreate = btnCreate;
+	}
+
+	public JButton getBtnBack() {
+		return btnBack;
+	}
+
+	public void setBtnBack(JButton btnBack) {
+		this.btnBack = btnBack;
 	}
 
 	public static void main(String[] args) {
