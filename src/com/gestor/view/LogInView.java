@@ -18,7 +18,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-public class loginView extends JFrame {
+public class LoginView extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -46,7 +46,7 @@ public class loginView extends JFrame {
 	private JButton btnLogIn;
 	private JButton btnSignUp;
 
-	public loginView() {
+	public LoginView() {
 		setTitle("Gestor de Restaurante - Acceso");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -178,7 +178,7 @@ public class loginView extends JFrame {
 
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				new loginView().setVisible(true);
+				new LoginView().setVisible(true);
 			}
 		});
 	}

@@ -4,14 +4,14 @@ import javax.swing.JOptionPane;
 
 import com.gestor.model.entity.Usuario;
 import com.gestor.service.usuarioService;
-import com.gestor.view.loginView;
+import com.gestor.view.LoginView;
 import com.gestor.view.signupView;
 
 public class loginController {
-	private loginView view;
+	private LoginView view;
 	private usuarioService uService;
 	
-	public loginController(loginView v,usuarioService us) {
+	public loginController(LoginView v,usuarioService us) {
 		this.view=v;
 		this.uService=us;
 		
