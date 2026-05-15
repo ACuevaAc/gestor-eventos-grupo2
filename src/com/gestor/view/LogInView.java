@@ -21,7 +21,7 @@ import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 
-public class LogInView extends JFrame {
+public class loginView extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -49,7 +49,7 @@ public class LogInView extends JFrame {
 	private JButton btnLogIn;
 	private JButton btnSignUp;
 
-	public LogInView() {
+	public loginView() {
 		setTitle("Gestor de Restaurante - Acceso");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -181,7 +181,12 @@ public class LogInView extends JFrame {
 
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				new LogInView().setVisible(true);
+				try {
+					loginView frame = new loginView();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
 		});
 	}
