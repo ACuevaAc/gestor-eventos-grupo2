@@ -153,16 +153,5 @@ public class AdminMainView extends JFrame {
 		btn.putClientProperty("JButton.cornerRadius", 20);
 	}
 
-	public static void main(String[] args) {
-		try {
-			FlatLightLaf.setup();
-		} catch (Exception e) {
-		}
-		EventQueue.invokeLater(() -> {
-			try {
-				new AdminMainView().setVisible(true);
-			} catch (Exception e) {
-			}
-		});
-	}
+	
 }
