@@ -7,7 +7,6 @@ public class Mesa {
 	private int id,num_max;
 	private String nombre;
 	private boolean mesa_Reservada;
-	private Date fecha_actual;
 	
 	public Mesa(int id,int num_max,String nom,boolean reservada) {
 		this.id=id;
