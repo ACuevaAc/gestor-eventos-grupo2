@@ -1,16 +1,13 @@
 package com.gestor.controller;
 
-import java.awt.Component;
 import java.awt.Container;
 
 import javax.swing.JOptionPane;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
 
 import com.gestor.model.entity.Usuario;
 import com.gestor.service.SecurityService;
 import com.gestor.service.usuarioService;
-import com.gestor.view.LoginView;
+import com.gestor.view.loginView;
 import com.gestor.view.signupView;
 
 public class registerController {
@@ -29,7 +26,7 @@ public class registerController {
 	}
 	public void back() {
 		view.dispose();
-		LoginView v=new LoginView();
+		loginView v=new loginView();
 		v.setVisible(true);
 		new loginController(v,uService);
 	}

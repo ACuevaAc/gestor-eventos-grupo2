@@ -36,7 +36,7 @@ public class AdminMainView extends JFrame {
 	private List<JButton> mesasList = new ArrayList<>();
 
 	public AdminMainView() {
-		setTitle("Admin Dashboard - Uniform Layout");
+		super("Administrador de mesas");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(850, 850);
 		setMinimumSize(new Dimension(650, 750));
@@ -59,6 +59,7 @@ public class AdminMainView extends JFrame {
 			fila.setOpaque(false);
 			for (int i = 0; i < numMesas; i++) {
 				JButton btn = crearBotonOvalado("Mesa " + contadorMesas++);
+				btn.setEnabled(false);
 				mesasList.add(btn);
 				fila.add(btn);
 			}
