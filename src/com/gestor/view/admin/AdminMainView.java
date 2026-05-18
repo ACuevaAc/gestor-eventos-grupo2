@@ -53,20 +53,19 @@ public class AdminMainView extends JFrame {
 		mesasPanel.setOpaque(false);
 
 		int contadorMesas = 1;
-		int[] esquema = { 3, 2, 3, 2 }; // 3-2-3-2
+		int[] esquema = { 3, 2, 3, 2 }; 
 
 		for (int numMesas : esquema) {
 			JPanel fila = new JPanel(new FlowLayout(FlowLayout.CENTER, 30, 10));
 			fila.setOpaque(false);
 			for (int i = 0; i < numMesas; i++) {
 				JButton btn = crearBotonOvalado("Mesa " + contadorMesas++);
-				btn.setEnabled(false);
+
 				mesasList.add(btn);
 				fila.add(btn);
 			}
 			mesasPanel.add(fila);
 		}
-
 		contentPane.add(mesasPanel, BorderLayout.CENTER);
 		actualizarTamanoMesas(mesasPanel.getWidth(), mesasPanel.getHeight());
 

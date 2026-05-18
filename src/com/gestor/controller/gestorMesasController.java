@@ -29,9 +29,10 @@ public class gestorMesasController {
 	}
 	public void volverMenu() {
 		view.dispose();
-		AdminMainView v=new AdminMainView();
-		v.setVisible(true);
-		new AdminController(v);
+		AdminMainView view=aCont.getAdminView();
+		view.setVisible(true);
+		
+		cargarMesas();
 	}
 	public void registrarMesa() {
 		String nom=view.getTxtNombre().getText();
@@ -46,17 +47,20 @@ public class gestorMesasController {
 	}
 	public void cargarMesas() {
 	    List<JButton> lista = aCont.getAdminView().getMesasList();
-	    int idsActuales = ms.obtenerIdsMesas(); 
-	 
-	    int limite = Math.min(idsActuales, lista.size());
-	    
+	    int totalMesas = ms.obtenerIdsMesas();
+	    for (JButton boton : lista) {
+	        boton.setBackground(null); 
+	    }
+	    int limite = Math.min(totalMesas, lista.size());
 	    for (int i = 0; i < limite; i++) {
 	        lista.get(i).setBackground(Color.GREEN);
 	    }
-	    if (idsActuales > lista.size()) {
-	        System.out.println("LOG GestionMesasController: Hay " + idsActuales + " mesas en la BD, pero solo " + lista.size() + " botones en la pantalla.");
+	    aCont.getAdminView().repaint();
+	    if (totalMesas > lista.size()) {
+	        System.out.println("LOG GestionMesasController: Hay " + totalMesas + " mesas en la BD, pero solo " + lista.size() + " botones en la pantalla.");
 	    }
 	}
+
 
 
 }

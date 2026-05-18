@@ -7,7 +7,6 @@ public class AdminController {
 	private AdminMainView view;
 	
 	
-	
 	public AdminController(AdminMainView v) {
 		this.view=v;
 		view.getBtnCreateTable().addActionListener(e-> crearMesa());
@@ -17,7 +16,7 @@ public class AdminController {
 		return view;
 	}
 	public void crearMesa() {
-		view.dispose();
+		view.setVisible(false);
 		GestorMesasView v=new GestorMesasView();
 		v.setVisible(true);
 		new gestorMesasController(v,this);
