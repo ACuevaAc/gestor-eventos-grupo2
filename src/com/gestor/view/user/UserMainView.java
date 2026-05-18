@@ -137,16 +137,4 @@ public class UserMainView extends JFrame {
 	}
 
 
-	public static void main(String[] args) {
-		try {
-			FlatLightLaf.setup();
-		} catch (Exception e) {
-		}
-		EventQueue.invokeLater(() -> {
-			try {
-				new UserMainView().setVisible(true);
-			} catch (Exception e) {
-			}
-		});
-	}
 }
