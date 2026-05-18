@@ -13,11 +13,14 @@ public class AdminController {
 		view.getBtnCreateTable().addActionListener(e-> crearMesa());
 		view.getBtnNewAdmin().addActionListener(e-> createNewAdmin());
 	}
+	public AdminMainView getAdminView() {
+		return view;
+	}
 	public void crearMesa() {
 		view.dispose();
 		GestorMesasView v=new GestorMesasView();
 		v.setVisible(true);
-		new gestorMesasController(v);
+		new gestorMesasController(v,this);
 	}
 	public void createNewAdmin() {
 		

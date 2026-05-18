@@ -23,6 +23,23 @@ public class mesaService {
 		}
 	}
 	
+	public int obtenerIdsMesas() {
+		String sql="SELECT MAX(ID) FROM mesa";
+		try {
+			Statement st=conn.createStatement();
+			ResultSet rs=st.executeQuery(sql);
+			
+			if(rs.next()) {
+				return rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return 0;
+		
+	}
 	public List<Mesa> obtenerMesasCreadas() {
 		List<Mesa> lista=new ArrayList<>();
 		String sql="SELECT * FROM mesa";
@@ -33,9 +50,9 @@ public class mesaService {
 			while(rs.next()) {
 				lista.add(new Mesa(
 						rs.getInt("id"),
-						rs.getInt("Num_max"),
+						rs.getInt("numero_max"),
 						rs.getString("nombre"),
-						rs.getBoolean("reservada")
+						rs.getBoolean("reservado")
 						));
 			}
 			
@@ -46,7 +63,7 @@ public class mesaService {
 		return lista;
 	}
 	public void crearMesa(Mesa m) {
-		String sql = "INSERT INTO mesa (num_max, nombre, reservada) VALUES ( ?, ?, ?)";
+		String sql = "INSERT INTO mesa (numero_max, nombre, reservado) VALUES ( ?, ?, ?)";
 
 		
 		try {
