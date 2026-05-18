@@ -1,5 +1,5 @@
 package com.gestor.service;
 
-public class Mesa_Service {
+public class mesaService {
 
 }

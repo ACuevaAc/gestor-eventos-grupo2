@@ -4,14 +4,15 @@ import javax.swing.JOptionPane;
 
 import com.gestor.model.entity.Usuario;
 import com.gestor.service.usuarioService;
-import com.gestor.view.LoginView;
+import com.gestor.view.loginView;
 import com.gestor.view.signupView;
+import com.gestor.view.admin.AdminMainView;
 
 public class loginController {
-	private LoginView view;
+	private loginView view;
 	private usuarioService uService;
 	
-	public loginController(LoginView v,usuarioService us) {
+	public loginController(loginView v,usuarioService us) {
 		this.view=v;
 		this.uService=us;
 		
@@ -30,7 +31,15 @@ public class loginController {
 		
 		Usuario usuario=uService.login(email, psw);
 		if(usuario!=null) {
-			JOptionPane.showMessageDialog(null, "Login Correcto ");
+			if(usuario.getRolUsuario()=="ADMIN") {
+				view.dispose();
+				AdminMainView v=new AdminMainView();
+				v.setVisible(true);
+				new AdminController(v);
+				
+			} else if(usuario.getRolUsuario()=="USER") {
+				
+			}
 		} else {
 			JOptionPane.showMessageDialog(null, "Credenciales incorrectas");
 		}
