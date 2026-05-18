@@ -56,28 +56,30 @@ public class usuarioService {
 		return false;
 		
 	}
-	public Usuario login(String email,String psw) {
-		String sql="SELECT * FROM usuario WHERE email=? AND password=?";
-		
-		try {
-			PreparedStatement ps=con.prepareStatement(sql);
-			ps.setString(1, email);
-			String contra=SecurityService.hashString(psw);
-			ps.setString(2, contra);
-			
-			ResultSet rs= ps.executeQuery();
-			
-			if(rs.next()) {
-				Usuario u=new Usuario();
-				u.setIdUsuario(rs.getInt("id"));
-				u.setNombreUsuario(rs.getString("nombre"));
-				
-				return u;
-			}
-		} catch(Exception ex) {
-			
-		}
-		return null;
+	public Usuario login(String email, String psw) {
+	    String sql = "SELECT * FROM usuario WHERE email=? AND password=?";
+	    
+	    try {
+	        PreparedStatement ps = con.prepareStatement(sql);
+	        ps.setString(1, email);
+	        String contra = SecurityService.hashString(psw);
+	        ps.setString(2, contra);
+	        
+	        ResultSet rs = ps.executeQuery();
+	        
+	        if (rs.next()) {
+	            Usuario u = new Usuario();
+	            u.setIdUsuario(rs.getInt("id"));
+	            u.setNombreUsuario(rs.getString("nombre"));
+	            u.setEmailUsuario(rs.getString("email")); 
+	            u.setEdad(rs.getInt("edad"));             
+	            u.setRolUsuario(rs.getString("rol")); 
+	            return u;
+	        }
+	    } catch (Exception ex) {
+	        ex.printStackTrace(); 
+	    }
+	    return null;
 	}
 
 }

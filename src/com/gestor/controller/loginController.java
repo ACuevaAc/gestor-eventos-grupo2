@@ -26,25 +26,26 @@ public class loginController {
 		new registerController(v,this,uService);
 	}
 	public void login() {
-		String email=view.getTxtEmail().getText();
-		String psw=String.valueOf(view.getPasswordField().getPassword());
-		
-		Usuario usuario=uService.login(email, psw);
-		if(usuario!=null) {
-			if(usuario.getRolUsuario()=="ADMIN") {
-				view.dispose();
-				AdminMainView v=new AdminMainView();
-				v.setVisible(true);
-				new AdminController(v);
-				
-			} else if(usuario.getRolUsuario()=="USER") {
-				
-			}
-		} else {
-			JOptionPane.showMessageDialog(null, "Credenciales incorrectas");
-		}
-		
+	    String email = view.getTxtEmail().getText();
+	    String psw = String.valueOf(view.getPasswordField().getPassword());
+	    
+	    Usuario usuario = uService.login(email, psw);
+	    if (usuario != null) {
+	        if ("ADMIN".equalsIgnoreCase(usuario.getRolUsuario())) {
+	            System.out.println("LOG- ADMIN");
+	            view.dispose();
+	            AdminMainView v = new AdminMainView();
+	            v.setVisible(true);
+	            new AdminController(v);
+	        } else if ("USER".equalsIgnoreCase(usuario.getRolUsuario())) {
+	            System.out.println("LOG- ROL USER");                
+	        } else {
+	            JOptionPane.showMessageDialog(null, "Error: El usuario no tiene un rol válido asignado.");
+	        }
+	    } else {
+	        JOptionPane.showMessageDialog(null, "Credenciales incorrectas");
+	    }
 	}
-	
+
 
 }
