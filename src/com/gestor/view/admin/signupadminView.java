@@ -155,6 +155,10 @@ public class signupadminView extends JFrame {
 		actionPanel.setOpaque(false);
 
 		btnCreate = new JButton("Crear Cuenta");
+		btnCreate.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnCreate.setFont(FUENTE_BOTON);
 		btnCreate.setForeground(COLOR_SECUNDARIO);
 		btnCreate.setBackground(COLOR_PRINCIPAL);
