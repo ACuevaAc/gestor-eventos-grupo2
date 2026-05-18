@@ -24,7 +24,7 @@ public class mesaService {
 	}
 	
 	public int obtenerIdsMesas() {
-		String sql="SELECT MAX(ID) FROM mesa";
+		String sql="SELECT COUNT(*) FROM mesa";
 		try {
 			Statement st=conn.createStatement();
 			ResultSet rs=st.executeQuery(sql);
