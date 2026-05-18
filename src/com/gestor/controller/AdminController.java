@@ -8,6 +8,7 @@ import javax.swing.JButton;
 import com.gestor.service.mesaService;
 import com.gestor.view.admin.AdminMainView;
 import com.gestor.view.admin.GestorMesasView;
+import com.gestor.view.admin.signupadminView;
 
 public class AdminController {
 	private AdminMainView view;
@@ -47,7 +48,10 @@ public class AdminController {
 		
 	}
 	public void createNewAdmin() {
-		
+		view.setVisible(false);
+		signupadminView v=new signupadminView();
+		v.setVisible(true);
+		new signupadminController(v,this);
 	}
 }
 
