@@ -1,6 +1,26 @@
 package com.gestor.controller;
 
+import com.gestor.view.admin.AdminMainView;
+import com.gestor.view.admin.GestorMesasView;
+
 public class AdminController {
+	private AdminMainView view;
 	
+	
+	
+	public AdminController(AdminMainView v) {
+		this.view=v;
+		view.getBtnCreateTable().addActionListener(e-> crearMesa());
+		view.getBtnNewAdmin().addActionListener(e-> createNewAdmin());
+	}
+	public void crearMesa() {
+		view.dispose();
+		GestorMesasView v=new GestorMesasView();
+		v.setVisible(true);
+		new gestorMesasController(v);
+	}
+	public void createNewAdmin() {
+		
+	}
 }
 
