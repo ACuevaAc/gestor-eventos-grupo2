@@ -15,6 +15,9 @@ public class gestorMesasController {
 	private mesaService ms;
 	private AdminController aCont;
 	
+	public gestorMesasController() {
+		
+	}
 	public gestorMesasController(GestorMesasView v,AdminController cont) {
 		
 		this.view=v;
