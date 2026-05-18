@@ -14,6 +14,9 @@ public class Mesa {
 		this.nombre=nom;
 		this.mesa_Reservada=reservada;
 	}
+	public Mesa() {
+		
+	}
 
 	public int getId() {
 		return id;

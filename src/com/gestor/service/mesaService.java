@@ -22,7 +22,8 @@ public class mesaService {
 			e.printStackTrace();
 		}
 	}
-	public List<Mesa> obtenerMesas() {
+	
+	public List<Mesa> obtenerMesasCreadas() {
 		List<Mesa> lista=new ArrayList<>();
 		String sql="SELECT * FROM mesa";
 		try {
@@ -44,16 +45,15 @@ public class mesaService {
 		}
 		return lista;
 	}
-	public void reservar(Mesa m) {
-		String sql = "INSERT INTO mesa (id, num_max, nombre, reservada) VALUES (?, ?, ?, ?)";
+	public void crearMesa(Mesa m) {
+		String sql = "INSERT INTO mesa (num_max, nombre, reservada) VALUES ( ?, ?, ?)";
 
 		
 		try {
 			PreparedStatement ps=conn.prepareStatement(sql);
-			ps.setInt(1, m.getId());
-			ps.setInt(2, m.getNum_max());
-			ps.setString(3, m.getNombre());
-			ps.setBoolean(4, m.isMesa_Reservada());
+			ps.setInt(1, m.getNum_max());
+			ps.setString(2, m.getNombre());
+			ps.setBoolean(3, m.isMesa_Reservada());
 			
 			ps.execute();
 			
