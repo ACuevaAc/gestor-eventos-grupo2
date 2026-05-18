@@ -37,6 +37,7 @@ public class AdminMainView extends JFrame {
 
 	public AdminMainView() {
 		super("Administrador de mesas");
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(850, 850);
 		setMinimumSize(new Dimension(650, 750));
@@ -67,6 +68,7 @@ public class AdminMainView extends JFrame {
 		}
 
 		contentPane.add(mesasPanel, BorderLayout.CENTER);
+		actualizarTamanoMesas(mesasPanel.getWidth(), mesasPanel.getHeight());
 
 		this.addComponentListener(new ComponentAdapter() {
 			@Override
