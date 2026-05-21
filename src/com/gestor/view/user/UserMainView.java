@@ -60,7 +60,7 @@ public class UserMainView extends JFrame {
 			fila.setOpaque(false);
 			for (int i = 0; i < numMesas; i++) {
 				JButton btn = crearBotonOvalado("Mesa " + contadorMesas++);
-				btn.setEnabled(false);
+			
 				mesasList.add(btn);
 				fila.add(btn);
 			}

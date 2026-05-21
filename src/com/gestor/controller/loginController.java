@@ -7,6 +7,7 @@ import com.gestor.service.usuarioService;
 import com.gestor.view.loginView;
 import com.gestor.view.signupView;
 import com.gestor.view.admin.AdminMainView;
+import com.gestor.view.user.UserMainView;
 
 public class loginController {
 	private loginView view;
@@ -38,7 +39,10 @@ public class loginController {
 	            v.setVisible(true);
 	            new AdminController(v);
 	        } else if ("USER".equalsIgnoreCase(usuario.getRolUsuario())) {
-	            System.out.println("LOG- ROL USER");                
+	            view.dispose();
+	            UserMainView v = new UserMainView();
+	            v.setVisible(true);
+	            new UserController(v);
 	        } else {
 	            JOptionPane.showMessageDialog(null, "Error: El usuario no tiene un rol válido asignado.");
 	        }
