@@ -5,59 +5,86 @@ import java.util.List;
 
 import javax.swing.JButton;
 
+import com.gestor.model.entity.Mesa;
 import com.gestor.service.mesaService;
 import com.gestor.view.admin.AdminMainView;
 import com.gestor.view.admin.GestorMesasView;
 import com.gestor.view.admin.signupadminView;
 
 public class AdminController {
-	private AdminMainView view;
-	private mesaService ms;
-	
-	
-	public AdminController(AdminMainView v) {
-		this.view=v;
-		this.ms=new mesaService();
-		
-		actualizarColoresMesas();
-		view.getBtnCreateTable().addActionListener(e-> crearMesa());
-		view.getBtnNewAdmin().addActionListener(e-> createNewAdmin());
-		view.getBtnEmptyAllTables().addActionListener(e-> deleteTable());
-	}
-	
-	public void deleteTable() {
-		ms.deleteTable();
-		actualizarColoresMesas();
-	}
-	
+
+    private AdminMainView view;
+    private mesaService ms;
+
+    public AdminController(AdminMainView v) {
+
+        this.view = v;
+        this.ms = new mesaService();
+
+        actualizarColoresMesas();
+
+        view.getBtnCreateTable().addActionListener(e -> crearMesa());
+        view.getBtnNewAdmin().addActionListener(e -> createNewAdmin());
+        view.getBtnEmptyAllTables().addActionListener(e -> deleteTable());
+    }
+
+    public void deleteTable() {
+
+        ms.deleteTable();
+
+        actualizarColoresMesas();
+    }
+
     public void actualizarColoresMesas() {
-        List<JButton> lista = view.getMesasList();
-        int totalMesas = ms.obtenerIdsMesas(); 
-        for (JButton boton : lista) {
-            boton.setBackground(null); 
+
+        List<JButton> botones = view.getMesasList();
+
+        List<Mesa> mesasBD = ms.obtenerMesasCreadas();
+        
+        for(JButton boton: botones) {
+        	boton.setBackground(Color.gray);
         }
-        int limite = Math.min(totalMesas, lista.size());
-        for (int i = 0; i < limite; i++) {
-            lista.get(i).setBackground(Color.GREEN);
+
+        for (int i = 0; i < botones.size() && i < mesasBD.size(); i++) {
+
+            JButton boton = botones.get(i);
+
+            Mesa mesa = mesasBD.get(i);
+
+            if (mesa.isMesa_Reservada()) {
+
+                boton.setBackground(Color.RED);
+
+            } else {
+
+                boton.setBackground(Color.GREEN);
+            }
         }
+
         view.repaint();
     }
 
-	public AdminMainView getAdminView() {
-		return view;
-	}
-	public void crearMesa() {
-		view.setVisible(false);
-		GestorMesasView v=new GestorMesasView();
-		v.setVisible(true);
-		new gestorMesasController(v,this);
-		
-	}
-	public void createNewAdmin() {
-		view.setVisible(false);
-		signupadminView v=new signupadminView();
-		v.setVisible(true);
-		new signupadminController(v,this);
-	}
-}
+    public AdminMainView getAdminView() {
+        return view;
+    }
 
+    public void crearMesa() {
+
+        view.setVisible(false);
+
+        GestorMesasView v = new GestorMesasView();
+        v.setVisible(true);
+
+        new gestorMesasController(v, this);
+    }
+
+    public void createNewAdmin() {
+
+        view.setVisible(false);
+
+        signupadminView v = new signupadminView();
+        v.setVisible(true);
+
+        new signupadminController(v, this);
+    }
+}
