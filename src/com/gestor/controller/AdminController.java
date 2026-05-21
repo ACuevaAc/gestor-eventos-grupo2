@@ -32,7 +32,17 @@ public class AdminController {
 
         ms.deleteTable();
 
-        actualizarColoresMesas();
+        reiniciarMesas();
+    }
+    public void reiniciarMesas() {
+    	
+        List<JButton> botones = view.getMesasList();
+    	
+        for (int i = 0; i < botones.size(); i++) {
+
+            JButton boton = botones.get(i);
+           boton.setBackground(null);
+        }
     }
 
     public void actualizarColoresMesas() {
@@ -40,10 +50,6 @@ public class AdminController {
         List<JButton> botones = view.getMesasList();
 
         List<Mesa> mesasBD = ms.obtenerMesasCreadas();
-        
-        for(JButton boton: botones) {
-        	boton.setBackground(Color.gray);
-        }
 
         for (int i = 0; i < botones.size() && i < mesasBD.size(); i++) {
 
