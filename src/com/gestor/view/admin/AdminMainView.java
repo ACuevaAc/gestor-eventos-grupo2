@@ -33,6 +33,7 @@ public class AdminMainView extends JFrame {
 
 	private JButton btnNewAdmin;
 	private JButton btnCreateTable;
+	private JButton btnEmptyAllTables;
 	private List<JButton> mesasList = new ArrayList<>();
 
 	public AdminMainView() {
@@ -82,10 +83,21 @@ public class AdminMainView extends JFrame {
 		estilizarAccion(btnCreateTable);
 		btnNewAdmin = new JButton("New Admin");
 		estilizarAccion(btnNewAdmin);
+		btnEmptyAllTables = new JButton("Empty All Tables");
+		estilizarAccion(btnEmptyAllTables);
 
 		actionPanel.add(btnCreateTable);
 		actionPanel.add(btnNewAdmin);
+		actionPanel.add(btnEmptyAllTables);
 		contentPane.add(actionPanel, BorderLayout.SOUTH);
+	}
+
+	public JButton getBtnEmptyAllTables() {
+		return btnEmptyAllTables;
+	}
+
+	public void setBtnEmptyAllTables(JButton btnEmptyAllTables) {
+		this.btnEmptyAllTables = btnEmptyAllTables;
 	}
 
 	private void actualizarTamanoMesas(int anchoPanel, int altoPanel) {
