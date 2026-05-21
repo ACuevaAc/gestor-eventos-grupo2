@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
-import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -15,10 +14,9 @@ import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
-import com.formdev.flatlaf.FlatLightLaf;
 
 public class UserMainView extends JFrame {
 
@@ -56,15 +54,40 @@ public class UserMainView extends JFrame {
 		int[] esquema = { 3, 2, 3, 2 }; // 3-2-3-2
 
 		for (int numMesas : esquema) {
-			JPanel fila = new JPanel(new FlowLayout(FlowLayout.CENTER, 30, 10));
-			fila.setOpaque(false);
-			for (int i = 0; i < numMesas; i++) {
-				JButton btn = crearBotonOvalado("Mesa " + contadorMesas++);
-			
-				mesasList.add(btn);
-				fila.add(btn);
-			}
-			mesasPanel.add(fila);
+		    JPanel fila = new JPanel(new FlowLayout(FlowLayout.CENTER, 30, 10));
+		    fila.setOpaque(false);
+		    
+		    for (int i = 0; i < numMesas; i++) {
+		        String nombreMesa = "Mesa " + contadorMesas++; 
+		        JButton btn = crearBotonOvalado(nombreMesa);
+		    
+		        btn.addActionListener(e -> {
+		        	JButton boton = (JButton) e.getSource();
+		        	if (boton.getBackground() == Color.GREEN) {
+		        		
+		        	String[] opcionesPopUp = {"Reservar", "Volver"};
+		            
+		            int seleccion = JOptionPane.showOptionDialog(
+		                this,                                   
+		                "¿Qué deseas hacer con la " + nombreMesa + "?", 
+		                "Opciones de " + nombreMesa,             
+		                JOptionPane.DEFAULT_OPTION,             
+		                JOptionPane.QUESTION_MESSAGE,           
+		                null,                                   
+		                opcionesPopUp,                          
+		                opcionesPopUp[0]                        
+		            );
+		            
+		            if (seleccion == 0) {
+		                System.out.println("Abriendo formulario para: " + nombreMesa);
+		            }
+		        	}
+		        });
+
+		        mesasList.add(btn);
+		        fila.add(btn);
+		    }
+		    mesasPanel.add(fila);
 		}
 
 		contentPane.add(mesasPanel, BorderLayout.CENTER);
@@ -80,6 +103,10 @@ public class UserMainView extends JFrame {
 		JPanel actionPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 30, 40));
 		actionPanel.setOpaque(false);
 
+	}
+	public static void main(String[]args) {
+		UserMainView us = new UserMainView();
+		us.setVisible(true);
 	}
 
 	private void actualizarTamanoMesas(int anchoPanel, int altoPanel) {
