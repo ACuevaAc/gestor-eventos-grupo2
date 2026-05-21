@@ -40,6 +40,9 @@ public class mesaService {
 		return 0;
 		
 	}
+	public void eliminarReserva(int id) {
+		String sql="DELETE FROM reserva WHERE id=?";
+	}
 	public List<Mesa> obtenerMesasCreadas() {
 		List<Mesa> lista=new ArrayList<>();
 		String sql="SELECT * FROM mesa";
@@ -61,6 +64,19 @@ public class mesaService {
 			e.printStackTrace();
 		}
 		return lista;
+	}
+	public void deleteTable() {
+		String sql="DELETE FROM mesa";
+		
+		try {
+			Statement st=conn.createStatement();
+			int filasBorradas= st.executeUpdate(sql);
+			System.out.println("LOG MesaService: mesas borradas -> "+filasBorradas);
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	public void crearMesa(Mesa m) {
 		String sql = "INSERT INTO mesa (numero_max, nombre, reservado) VALUES ( ?, ?, ?)";
