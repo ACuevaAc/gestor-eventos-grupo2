@@ -8,6 +8,8 @@ public class Reserva {
     private int idMesa;
     private LocalDateTime fechaReserva; 
     
+    
+    // Este constructor sobra
     public Reserva(int idReserva, int idUsuario, int idMesa) {
         this.idReserva = idReserva;
         this.idUsuario = idUsuario;
