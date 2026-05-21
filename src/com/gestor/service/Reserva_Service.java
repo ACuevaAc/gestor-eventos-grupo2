@@ -63,15 +63,10 @@ public class Reserva_Service {
         return lista;
     }
 
-    public void realizarReserva(
-            int idUser,
-            int idTable,
-            LocalDateTime date
-    ) {
-
-        String sql =
-                "INSERT INTO reserva (id_usuario, id_mesa, fecha_reserva) VALUES (?, ?, ?)";
-
+    public void realizarReserva(int idUser,int idTable,LocalDateTime date) {
+    	
+    	String sql ="INSERT INTO reserva (id_usuario, id_mesa, fecha_reserva) VALUES (?, ?, ?)";
+    	
         try (PreparedStatement st = conn.prepareStatement(sql)) {
 
             st.setInt(1, idUser);
