@@ -26,243 +26,173 @@ import com.gestor.service.mesaService;
 
 public class UserMainView extends JFrame {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private JPanel contentPane;
+	private JPanel contentPane;
 
-    private Reserva_Service rs;
-    private mesaService ms;
+	private Reserva_Service rs;
+	private mesaService ms;
 
-    private Usuario usuario;
+	private Usuario usuario;
 
-    private final Color COLOR_FONDO = new Color(248, 249, 250);
+	private final Color COLOR_FONDO = new Color(248, 249, 250);
 
-    private final Font FUENTE_MESAS =
-            new Font("Segoe UI", Font.BOLD, 18);
+	private final Font FUENTE_MESAS = new Font("Segoe UI", Font.BOLD, 18);
 
-    private List<JButton> mesasList = new ArrayList<>();
+	private List<JButton> mesasList = new ArrayList<>();
 
-    public UserMainView(Usuario usuario) {
+	public UserMainView(Usuario usuario) {
 
-        super("Reservar mesas");
+		super("Reservar mesas");
 
-        this.usuario = usuario;
+		this.usuario = usuario;
 
-        this.rs = new Reserva_Service();
-        this.ms = new mesaService();
+		this.rs = new Reserva_Service();
+		this.ms = new mesaService();
 
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        setSize(850, 850);
+		setSize(850, 850);
 
-        setMinimumSize(new Dimension(650, 750));
+		setMinimumSize(new Dimension(650, 750));
 
-        setLocationRelativeTo(null);
+		setLocationRelativeTo(null);
 
-        contentPane = new JPanel();
+		contentPane = new JPanel();
 
-        contentPane.setBackground(COLOR_FONDO);
+		contentPane.setBackground(COLOR_FONDO);
 
-        contentPane.setBorder(
-                new EmptyBorder(30, 50, 30, 50)
-        );
+		contentPane.setBorder(new EmptyBorder(30, 50, 30, 50));
 
-        setContentPane(contentPane);
+		setContentPane(contentPane);
 
-        contentPane.setLayout(new BorderLayout());
+		contentPane.setLayout(new BorderLayout());
 
-        JPanel mesasPanel =
-                new JPanel(new GridLayout(4, 1, 0, 20));
+		JPanel mesasPanel = new JPanel(new GridLayout(4, 1, 0, 20));
 
-        mesasPanel.setOpaque(false);
+		mesasPanel.setOpaque(false);
 
-        List<Mesa> mesas = ms.obtenerMesasCreadas();
+		List<Mesa> mesas = ms.obtenerMesasCreadas();
 
-        int[] esquema = {3, 2, 3, 2};
+		int[] esquema = { 3, 2, 3, 2 };
 
-        int indiceMesa = 0;
+		int indiceMesa = 0;
 
-        for (int numMesas : esquema) {
+		for (int numMesas : esquema) {
 
-            JPanel fila =
-                    new JPanel(
-                            new FlowLayout(
-                                    FlowLayout.CENTER,
-                                    30,
-                                    10
-                            )
-                    );
+			JPanel fila = new JPanel(new FlowLayout(FlowLayout.CENTER, 30, 10));
 
-            fila.setOpaque(false);
+			fila.setOpaque(false);
 
-            for (
-                    int i = 0;
-                    i < numMesas && indiceMesa < mesas.size();
-                    i++
-            ) {
+			for (int i = 0; i < numMesas && indiceMesa < mesas.size(); i++) {
 
-                Mesa mesa = mesas.get(indiceMesa++);
+				Mesa mesa = mesas.get(indiceMesa++);
 
-                JButton btn =
-                        crearBotonOvalado(mesa.getNombre());
+				JButton btn = crearBotonOvalado(mesa.getNombre());
 
-                btn.putClientProperty(
-                        "idMesa",
-                        mesa.getId()
-                );
+				btn.putClientProperty("idMesa", mesa.getId());
 
-                if (mesa.isMesa_Reservada()) {
+				if (mesa.isMesa_Reservada()) {
 
-                    btn.setBackground(Color.RED);
+					btn.setBackground(Color.RED);
 
-                } else {
+				} else {
 
-                    btn.setBackground(Color.GREEN);
-                }
+					btn.setBackground(Color.GREEN);
+				}
 
-                btn.addActionListener(e -> {
+				btn.addActionListener(e -> {
 
-                    JButton boton =
-                            (JButton) e.getSource();
+					JButton boton = (JButton) e.getSource();
+					int idMesa = (int) boton.getClientProperty("idMesa");
 
-                    int idMesa =
-                            (int) boton.getClientProperty("idMesa");
+					if (boton.getBackground().equals(Color.GREEN)) {
+						int opcion = JOptionPane.showConfirmDialog(this, "¿Reservar " + mesa.getNombre() + "?",
+								"Reserva", JOptionPane.YES_NO_OPTION);
+						if (opcion == JOptionPane.YES_OPTION) {
+							rs.realizarReserva(usuario.getIdUsuario(), idMesa, LocalDateTime.now());
 
-                    if (
-                            boton.getBackground()
-                                    .equals(Color.GREEN)
-                    ) {
+							ms.reservarMesa(idMesa);
 
-                        int opcion =
-                                JOptionPane.showConfirmDialog(
-                                        this,
-                                        "¿Reservar "
-                                                + mesa.getNombre()
-                                                + "?",
-                                        "Reserva",
-                                        JOptionPane.YES_NO_OPTION
-                                );
+							boton.setBackground(Color.RED);
 
-                        if (
-                                opcion
-                                        == JOptionPane.YES_OPTION
-                        ) {
+							JOptionPane.showMessageDialog(this, "Mesa reservada correctamente");
+						}
 
-                            rs.realizarReserva(
-                                    usuario.getIdUsuario(),
-                                    idMesa,
-                                    LocalDateTime.now()
-                            );
+					} else {
 
-                            ms.reservarMesa(idMesa);
+						JOptionPane.showMessageDialog(this, "La mesa ya está reservada");
+					}
+				});
 
-                            boton.setBackground(Color.RED);
+				mesasList.add(btn);
 
-                            JOptionPane.showMessageDialog(
-                                    this,
-                                    "Mesa reservada correctamente"
-                            );
-                        }
+				fila.add(btn);
+			}
 
-                    } else {
+			mesasPanel.add(fila);
+		}
 
-                        JOptionPane.showMessageDialog(
-                                this,
-                                "La mesa ya está reservada"
-                        );
-                    }
-                });
+		contentPane.add(mesasPanel, BorderLayout.CENTER);
 
-                mesasList.add(btn);
+		actualizarTamanoMesas(mesasPanel.getWidth(), mesasPanel.getHeight());
 
-                fila.add(btn);
-            }
+		this.addComponentListener(new ComponentAdapter() {
 
-            mesasPanel.add(fila);
-        }
+			@Override
+			public void componentResized(ComponentEvent e) {
 
-        contentPane.add(mesasPanel, BorderLayout.CENTER);
+				actualizarTamanoMesas(mesasPanel.getWidth(), mesasPanel.getHeight());
+			}
+		});
+	}
 
-        actualizarTamanoMesas(
-                mesasPanel.getWidth(),
-                mesasPanel.getHeight()
-        );
+	private void actualizarTamanoMesas(int anchoPanel, int altoPanel) {
 
-        this.addComponentListener(
-                new ComponentAdapter() {
+		int gapHorizontal = 30;
 
-                    @Override
-                    public void componentResized(ComponentEvent e) {
+		int anchoIdeal = (anchoPanel - (gapHorizontal * 4)) / 3;
 
-                        actualizarTamanoMesas(
-                                mesasPanel.getWidth(),
-                                mesasPanel.getHeight()
-                        );
-                    }
-                }
-        );
-    }
+		int altoIdeal = (altoPanel - (20 * 4)) / 5;
 
-    private void actualizarTamanoMesas(
-            int anchoPanel,
-            int altoPanel
-    ) {
+		anchoIdeal = Math.max(120, Math.min(anchoIdeal, 250));
 
-        int gapHorizontal = 30;
+		altoIdeal = Math.max(70, Math.min(altoIdeal, 120));
 
-        int anchoIdeal =
-                (anchoPanel - (gapHorizontal * 4)) / 3;
+		Dimension nuevaDimension = new Dimension(anchoIdeal, altoIdeal);
 
-        int altoIdeal =
-                (altoPanel - (20 * 4)) / 5;
+		for (JButton btn : mesasList) {
 
-        anchoIdeal =
-                Math.max(120, Math.min(anchoIdeal, 250));
+			btn.setPreferredSize(nuevaDimension);
+		}
 
-        altoIdeal =
-                Math.max(70, Math.min(altoIdeal, 120));
+		contentPane.revalidate();
+	}
 
-        Dimension nuevaDimension =
-                new Dimension(anchoIdeal, altoIdeal);
+	public List<JButton> getMesasList() {
+		return mesasList;
+	}
 
-        for (JButton btn : mesasList) {
+	public void setMesasList(List<JButton> mesasList) {
+		this.mesasList = mesasList;
+	}
 
-            btn.setPreferredSize(nuevaDimension);
-        }
+	private JButton crearBotonOvalado(String texto) {
 
-        contentPane.revalidate();
-    }
+		JButton btn = new JButton(texto);
 
-    public List<JButton> getMesasList() {
-        return mesasList;
-    }
+		btn.setFont(FUENTE_MESAS);
 
-    public void setMesasList(List<JButton> mesasList) {
-        this.mesasList = mesasList;
-    }
+		btn.setForeground(Color.BLACK);
 
-    private JButton crearBotonOvalado(String texto) {
+		btn.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
-        JButton btn = new JButton(texto);
+		btn.setFocusPainted(false);
 
-        btn.setFont(FUENTE_MESAS);
+		btn.putClientProperty("JButton.buttonType", "roundRect");
 
-        btn.setForeground(Color.BLACK);
+		btn.putClientProperty("JButton.cornerRadius", 999);
 
-        btn.setCursor(new Cursor(Cursor.HAND_CURSOR));
-
-        btn.setFocusPainted(false);
-
-        btn.putClientProperty(
-                "JButton.buttonType",
-                "roundRect"
-        );
-
-        btn.putClientProperty(
-                "JButton.cornerRadius",
-                999
-        );
-
-        return btn;
-    }
+		return btn;
+	}
 }
