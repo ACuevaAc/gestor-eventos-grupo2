@@ -145,7 +145,7 @@ public class AdminMainView extends JFrame {
 	private JButton crearBotonOvalado(String texto) {
 		JButton btn = new JButton(texto);
 		btn.setFont(FUENTE_MESAS);
-		btn.setBackground(COLOR_MESA);
+		//btn.setBackground(COLOR_MESA);
 		btn.setForeground(Color.BLACK);
 		btn.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		btn.setFocusPainted(false);
