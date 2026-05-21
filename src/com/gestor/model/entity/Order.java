@@ -1,7 +1,7 @@
 package com.gestor.model.entity;
 
 /**
- * @class Pedido
+ * @class Order
  * @description Entity class representing a record in the 'pide' table. 
  * Maps database order transactions directly to Java objects.
  */
@@ -13,7 +13,7 @@ public class Order {
     private double totalPrice;
     
     /**
-     * @method Pedido
+     * @method Order
      * @description Parameterized constructor to instantiate a complete Order model.
      * @param {int} orderId - Unique identifier of the order transaction.
      * @param {int} tableId - Foreign key identifier referencing the table.
