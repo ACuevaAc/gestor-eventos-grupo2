@@ -5,7 +5,7 @@ package com.gestor.model.entity;
  * @description Entity class representing a record in the 'pide' table. 
  * Maps database order transactions directly to Java objects.
  */
-public class Pedido {
+public class Order {
     private int orderId;
     private int tableId;
     private int productId;
@@ -21,7 +21,7 @@ public class Pedido {
      * @param {int} amount - Quantity of products requested.
      * @param {double} totalPrice - Aggregated price total for this specific entry.
      */
-    public Pedido(int orderId, int tableId, int productId, int amount, double totalPrice) {
+    public Order(int orderId, int tableId, int productId, int amount, double totalPrice) {
         this.orderId = orderId;
         this.tableId = tableId;
         this.productId = productId;
