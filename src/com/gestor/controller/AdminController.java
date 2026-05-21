@@ -22,6 +22,12 @@ public class AdminController {
 		actualizarColoresMesas();
 		view.getBtnCreateTable().addActionListener(e-> crearMesa());
 		view.getBtnNewAdmin().addActionListener(e-> createNewAdmin());
+		view.getBtnEmptyAllTables().addActionListener(e-> deleteTable());
+	}
+	
+	public void deleteTable() {
+		ms.deleteTable();
+		actualizarColoresMesas();
 	}
 	
     public void actualizarColoresMesas() {
