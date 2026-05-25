@@ -20,7 +20,7 @@ public class UserController {
 		cargarMesasCreadas();
 	}
 	public void cargarMesasCreadas() {
-		List<JButton> lista = view.getMesasList();
+		List<JButton> lista = view.getTablesList();
        List<Mesa> mesas=ms.obtenerMesasCreadas();
        
        for(JButton boton: lista) {

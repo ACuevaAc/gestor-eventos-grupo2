@@ -27,170 +27,118 @@ import com.gestor.service.mesaService;
 public class UserMainView extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-
 	private JPanel contentPane;
-
 	private Reserva_Service rs;
 	private mesaService ms;
 
-	private Usuario usuario;
+	private final Color backgroundColor = new Color(248, 249, 250);
+	private final Font tablesFont = new Font("Segoe UI", Font.BOLD, 18);
+	
+	private List<JButton> tablesList = new ArrayList<>();
 
-	private final Color COLOR_FONDO = new Color(248, 249, 250);
-
-	private final Font FUENTE_MESAS = new Font("Segoe UI", Font.BOLD, 18);
-
-	private List<JButton> mesasList = new ArrayList<>();
-
-	public UserMainView(Usuario usuario) {
+	public UserMainView(Usuario user) {
 
 		super("Reservar mesas");
-
-		this.usuario = usuario;
 
 		this.rs = new Reserva_Service();
 		this.ms = new mesaService();
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
 		setSize(850, 850);
-
 		setMinimumSize(new Dimension(650, 750));
-
 		setLocationRelativeTo(null);
 
 		contentPane = new JPanel();
-
-		contentPane.setBackground(COLOR_FONDO);
-
+		contentPane.setBackground(backgroundColor);
 		contentPane.setBorder(new EmptyBorder(30, 50, 30, 50));
-
 		setContentPane(contentPane);
-
 		contentPane.setLayout(new BorderLayout());
 
-		JPanel mesasPanel = new JPanel(new GridLayout(4, 1, 0, 20));
+		JPanel tablesPanel = new JPanel(new GridLayout(4, 1, 0, 20));
+		tablesPanel.setOpaque(false);
+		List<Mesa> tables = ms.obtenerMesasCreadas();
 
-		mesasPanel.setOpaque(false);
+		int[] scheme = { 3, 2, 3, 2 };
+		int tableIndex = 0;
 
-		List<Mesa> mesas = ms.obtenerMesasCreadas();
+		for (int numMesas : scheme) {
+			JPanel row = new JPanel(new FlowLayout(FlowLayout.CENTER, 30, 10));
+			row.setOpaque(false);
 
-		int[] esquema = { 3, 2, 3, 2 };
+			for (int i = 0; i < numMesas && tableIndex < tables.size(); i++) {
+				Mesa table = tables.get(tableIndex++);
+				JButton btn = createOvalButton(table.getNombre());
+				btn.putClientProperty("idMesa", table.getId());
 
-		int indiceMesa = 0;
-
-		for (int numMesas : esquema) {
-
-			JPanel fila = new JPanel(new FlowLayout(FlowLayout.CENTER, 30, 10));
-
-			fila.setOpaque(false);
-
-			for (int i = 0; i < numMesas && indiceMesa < mesas.size(); i++) {
-
-				Mesa mesa = mesas.get(indiceMesa++);
-
-				JButton btn = crearBotonOvalado(mesa.getNombre());
-
-				btn.putClientProperty("idMesa", mesa.getId());
-
-				if (mesa.isMesa_Reservada()) {
-
-					btn.setBackground(Color.RED);
-
-				} else {
-
-					btn.setBackground(Color.GREEN);
-				}
+				if (table.isMesa_Reservada()) btn.setBackground(Color.RED);
+				else btn.setBackground(Color.GREEN);
 
 				btn.addActionListener(e -> {
+					JButton button = (JButton) e.getSource();
+					int talbeId = (int) button.getClientProperty("idMesa");
 
-					JButton boton = (JButton) e.getSource();
-					int idMesa = (int) boton.getClientProperty("idMesa");
-
-					if (boton.getBackground().equals(Color.GREEN)) {
-						int opcion = JOptionPane.showConfirmDialog(this, "¿Reservar " + mesa.getNombre() + "?",
-								"Reserva", JOptionPane.YES_NO_OPTION);
+					if (button.getBackground().equals(Color.GREEN)) {
+						int opcion = JOptionPane.showConfirmDialog(this, "¿Reservar " + table.getNombre() + "?", "Reserva", JOptionPane.YES_NO_OPTION);
 						if (opcion == JOptionPane.YES_OPTION) {
-							rs.realizarReserva(usuario.getIdUsuario(), idMesa, LocalDateTime.now());
-
-							ms.reservarMesa(idMesa);
-
-							boton.setBackground(Color.RED);
-
+							rs.realizarReserva(user.getIdUsuario(), talbeId, LocalDateTime.now());
+							ms.reservarMesa(talbeId);
+							button.setBackground(Color.RED);
 							JOptionPane.showMessageDialog(this, "Mesa reservada correctamente");
 						}
-
 					} else {
-
 						JOptionPane.showMessageDialog(this, "La mesa ya está reservada");
 					}
 				});
 
-				mesasList.add(btn);
-
-				fila.add(btn);
+				tablesList.add(btn);
+				row.add(btn);
 			}
 
-			mesasPanel.add(fila);
+			tablesPanel.add(row);
 		}
 
-		contentPane.add(mesasPanel, BorderLayout.CENTER);
-
-		actualizarTamanoMesas(mesasPanel.getWidth(), mesasPanel.getHeight());
-
+		contentPane.add(tablesPanel, BorderLayout.CENTER);
+		updateTablesSize(tablesPanel.getWidth(), tablesPanel.getHeight());
 		this.addComponentListener(new ComponentAdapter() {
-
 			@Override
 			public void componentResized(ComponentEvent e) {
-
-				actualizarTamanoMesas(mesasPanel.getWidth(), mesasPanel.getHeight());
+				updateTablesSize(tablesPanel.getWidth(), tablesPanel.getHeight());
 			}
 		});
 	}
 
-	private void actualizarTamanoMesas(int anchoPanel, int altoPanel) {
+	private void updateTablesSize (int widthPanel, int heightPanel) {
+		int horizontalGap = 30;
+		int width = (widthPanel - (horizontalGap * 4)) / 3;
+		int height = (heightPanel - (20 * 4)) / 5;
 
-		int gapHorizontal = 30;
+		width = Math.max(120, Math.min(width, 250));
+		height = Math.max(70, Math.min(height, 120));
 
-		int anchoIdeal = (anchoPanel - (gapHorizontal * 4)) / 3;
+		Dimension newDimension = new Dimension(width, height);
 
-		int altoIdeal = (altoPanel - (20 * 4)) / 5;
-
-		anchoIdeal = Math.max(120, Math.min(anchoIdeal, 250));
-
-		altoIdeal = Math.max(70, Math.min(altoIdeal, 120));
-
-		Dimension nuevaDimension = new Dimension(anchoIdeal, altoIdeal);
-
-		for (JButton btn : mesasList) {
-
-			btn.setPreferredSize(nuevaDimension);
+		for (JButton btn : tablesList) {
+			btn.setPreferredSize(newDimension);
 		}
 
 		contentPane.revalidate();
 	}
 
-	public List<JButton> getMesasList() {
-		return mesasList;
+	public List<JButton> getTablesList() {
+		return tablesList;
 	}
 
-	public void setMesasList(List<JButton> mesasList) {
-		this.mesasList = mesasList;
+	public void setTablesList(List<JButton> tablesList) {
+		this.tablesList = tablesList;
 	}
 
-	private JButton crearBotonOvalado(String texto) {
-
-		JButton btn = new JButton(texto);
-
-		btn.setFont(FUENTE_MESAS);
-
+	private JButton createOvalButton (String text) {
+		JButton btn = new JButton(text);
+		btn.setFont(tablesFont);
 		btn.setForeground(Color.BLACK);
-
 		btn.setCursor(new Cursor(Cursor.HAND_CURSOR));
-
 		btn.setFocusPainted(false);
-
 		btn.putClientProperty("JButton.buttonType", "roundRect");
-
 		btn.putClientProperty("JButton.cornerRadius", 999);
 
 		return btn;
