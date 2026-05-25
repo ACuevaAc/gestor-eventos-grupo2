@@ -7,13 +7,23 @@ import java.sql.SQLException;
 
 import org.jfree.data.category.DefaultCategoryDataset;
 
+import com.config.ConexionDB;
+
 public class FreeChartService {
 
-	private Connection conexion;
+    public Connection conn;
 
-	public FreeChartService(Connection conexion) {
-		this.conexion = conexion;
-	}
+    public FreeChartService() {
+
+        try {
+
+            this.conn = ConexionDB.obtener();
+
+        } catch (ClassNotFoundException | SQLException e) {
+
+            e.printStackTrace();
+        }
+    }
 
 	public DefaultCategoryDataset obtenerProductosMasPedidos() {
 		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
@@ -22,7 +32,7 @@ public class FreeChartService {
 				+ "WHERE P.ID_PRODUCTO = PRO.ID";
 		
 
-		try (PreparedStatement ps = conexion.prepareStatement(sql);
+		try (PreparedStatement ps = conn.prepareStatement(sql);
 		     ResultSet rs = ps.executeQuery()) {
 
 			while (rs.next()) {

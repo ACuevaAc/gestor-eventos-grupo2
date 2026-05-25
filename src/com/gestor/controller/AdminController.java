@@ -10,6 +10,7 @@ import com.gestor.service.mesaService;
 import com.gestor.view.admin.AdminMainView;
 import com.gestor.view.admin.FormCrearProducto;
 import com.gestor.view.admin.GestorMesasView;
+import com.gestor.view.admin.StatsAdminProducts;
 import com.gestor.view.admin.signupadminView;
 
 public class AdminController {
@@ -28,6 +29,14 @@ public class AdminController {
         view.getBtnNewAdmin().addActionListener(e -> createNewAdmin());
         view.getBtnEmptyAllTables().addActionListener(e -> deleteTable());
         view.getBtnNewProduct().addActionListener(e-> crearProducto());
+        view.getBtnStats().addActionListener(e-> checkStats());
+    }
+    
+    public void checkStats() {
+    	view.dispose();
+    	StatsAdminProducts v=new StatsAdminProducts();
+    	v.setVisible(true);
+    	new StatsController(v);
     }
     
     public void crearProducto() {
