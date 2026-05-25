@@ -8,6 +8,7 @@ import javax.swing.JButton;
 import com.gestor.model.entity.Mesa;
 import com.gestor.service.mesaService;
 import com.gestor.view.admin.AdminMainView;
+import com.gestor.view.admin.FormCrearProducto;
 import com.gestor.view.admin.GestorMesasView;
 import com.gestor.view.admin.signupadminView;
 
@@ -26,6 +27,14 @@ public class AdminController {
         view.getBtnCreateTable().addActionListener(e -> crearMesa());
         view.getBtnNewAdmin().addActionListener(e -> createNewAdmin());
         view.getBtnEmptyAllTables().addActionListener(e -> deleteTable());
+        view.getBtnNewProduct().addActionListener(e-> crearProducto());
+    }
+    
+    public void crearProducto() {
+    	view.dispose();
+    	FormCrearProducto v=new FormCrearProducto();
+    	v.setVisible(true);
+    	new ControllerCrearProducto(this,v);
     }
 
     public void deleteTable() {

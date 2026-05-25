@@ -48,7 +48,7 @@ public class FormCrearProducto extends JFrame {
 		btnCreate = new JButton("Create");
 		panelBotones.add(btnCreate);
 
-		JButton btnBack = new JButton("Back");
+		btnBack = new JButton("Back");
 		panelBotones.add(btnBack);
 
 		JPanel panelForm = new JPanel();
@@ -81,27 +81,6 @@ public class FormCrearProducto extends JFrame {
 		lblRutaImagen = new JLabel("Sin foto");
 		panelForm.add(lblRutaImagen);
 
-		btnBuscarImagen.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				JFileChooser selector = new JFileChooser();
-				FileNameExtensionFilter filtro = new FileNameExtensionFilter("Imágenes (JPG, PNG)", "jpg", "jpeg",
-						"png");
-				selector.setFileFilter(filtro);
-
-				int resultado = selector.showOpenDialog(FormCrearProducto.this);
-
-				if (resultado == JFileChooser.APPROVE_OPTION) {
-					imagenSeleccionada = selector.getSelectedFile();
-
-					iconoOriginal = new ImageIcon(imagenSeleccionada.getAbsolutePath());
-					imagenEscalada = iconoOriginal.getImage().getScaledInstance(60, 60, Image.SCALE_SMOOTH);
-
-					lblRutaImagen.setText("");
-					lblRutaImagen.setIcon(new ImageIcon(imagenEscalada));
-				}
-			}
-		});
 	}
 
 	
@@ -173,4 +152,15 @@ public class FormCrearProducto extends JFrame {
 		FormCrearProducto fp = new FormCrearProducto();
 		fp.setVisible(true);
 	}
+
+
+	public JLabel getLblRutaImagen() {
+		return lblRutaImagen;
+	}
+
+
+	public void setLblRutaImagen(JLabel lblRutaImagen) {
+		this.lblRutaImagen = lblRutaImagen;
+	}
+	
 }
