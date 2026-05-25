@@ -8,15 +8,15 @@ import com.gestor.model.entity.Usuario;
 import com.gestor.service.SecurityService;
 import com.gestor.service.usuarioService;
 import com.gestor.view.LoginView;
-import com.gestor.view.signupView;
+import com.gestor.view.SignupView;
 
 public class registerController {
 	
 	private usuarioService uService;
-	private signupView view;
+	private SignupView view;
 	private loginController cont;
 
-	public registerController(signupView v, loginController loginController, usuarioService uService) {
+	public registerController(SignupView v, loginController loginController, usuarioService uService) {
 		this.view=v;
 		this.cont=loginController;
 		this.uService=uService;
@@ -31,8 +31,8 @@ public class registerController {
 		new loginController(v,uService);
 	}
 	public boolean validacion() {
-		String nom=view.getTxtNombre().getText();
-		int edad=Integer.parseInt(view.getTxtEdad().getText());
+		String nom=view.getTxtName().getText();
+		int edad=Integer.parseInt(view.getTxtAge().getText());
 
 		String em=view.getTxtEmail().getText();
 		String emConf=view.getTxtConfirmEmail().getText();
@@ -47,9 +47,9 @@ public class registerController {
 	}
 	public void registrar() {
 		Usuario user=new Usuario();
-		user.setNombreUsuario(view.getTxtNombre().getText());
+		user.setNombreUsuario(view.getTxtName().getText());
 		user.setEmailUsuario(view.getTxtConfirmEmail().getText());
-		user.setEdad(Integer.parseInt(view.getTxtEdad().getText()));
+		user.setEdad(Integer.parseInt(view.getTxtAge().getText()));
 		String psw=String.valueOf(view.getTxtConfirmPassword().getPassword());
 		String hash=SecurityService.hashString(psw);
 		user.setPswUsuario(hash);
@@ -68,8 +68,8 @@ public class registerController {
 		}
 	}
 	public void limpiarCampos(Container cont) {
-		    view.getTxtNombre().setText("");
-		    view.getTxtEdad().setText("");
+		    view.getTxtName().setText("");
+		    view.getTxtAge().setText("");
 		    view.getTxtEmail().setText("");
 		    view.getTxtConfirmEmail().setText("");
 		    view.getTxtPassword().setText("");
