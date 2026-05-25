@@ -45,7 +45,7 @@ public class AdminController {
     }
     public void reiniciarMesas() {
     	
-        List<JButton> botones = view.getMesasList();
+        List<JButton> botones = view.getTablesList();
     	
         for (int i = 0; i < botones.size(); i++) {
 
@@ -56,7 +56,7 @@ public class AdminController {
 
     public void actualizarColoresMesas() {
 
-        List<JButton> botones = view.getMesasList();
+        List<JButton> botones = view.getTablesList();
 
         List<Mesa> mesasBD = ms.obtenerMesasCreadas();
 

@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
-import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -18,24 +17,21 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import com.formdev.flatlaf.FlatLightLaf;
-
 public class AdminMainView extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 
-	private final Color COLOR_FONDO = new Color(248, 249, 250);
-	private final Color COLOR_MESA = new Color(245, 158, 11);
-	private final Color COLOR_ACCION = new Color(51, 65, 85);
-	private final Font FUENTE_MESAS = new Font("Segoe UI", Font.BOLD, 18);
-	private final Font FUENTE_BOTONES = new Font("Segoe UI", Font.BOLD, 14);
+	private final Color backgroundColor = new Color(248, 249, 250);
+	private final Color actionColor = new Color(51, 65, 85);
+	private final Font tableFont = new Font("Segoe UI", Font.BOLD, 18);
+	private final Font buttonFont = new Font("Segoe UI", Font.BOLD, 14);
 	
 	private JButton btnNewProduct;
 	private JButton btnNewAdmin;
 	private JButton btnCreateTable;
 	private JButton btnEmptyAllTables;
-	private List<JButton> mesasList = new ArrayList<>();
+	private List<JButton> tablesList = new ArrayList<>();
 
 	public AdminMainView() {
 		super("Administrador de mesas");
@@ -46,34 +42,35 @@ public class AdminMainView extends JFrame {
 		setLocationRelativeTo(null);
 
 		contentPane = new JPanel();
-		contentPane.setBackground(COLOR_FONDO);
+		contentPane.setBackground(backgroundColor);
 		contentPane.setBorder(new EmptyBorder(30, 50, 30, 50));
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout());
 
-		JPanel mesasPanel = new JPanel(new GridLayout(4, 1, 0, 20));
-		mesasPanel.setOpaque(false);
+		JPanel tablesPanel = new JPanel(new GridLayout(4, 1, 0, 20));
+		tablesPanel.setOpaque(false);
 
-		int contadorMesas = 1;
-		int[] esquema = { 3, 2, 3, 2 }; 
+		int tablesCount = 1;
+		int[] schema = { 3, 2, 3, 2 }; 
 
-		for (int numMesas : esquema) {
-			JPanel fila = new JPanel(new FlowLayout(FlowLayout.CENTER, 30, 10));
-			fila.setOpaque(false);
-			for (int i = 0; i < numMesas; i++) {
-				JButton btn = crearBotonOvalado("Mesa " + contadorMesas++);
-				mesasList.add(btn);
-				fila.add(btn);
+		for (int tablesNumber : schema) {
+			JPanel file = new JPanel(new FlowLayout(FlowLayout.CENTER, 30, 10));
+			file.setOpaque(false);
+			for (int i = 0; i < tablesNumber; i++) {
+				JButton btn = createOvalButton ("Mesa " + tablesCount++);
+				tablesList.add(btn);
+				file.add(btn);
 			}
-			mesasPanel.add(fila);
+			tablesPanel.add(file);
 		}
-		contentPane.add(mesasPanel, BorderLayout.CENTER);
-		actualizarTamanoMesas(mesasPanel.getWidth(), mesasPanel.getHeight());
+
+		contentPane.add(tablesPanel, BorderLayout.CENTER);
+		updateTablesSize(tablesPanel.getWidth(), tablesPanel.getHeight());
 
 		this.addComponentListener(new ComponentAdapter() {
 			@Override
 			public void componentResized(ComponentEvent e) {
-				actualizarTamanoMesas(mesasPanel.getWidth(), mesasPanel.getHeight());
+				updateTablesSize(tablesPanel.getWidth(), tablesPanel.getHeight());
 			}
 		});
 
@@ -81,13 +78,13 @@ public class AdminMainView extends JFrame {
 		actionPanel.setOpaque(false);
 
 		btnCreateTable = new JButton("Create Table");
-		estilizarAccion(btnCreateTable);
+		stabilizeAction(btnCreateTable);
 		btnNewAdmin = new JButton("New Admin");
-		estilizarAccion(btnNewAdmin);
+		stabilizeAction(btnNewAdmin);
 		btnEmptyAllTables = new JButton("Empty All Tables");
-		estilizarAccion(btnEmptyAllTables);
+		stabilizeAction(btnEmptyAllTables);
 		btnNewProduct = new JButton("Create New Product");
-		estilizarAccion(btnNewProduct);
+		stabilizeAction(btnNewProduct);
 		
 		actionPanel.add(btnCreateTable);
 		actionPanel.add(btnNewAdmin);
@@ -113,19 +110,18 @@ public class AdminMainView extends JFrame {
 		this.btnEmptyAllTables = btnEmptyAllTables;
 	}
 
-	private void actualizarTamanoMesas(int anchoPanel, int altoPanel) {
-		int gapHorizontal = 30;
-		int anchoIdeal = (anchoPanel - (gapHorizontal * 4)) / 3;
+	private void updateTablesSize (int widthPanel, int heightPanel) {
+		int horizontalGap = 30;
+		int width = (widthPanel - (horizontalGap * 4)) / 3;
+		int height = (heightPanel - (20 * 4)) / 5;
 
-		int altoIdeal = (altoPanel - (20 * 4)) / 5;
+		width = Math.max(120, Math.min(width, 250));
+		height = Math.max(70, Math.min(height, 120));
 
-		anchoIdeal = Math.max(120, Math.min(anchoIdeal, 250));
-		altoIdeal = Math.max(70, Math.min(altoIdeal, 120));
+		Dimension newDimension = new Dimension(width, height);
 
-		Dimension nuevaDimension = new Dimension(anchoIdeal, altoIdeal);
-
-		for (JButton btn : mesasList) {
-			btn.setPreferredSize(nuevaDimension);
+		for (JButton btn : tablesList) {
+			btn.setPreferredSize(newDimension);
 		}
 
 		contentPane.revalidate();
@@ -147,18 +143,17 @@ public class AdminMainView extends JFrame {
 		this.btnCreateTable = btnCreateTable;
 	}
 
-	public List<JButton> getMesasList() {
-		return mesasList;
+	public List<JButton> getTablesList() {
+		return tablesList;
 	}
 
-	public void setMesasList(List<JButton> mesasList) {
-		this.mesasList = mesasList;
+	public void setTablesList(List<JButton> tablesList) {
+		this.tablesList = tablesList;
 	}
 
-	private JButton crearBotonOvalado(String texto) {
-		JButton btn = new JButton(texto);
-		btn.setFont(FUENTE_MESAS);
-		//btn.setBackground(COLOR_MESA);
+	private JButton createOvalButton(String text) {
+		JButton btn = new JButton(text);
+		btn.setFont(tableFont);
 		btn.setForeground(Color.BLACK);
 		btn.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		btn.setFocusPainted(false);
@@ -167,10 +162,10 @@ public class AdminMainView extends JFrame {
 		return btn;
 	}
 
-	private void estilizarAccion(JButton btn) {
+	private void stabilizeAction(JButton btn) {
 		btn.setPreferredSize(new Dimension(200, 50));
-		btn.setFont(FUENTE_BOTONES);
-		btn.setBackground(COLOR_ACCION);
+		btn.setFont(buttonFont);
+		btn.setBackground(actionColor);
 		btn.setForeground(Color.WHITE);
 		btn.putClientProperty("JButton.buttonType", "roundRect");
 		btn.putClientProperty("JButton.cornerRadius", 20);
