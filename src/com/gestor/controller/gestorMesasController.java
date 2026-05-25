@@ -49,7 +49,7 @@ public class gestorMesasController {
 		aCont.actualizarColoresMesas();
 	}
 	public void cargarMesas() {
-	    List<JButton> lista = aCont.getAdminView().getMesasList();
+	    List<JButton> lista = aCont.getAdminView().getTablesList();
 	    int totalMesas = ms.obtenerIdsMesas();
 	    for (JButton boton : lista) {
 	        boton.setBackground(null); 
