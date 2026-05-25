@@ -31,6 +31,8 @@ public class AdminMainView extends JFrame {
 	private JButton btnNewAdmin;
 	private JButton btnCreateTable;
 	private JButton btnEmptyAllTables;
+	private JButton btnStats;
+	
 	private List<JButton> tablesList = new ArrayList<>();
 
 	public AdminMainView() {
@@ -85,11 +87,14 @@ public class AdminMainView extends JFrame {
 		stabilizeAction(btnEmptyAllTables);
 		btnNewProduct = new JButton("Create New Product");
 		stabilizeAction(btnNewProduct);
+		btnStats = new JButton("Stats");
+		stabilizeAction(btnStats);
 		
 		actionPanel.add(btnCreateTable);
 		actionPanel.add(btnNewAdmin);
 		actionPanel.add(btnEmptyAllTables);
 		actionPanel.add(btnNewProduct);
+		actionPanel.add(btnStats);
 		
 		contentPane.add(actionPanel, BorderLayout.SOUTH);
 	}
