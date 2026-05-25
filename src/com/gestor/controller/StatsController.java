@@ -1,15 +1,12 @@
 package com.gestor.controller;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.sql.Connection;
-
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 
 import com.gestor.service.FreeChartService;
+import com.gestor.view.admin.AdminMainView;
 import com.gestor.view.admin.StatsAdminProducts;
 
 public class StatsController {
@@ -17,9 +14,9 @@ public class StatsController {
 	private StatsAdminProducts vista;
 	private FreeChartService productoDao;
 
-	public StatsController(Connection conexion) {
-		this.vista = new StatsAdminProducts();
-		this.productoDao = new FreeChartService(conexion);
+	public StatsController(StatsAdminProducts v) {
+		this.vista = v;
+		this.productoDao = new FreeChartService();
 		inicializarControlador();
 	}
 
@@ -27,14 +24,15 @@ public class StatsController {
 	private void inicializarControlador() {
 		vista.setTitle("Gestor Eventos - Estadísticas de Productos");
 
-		vista.getBtnVolver().addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				vista.dispose();
-			}
-		});
+		vista.getBtnVolver().addActionListener(e-> volver());		
 	}
 
+	public void volver() {
+		vista.dispose();
+		AdminMainView v=new AdminMainView();
+		v.setVisible(true);
+		new AdminController(v);
+	}
 	
 	public void mostrarEstadisticas() {
 		DefaultCategoryDataset dataset = productoDao.obtenerProductosMasPedidos();
