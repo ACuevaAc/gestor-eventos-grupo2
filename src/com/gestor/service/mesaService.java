@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.config.ConexionDB;
-import com.gestor.model.entity.Mesa;
+import com.gestor.model.entity.Table;
 
 public class mesaService {
 
@@ -50,9 +50,9 @@ public class mesaService {
         return 0;
     }
 
-    public List<Mesa> obtenerMesasCreadas() {
+    public List<Table> obtenerMesasCreadas() {
 
-        List<Mesa> lista = new ArrayList<>();
+        List<Table> lista = new ArrayList<>();
 
         String sql = "SELECT * FROM mesa";
 
@@ -65,7 +65,7 @@ public class mesaService {
             while (rs.next()) {
 
                 lista.add(
-                        new Mesa(
+                        new Table(
                                 rs.getInt("id"),
                                 rs.getInt("numero_max"),
                                 rs.getString("nombre"),
@@ -141,7 +141,7 @@ public class mesaService {
         }
     }
 
-    public void crearMesa(Mesa m) {
+    public void crearMesa(Table m) {
 
         String sql =
                 "INSERT INTO mesa (numero_max, nombre, reservado) VALUES (?, ?, ?)";
@@ -150,9 +150,9 @@ public class mesaService {
 
             PreparedStatement ps = conn.prepareStatement(sql);
 
-            ps.setInt(1, m.getNum_max());
-            ps.setString(2, m.getNombre());
-            ps.setBoolean(3, m.isMesa_Reservada());
+            ps.setInt(1, m.getMax());
+            ps.setString(2, m.getName());
+            ps.setBoolean(3, m.isBooked());
 
             ps.execute();
 
