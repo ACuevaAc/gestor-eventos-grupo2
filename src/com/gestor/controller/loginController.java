@@ -2,7 +2,7 @@ package com.gestor.controller;
 
 import javax.swing.JOptionPane;
 
-import com.gestor.model.entity.Usuario;
+import com.gestor.model.entity.User;
 import com.gestor.service.usuarioService;
 import com.gestor.view.LoginView;
 import com.gestor.view.SignupView;
@@ -38,11 +38,11 @@ public class loginController {
         String email = view.getTxtEmail().getText();
         String psw = String.valueOf(view.getPasswordField().getPassword());
 
-        Usuario usuario = uService.login(email, psw);
+        User usuario = uService.login(email, psw);
 
         if (usuario != null) {
 
-            if ("ADMIN".equalsIgnoreCase(usuario.getRolUsuario())) {
+            if ("ADMIN".equalsIgnoreCase(usuario.getRole())) {
 
                 System.out.println("LOG- ADMIN");
 
@@ -53,7 +53,7 @@ public class loginController {
 
                 new AdminController(v);
 
-            } else if ("USER".equalsIgnoreCase(usuario.getRolUsuario())) {
+            } else if ("USER".equalsIgnoreCase(usuario.getRole())) {
 
                 view.dispose();
 

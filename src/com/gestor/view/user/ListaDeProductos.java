@@ -15,7 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-import com.gestor.model.entity.Producto;
+import com.gestor.model.entity.Product;
 
 public class ListaDeProductos extends JFrame {
 
@@ -24,7 +24,7 @@ public class ListaDeProductos extends JFrame {
 	private JButton btnAñadir;
 	private JButton btnTerminar;
 	private JLabel lblPrecioTotal,lblFoto,lblPrecioNum;
-	private DefaultListModel<Producto> modelo;
+	private DefaultListModel<Product> modelo;
 	private JPanel panelBack;
 	private JPanel panelProduct;
 	private JPanel panelNext;
@@ -58,7 +58,7 @@ public class ListaDeProductos extends JFrame {
 		panel.add(btnTerminar, BorderLayout.EAST);
 
 		// metodo para leer productos AQUI
-		modelo = new DefaultListModel<Producto>();
+		modelo = new DefaultListModel<Product>();
 
 		JPanel panel_Lista = new JPanel(new BorderLayout());
 		contentPane.add(panel_Lista, BorderLayout.CENTER);
@@ -193,11 +193,11 @@ public class ListaDeProductos extends JFrame {
 		this.lblPrecioTotal = lblPrecioTotal;
 	}
 
-	public DefaultListModel<Producto> getModelo() {
+	public DefaultListModel<Product> getModelo() {
 		return modelo;
 	}
 
-	public void setModelo(DefaultListModel<Producto> modelo) {
+	public void setModelo(DefaultListModel<Product> modelo) {
 		this.modelo = modelo;
 	}
 

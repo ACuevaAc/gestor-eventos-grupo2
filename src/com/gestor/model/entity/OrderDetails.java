@@ -1,5 +1,8 @@
 package com.gestor.model.entity;
 
+/**
+ * @deprecated This class is a duplicate of the Order class and should not be used.
+ */
 public class OrderDetails {
 	
 	private int id;
@@ -7,6 +10,10 @@ public class OrderDetails {
 	private int productId;
 	private int amount;
 	
+	/**
+	 * This class is duplicate of Order Class.
+	 * @deprecated
+	 */
 	public OrderDetails (int id, int orderId, int productId,int amount) {
 		this.id = id;
 		this.orderId = orderId;

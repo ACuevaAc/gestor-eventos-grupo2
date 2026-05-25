@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.config.ConexionDB;
-import com.gestor.model.entity.Reserva;
+import com.gestor.model.entity.Book;
 
 public class Reserva_Service {
 
@@ -29,9 +29,9 @@ public class Reserva_Service {
         }
     }
 
-    public List<Reserva> getReservas() {
+    public List<Book> getReservas() {
 
-        List<Reserva> lista = new ArrayList<>();
+        List<Book> lista = new ArrayList<>();
 
         String sql = "SELECT * FROM reserva";
 
@@ -46,7 +46,7 @@ public class Reserva_Service {
                         rs.getObject("fecha_reserva", LocalDateTime.class);
 
                 lista.add(
-                        new Reserva(
+                        new Book(
                                 rs.getInt("id"),
                                 rs.getInt("id_usuario"),
                                 rs.getInt("id_mesa"),

@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.config.ConexionDB;
-import com.gestor.model.entity.Usuario;
+import com.gestor.model.entity.User;
 
 public class usuarioService {
 
@@ -46,9 +46,9 @@ public class usuarioService {
         return false;
     }
 
-    public boolean registrar(Usuario usuario) {
+    public boolean registrar(User usuario) {
 
-        if (existeEmail(usuario.getEmailUsuario())) {
+        if (existeEmail(usuario.getEmail())) {
 
             return false;
         }
@@ -60,11 +60,11 @@ public class usuarioService {
 
             PreparedStatement ps = con.prepareStatement(sql);
 
-            ps.setString(1, usuario.getNombreUsuario());
-            ps.setString(2, usuario.getEmailUsuario());
-            ps.setInt(3, usuario.getEdad());
-            ps.setString(4, usuario.getPswUsuario());
-            ps.setString(5, usuario.getRolUsuario());
+            ps.setString(1, usuario.getName());
+            ps.setString(2, usuario.getEmail());
+            ps.setInt(3, usuario.getAge());
+            ps.setString(4, usuario.getPassword());
+            ps.setString(5, usuario.getRole());
 
             ps.executeUpdate();
 
@@ -78,7 +78,7 @@ public class usuarioService {
         return false;
     }
 
-    public Usuario login(String email, String psw) {
+    public User login(String email, String psw) {
 
         String sql =
                 "SELECT * FROM usuario WHERE email=? AND password=?";
@@ -97,13 +97,13 @@ public class usuarioService {
 
             if (rs.next()) {
 
-                Usuario u = new Usuario();
+                User u = new User();
 
-                u.setIdUsuario(rs.getInt("id"));
-                u.setNombreUsuario(rs.getString("nombre"));
-                u.setEmailUsuario(rs.getString("email"));
-                u.setEdad(rs.getInt("edad"));
-                u.setRolUsuario(rs.getString("rol"));
+                u.setId(rs.getInt("id"));
+                u.setName(rs.getString("nombre"));
+                u.setEmail(rs.getString("email"));
+                u.setAge(rs.getInt("edad"));
+                u.setRole(rs.getString("rol"));
 
                 return u;
             }

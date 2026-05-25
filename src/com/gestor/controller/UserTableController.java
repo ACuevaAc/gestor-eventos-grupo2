@@ -6,7 +6,7 @@ import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
-import com.gestor.model.entity.Producto;
+import com.gestor.model.entity.Product;
 import com.gestor.service.OrderService;
 import com.gestor.service.ProductService;
 import com.gestor.view.user.ListaDeProductos;
@@ -17,7 +17,7 @@ public class UserTableController {
     private ProductService productService;
     private OrderService orderService;
     
-    private List<Producto> listaProductos;
+    private List<Product> listaProductos;
     private int indiceActual = 0;
     private double totalAcumuladoMesa = 0.0;
 
@@ -47,13 +47,13 @@ public class UserTableController {
     private void mostrarProductoActual() {
         if (listaProductos == null || listaProductos.isEmpty()) return;
         
-        Producto prod = listaProductos.get(indiceActual);
-        view.getLblTituloProducto().setText(prod.getNomProducto());
-        view.getPrecioNum().setText(prod.getPrecioProducto() + " €");
+        Product prod = listaProductos.get(indiceActual);
+        view.getLblTituloProducto().setText(prod.getName());
+        view.getPrecioNum().setText(prod.getPrice() + " €");
         view.getCantCB().setSelectedIndex(0); 
 
-        if (prod.getImagen() != null && prod.getImagen().length > 0) {
-            ImageIcon original = new ImageIcon(prod.getImagen());
+        if (prod.getImage() != null && prod.getImage().length > 0) {
+            ImageIcon original = new ImageIcon(prod.getImage());
             Image escalada = original.getImage().getScaledInstance(260, 131, Image.SCALE_SMOOTH);
             view.getLblFoto().setIcon(new ImageIcon(escalada));
             view.getLblFoto().setText(""); 
@@ -86,15 +86,15 @@ public class UserTableController {
     private void añadirAlPedido() {
         if (listaProductos == null || listaProductos.isEmpty()) return;
 
-        Producto prodActual = listaProductos.get(indiceActual);
+        Product prodActual = listaProductos.get(indiceActual);
         int cantidad = (int) view.getCantCB().getSelectedItem();
-        double precioTotalItems = prodActual.getPrecioProducto() * cantidad;
-        orderService.createOrder(this.idMesa, prodActual.getIdProducto(), cantidad, precioTotalItems);
+        double precioTotalItems = prodActual.getPrice() * cantidad;
+        orderService.createOrder(this.idMesa, prodActual.getId(), cantidad, precioTotalItems);
         totalAcumuladoMesa += precioTotalItems;
         actualizarTextoTotal();
 
         JOptionPane.showMessageDialog(view, 
-            "Añadido: " + cantidad + "x " + prodActual.getNomProducto() + " a la cuenta.", 
+            "Añadido: " + cantidad + "x " + prodActual.getName() + " a la cuenta.", 
             "Pedido Confirmado", 
             JOptionPane.INFORMATION_MESSAGE
         );
