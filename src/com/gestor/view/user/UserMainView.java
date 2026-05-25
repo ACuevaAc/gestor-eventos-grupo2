@@ -137,16 +137,4 @@ public class UserMainView extends JFrame {
 	public void setTablesList(List<JButton> tablesList) {
 		this.tablesList = tablesList;
 	}
-
-	private JButton createOvalButton (String text) {
-		JButton btn = new JButton(text);
-		btn.setFont(tablesFont);
-		btn.setForeground(Color.BLACK);
-		btn.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		btn.setFocusPainted(false);
-		btn.putClientProperty("JButton.buttonType", "roundRect");
-		btn.putClientProperty("JButton.cornerRadius", 999);
-
-		return btn;
-	}
 }
