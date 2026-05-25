@@ -104,7 +104,7 @@ public class FormCrearProducto extends JFrame {
 		});
 	}
 
-
+	
 	public JTextField getTxtNombre() {
 		return txtNombre;
 	}
