@@ -42,8 +42,8 @@ public class StatsAdminProducts extends JFrame {
 		if (panelGrafico != null) {
 			contentPane.remove(panelGrafico);
 		}
-
 		panelGrafico = new ChartPanel(grafico);
+		panelGrafico.setPreferredSize(new java.awt.Dimension(600, 350));
 		panelGrafico.setMouseWheelEnabled(true);
 		contentPane.add(panelGrafico, BorderLayout.CENTER);
 
