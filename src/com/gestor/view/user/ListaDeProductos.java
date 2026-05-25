@@ -1,12 +1,12 @@
 package com.gestor.view.user;
 
 import java.awt.BorderLayout;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 import javax.swing.DefaultListModel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -82,9 +82,9 @@ public class ListaDeProductos extends JFrame {
 		lblTituloProducto.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTituloProducto.setBounds(83, 10, 103, 21);
 		panelProduct.add(lblTituloProducto);
-		URL url = null;
 
-		JLabel lblFoto = new JLabel();
+		Icon foto = new ImageIcon("resources/ñam.jpg");
+		JLabel lblFoto = new JLabel(foto);
 		lblFoto.setBounds(10, 41, 260, 131);
 		panelProduct.add(lblFoto);
 

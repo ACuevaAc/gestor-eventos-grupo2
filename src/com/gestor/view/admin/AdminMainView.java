@@ -30,7 +30,8 @@ public class AdminMainView extends JFrame {
 	private final Color COLOR_ACCION = new Color(51, 65, 85);
 	private final Font FUENTE_MESAS = new Font("Segoe UI", Font.BOLD, 18);
 	private final Font FUENTE_BOTONES = new Font("Segoe UI", Font.BOLD, 14);
-
+	
+	private JButton btnNewProduct;
 	private JButton btnNewAdmin;
 	private JButton btnCreateTable;
 	private JButton btnEmptyAllTables;
@@ -85,11 +86,23 @@ public class AdminMainView extends JFrame {
 		estilizarAccion(btnNewAdmin);
 		btnEmptyAllTables = new JButton("Empty All Tables");
 		estilizarAccion(btnEmptyAllTables);
-
+		btnNewProduct = new JButton("Create New Product");
+		estilizarAccion(btnNewProduct);
+		
 		actionPanel.add(btnCreateTable);
 		actionPanel.add(btnNewAdmin);
 		actionPanel.add(btnEmptyAllTables);
+		actionPanel.add(btnNewProduct);
+		
 		contentPane.add(actionPanel, BorderLayout.SOUTH);
+	}
+
+	public JButton getBtnNewProduct() {
+		return btnNewProduct;
+	}
+
+	public void setBtnNewProduct(JButton btnNewProduct) {
+		this.btnNewProduct = btnNewProduct;
 	}
 
 	public JButton getBtnEmptyAllTables() {
