@@ -99,6 +99,14 @@ public class AdminMainView extends JFrame {
 		contentPane.add(actionPanel, BorderLayout.SOUTH);
 	}
 
+	public JButton getBtnStats() {
+		return btnStats;
+	}
+
+	public void setBtnStats(JButton btnStats) {
+		this.btnStats = btnStats;
+	}
+
 	public JButton getBtnNewProduct() {
 		return btnNewProduct;
 	}
