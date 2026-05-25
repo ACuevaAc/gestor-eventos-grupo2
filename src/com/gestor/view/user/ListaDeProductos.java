@@ -1,7 +1,6 @@
 package com.gestor.view.user;
 
 import java.awt.BorderLayout;
-import java.net.URL;
 
 import javax.swing.DefaultListModel;
 import javax.swing.GroupLayout;
@@ -24,13 +23,15 @@ public class ListaDeProductos extends JFrame {
 	private JPanel contentPane;
 	private JButton btnAñadir;
 	private JButton btnTerminar;
-	private JLabel lblPrecioTotal;
+	private JLabel lblPrecioTotal,lblFoto,lblPrecioNum;
 	private DefaultListModel<Producto> modelo;
 	private JPanel panelBack;
 	private JPanel panelProduct;
 	private JPanel panelNext;
 	private JButton btnBack;
 	private JButton btnNext;
+	private JComboBox<Integer> CantCB;
+	private JLabel lblCantidad,lblTituloProducto,lblPrecio;
 
 	/**
 	 * Create the frame.
@@ -78,32 +79,32 @@ public class ListaDeProductos extends JFrame {
 		panel_Lista.add(panelProduct, BorderLayout.CENTER);
 		panelProduct.setLayout(null);
 
-		JLabel lblTituloProducto = new JLabel("Nombre Producto");
+		lblTituloProducto = new JLabel("Nombre Producto");
 		lblTituloProducto.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTituloProducto.setBounds(83, 10, 103, 21);
 		panelProduct.add(lblTituloProducto);
 
-		Icon foto = new ImageIcon("resources/ñam.jpg");
-		JLabel lblFoto = new JLabel(foto);
+		// de test Icon foto = new ImageIcon("resources/ñam.jpg");
+		lblFoto = new JLabel();
 		lblFoto.setBounds(10, 41, 260, 131);
 		panelProduct.add(lblFoto);
 
-		JLabel lblCantidad = new JLabel("Cantidad:");
+		lblCantidad = new JLabel("Cantidad:");
 		lblCantidad.setBounds(10, 210, 44, 12);
 		panelProduct.add(lblCantidad);
 
-		JComboBox<Integer> CantCB = new JComboBox<>();
+		CantCB = new JComboBox<>();
 		for (int i = 1; i <= 10; i++) {
 			CantCB.addItem(i);
 		}
 		CantCB.setBounds(186, 206, 84, 20);
 		panelProduct.add(CantCB);
 
-		JLabel lblPrecio = new JLabel("Precio");
+		lblPrecio = new JLabel("Precio");
 		lblPrecio.setBounds(10, 182, 44, 12);
 		panelProduct.add(lblPrecio);
 
-		JLabel lblPrecioNum = new JLabel("0€");
+		lblPrecioNum = new JLabel("0€");
 		lblPrecioNum.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblPrecioNum.setBounds(226, 182, 44, 12);
 		panelProduct.add(lblPrecioNum);
@@ -126,4 +127,102 @@ public class ListaDeProductos extends JFrame {
 		ListaDeProductos ldp = new ListaDeProductos();
 		ldp.setVisible(true);
 	}
+	
+	public void setPrecioNum(JLabel lblPrecioNum) {
+		this.lblPrecioNum=lblPrecioNum;
+	}
+	public JLabel getPrecioNum() {
+		return lblPrecioNum;
+	}
+	public JComboBox<Integer> getCantCB() {
+		return CantCB;
+	}
+	public JLabel getLblFoto() {
+		return lblFoto;
+	}
+
+	public void setCantCB(JComboBox<Integer> cantCB) {
+		CantCB = cantCB;
+	}
+
+	public JLabel getLblCantidad() {
+		return lblCantidad;
+	}
+
+	public void setLblCantidad(JLabel lblCantidad) {
+		this.lblCantidad = lblCantidad;
+	}
+
+	public JLabel getLblTituloProducto() {
+		return lblTituloProducto;
+	}
+
+	public void setLblTituloProducto(JLabel lblTituloProducto) {
+		this.lblTituloProducto = lblTituloProducto;
+	}
+
+	public JLabel getLblPrecio() {
+		return lblPrecio;
+	}
+
+	public void setLblPrecio(JLabel lblPrecio) {
+		this.lblPrecio = lblPrecio;
+	}
+
+	public JButton getBtnAñadir() {
+		return btnAñadir;
+	}
+
+	public void setBtnAñadir(JButton btnAñadir) {
+		this.btnAñadir = btnAñadir;
+	}
+
+	public JButton getBtnTerminar() {
+		return btnTerminar;
+	}
+
+	public void setBtnTerminar(JButton btnTerminar) {
+		this.btnTerminar = btnTerminar;
+	}
+
+	public JLabel getLblPrecioTotal() {
+		return lblPrecioTotal;
+	}
+
+	public void setLblPrecioTotal(JLabel lblPrecioTotal) {
+		this.lblPrecioTotal = lblPrecioTotal;
+	}
+
+	public DefaultListModel<Producto> getModelo() {
+		return modelo;
+	}
+
+	public void setModelo(DefaultListModel<Producto> modelo) {
+		this.modelo = modelo;
+	}
+
+	public JPanel getPanelProduct() {
+		return panelProduct;
+	}
+
+	public void setPanelProduct(JPanel panelProduct) {
+		this.panelProduct = panelProduct;
+	}
+
+	public JButton getBtnBack() {
+		return btnBack;
+	}
+
+	public void setBtnBack(JButton btnBack) {
+		this.btnBack = btnBack;
+	}
+
+	public JButton getBtnNext() {
+		return btnNext;
+	}
+
+	public void setBtnNext(JButton btnNext) {
+		this.btnNext = btnNext;
+	}
+	
 }

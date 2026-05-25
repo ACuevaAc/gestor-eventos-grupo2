@@ -19,6 +19,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import com.gestor.controller.UserTableController;
 import com.gestor.model.entity.Mesa;
 import com.gestor.model.entity.Usuario;
 import com.gestor.service.Reserva_Service;
@@ -75,15 +76,20 @@ public class UserMainView extends JFrame {
 
 				btn.addActionListener(e -> {
 					JButton button = (JButton) e.getSource();
-					int talbeId = (int) button.getClientProperty("idMesa");
+					int tableId = (int) button.getClientProperty("idMesa");
 
 					if (button.getBackground().equals(Color.GREEN)) {
 						int opcion = JOptionPane.showConfirmDialog(this, "¿Reservar " + table.getNombre() + "?", "Reserva", JOptionPane.YES_NO_OPTION);
 						if (opcion == JOptionPane.YES_OPTION) {
-							rs.realizarReserva(user.getIdUsuario(), talbeId, LocalDateTime.now());
-							ms.reservarMesa(talbeId);
+							rs.realizarReserva(user.getIdUsuario(), tableId, LocalDateTime.now());
+							ms.reservarMesa(tableId);
 							button.setBackground(Color.RED);
 							JOptionPane.showMessageDialog(this, "Mesa reservada correctamente");
+							dispose();
+							ListaDeProductos v=new ListaDeProductos();
+							v.setVisible(true);
+							new UserTableController(v,tableId);
+							
 						}
 					} else {
 						JOptionPane.showMessageDialog(this, "La mesa ya está reservada");
