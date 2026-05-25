@@ -5,7 +5,7 @@ import java.util.List;
 
 import javax.swing.JButton;
 
-import com.gestor.model.entity.Mesa;
+import com.gestor.model.entity.Table;
 import com.gestor.service.mesaService;
 import com.gestor.view.admin.AdminMainView;
 import com.gestor.view.admin.GestorMesasView;
@@ -40,10 +40,10 @@ public class gestorMesasController {
 	public void registrarMesa() {
 		String nom=view.getTxtNombre().getText();
 		int num_max=(int) view.getcBgente().getSelectedItem();
-		Mesa mesa=new Mesa();
-		mesa.setNum_max(num_max);
-		mesa.setNombre(nom);
-		mesa.setMesa_Reservada(false);
+		Table mesa=new Table();
+		mesa.setMax(num_max);
+		mesa.setName(nom);
+		mesa.setBooked(false);
 		ms.crearMesa(mesa);
 		
 		aCont.actualizarColoresMesas();

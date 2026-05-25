@@ -5,7 +5,7 @@ import java.util.List;
 
 import javax.swing.JButton;
 
-import com.gestor.model.entity.Mesa;
+import com.gestor.model.entity.Table;
 import com.gestor.service.mesaService;
 import com.gestor.view.admin.AdminMainView;
 import com.gestor.view.admin.FormCrearProducto;
@@ -67,15 +67,15 @@ public class AdminController {
 
         List<JButton> botones = view.getTablesList();
 
-        List<Mesa> mesasBD = ms.obtenerMesasCreadas();
+        List<Table> mesasBD = ms.obtenerMesasCreadas();
 
         for (int i = 0; i < botones.size() && i < mesasBD.size(); i++) {
 
             JButton boton = botones.get(i);
 
-            Mesa mesa = mesasBD.get(i);
+            Table mesa = mesasBD.get(i);
 
-            if (mesa.isMesa_Reservada()) {
+            if (mesa.isBooked()) {
 
                 boton.setBackground(Color.RED);
 
