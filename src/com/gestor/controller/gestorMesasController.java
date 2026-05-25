@@ -35,7 +35,7 @@ public class gestorMesasController {
 		AdminMainView view=aCont.getAdminView();
 		view.setVisible(true);
 		
-		cargarMesas();
+		aCont.actualizarColoresMesas();
 	}
 	public void registrarMesa() {
 		String nom=view.getTxtNombre().getText();
@@ -46,7 +46,7 @@ public class gestorMesasController {
 		mesa.setMesa_Reservada(false);
 		ms.crearMesa(mesa);
 		
-		cargarMesas();
+		aCont.actualizarColoresMesas();
 	}
 	public void cargarMesas() {
 	    List<JButton> lista = aCont.getAdminView().getMesasList();
