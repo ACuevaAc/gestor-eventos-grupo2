@@ -7,8 +7,6 @@ import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -25,8 +23,8 @@ public class signupView extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField txtNombre;
-	private JTextField txtEdad;
+	private JTextField txtName;
+	private JTextField txtAge;
 	private JTextField txtEmail;
 	private JTextField txtConfirmEmail;
 	private JPasswordField txtPassword;
@@ -34,15 +32,15 @@ public class signupView extends JFrame {
 	private JButton btnCreate;
 	private JButton btnBack;
 
-	private final Color COLOR_FONDO = new Color(248, 249, 250);
-	private final Color COLOR_TEXTO = new Color(43, 43, 43);
-	private final Color COLOR_PRINCIPAL = new Color(230, 95, 43);
-	private final Color COLOR_SECUNDARIO = new Color(108, 117, 125);
+	private final Color backgroundColor = new Color(248, 249, 250);
+	private final Color textColor = new Color(43, 43, 43);
+	private final Color mainColor = new Color(230, 95, 43);
+	private final Color secondaryColor = new Color(108, 117, 125);
 
-	private final Font FUENTE_TITULO = new Font("Segoe UI", Font.BOLD, 22);
-	private final Font FUENTE_LABEL = new Font("Segoe UI", Font.PLAIN, 13);
-	private final Font FUENTE_INPUT = new Font("Segoe UI", Font.PLAIN, 14);
-	private final Font FUENTE_BOTON = new Font("Segoe UI", Font.BOLD, 14);
+	private final Font titleFont = new Font("Segoe UI", Font.BOLD, 22);
+	private final Font labelFont = new Font("Segoe UI", Font.PLAIN, 13);
+	private final Font inputFont = new Font("Segoe UI", Font.PLAIN, 14);
+	private final Font buttonFont = new Font("Segoe UI", Font.BOLD, 14);
 
 	public signupView() {
 		setTitle("Registro - Gestor de Restaurante");
@@ -52,7 +50,7 @@ public class signupView extends JFrame {
 		setLocationRelativeTo(null);
 
 		contentPane = new JPanel();
-		contentPane.setBackground(COLOR_FONDO);
+		contentPane.setBackground(backgroundColor);
 		contentPane.setBorder(new EmptyBorder(30, 50, 30, 50));
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 20));
@@ -61,14 +59,14 @@ public class signupView extends JFrame {
 		headerPanel.setOpaque(false);
 
 		JLabel lblTitle = new JLabel("Crear Cuenta");
-		lblTitle.setFont(FUENTE_TITULO);
-		lblTitle.setForeground(COLOR_PRINCIPAL);
+		lblTitle.setFont(titleFont);
+		lblTitle.setForeground(mainColor);
 		lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
 		headerPanel.add(lblTitle);
 
 		JLabel lblSubtitle = new JLabel("Te damos la bienvenida a nuestra nueva experiencia gastronómica");
-		lblSubtitle.setFont(FUENTE_LABEL);
-		lblSubtitle.setForeground(COLOR_SECUNDARIO);
+		lblSubtitle.setFont(labelFont);
+		lblSubtitle.setForeground(secondaryColor);
 		lblSubtitle.setHorizontalAlignment(SwingConstants.CENTER);
 		headerPanel.add(lblSubtitle);
 
@@ -77,76 +75,88 @@ public class signupView extends JFrame {
 		JPanel formPanel = new JPanel(new GridLayout(12, 1, 0, 5));
 		formPanel.setOpaque(false);
 
-		JLabel lblNombre = new JLabel("Nombre Completo");
-		lblNombre.setFont(FUENTE_LABEL);
-		lblNombre.setForeground(COLOR_TEXTO);
-		formPanel.add(lblNombre);
+		JLabel lblName = new JLabel("Nombre Completo");
+		lblName.setFont(labelFont);
+		lblName.setForeground(textColor);
+		formPanel.add(lblName);
 
-		txtNombre = new JTextField();
-		txtNombre.setFont(FUENTE_INPUT);
-		txtNombre.setBorder(
-				BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(new Color(200, 200, 200), 1),
-						BorderFactory.createEmptyBorder(5, 10, 5, 10)));
-		formPanel.add(txtNombre);
+		txtName = new JTextField();
+		txtName.setFont(inputFont);
+		txtName.setBorder(
+			BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(new Color(200, 200, 200), 1),
+				BorderFactory.createEmptyBorder(5, 10, 5, 10)
+			)
+		);
+		formPanel.add(txtName);
 
 		JLabel lblEdad = new JLabel("Edad");
-		lblEdad.setFont(FUENTE_LABEL);
-		lblEdad.setForeground(COLOR_TEXTO);
+		lblEdad.setFont(labelFont);
+		lblEdad.setForeground(textColor);
 		formPanel.add(lblEdad);
 
-		txtEdad = new JTextField();
-		txtEdad.setFont(FUENTE_INPUT);
-		txtEdad.setBorder(
-				BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(new Color(200, 200, 200), 1),
-						BorderFactory.createEmptyBorder(5, 10, 5, 10)));
-		formPanel.add(txtEdad);
+		txtAge = new JTextField();
+		txtAge.setFont(inputFont);
+		txtAge.setBorder(
+			BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(new Color(200, 200, 200), 1),
+				BorderFactory.createEmptyBorder(5, 10, 5, 10)
+			)
+		);
+		formPanel.add(txtAge);
 
 		JLabel lblEmail = new JLabel("Correo Electrónico");
-		lblEmail.setFont(FUENTE_LABEL);
-		lblEmail.setForeground(COLOR_TEXTO);
+		lblEmail.setFont(labelFont);
+		lblEmail.setForeground(textColor);
 		formPanel.add(lblEmail);
 
 		txtEmail = new JTextField();
-		txtEmail.setFont(FUENTE_INPUT);
+		txtEmail.setFont(inputFont);
 		txtEmail.setBorder(
-				BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(new Color(200, 200, 200), 1),
-						BorderFactory.createEmptyBorder(5, 10, 5, 10)));
+			BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(new Color(200, 200, 200), 1),
+				BorderFactory.createEmptyBorder(5, 10, 5, 10)
+			)
+		);
 		formPanel.add(txtEmail);
 
 		JLabel lblConfirmEmail = new JLabel("Confirmar Correo Electrónico");
-		lblConfirmEmail.setFont(FUENTE_LABEL);
-		lblConfirmEmail.setForeground(COLOR_TEXTO);
+		lblConfirmEmail.setFont(labelFont);
+		lblConfirmEmail.setForeground(textColor);
 		formPanel.add(lblConfirmEmail);
 
 		txtConfirmEmail = new JTextField();
-		txtConfirmEmail.setFont(FUENTE_INPUT);
+		txtConfirmEmail.setFont(inputFont);
 		txtConfirmEmail.setBorder(
-				BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(new Color(200, 200, 200), 1),
-						BorderFactory.createEmptyBorder(5, 10, 5, 10)));
+			BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(new Color(200, 200, 200), 1),
+				BorderFactory.createEmptyBorder(5, 10, 5, 10)
+			)
+		);
 		formPanel.add(txtConfirmEmail);
 
 		JLabel lblPass = new JLabel("Contraseña");
-		lblPass.setFont(FUENTE_LABEL);
-		lblPass.setForeground(COLOR_TEXTO);
+		lblPass.setFont(labelFont);
+		lblPass.setForeground(textColor);
 		formPanel.add(lblPass);
 
 		txtPassword = new JPasswordField();
-		txtPassword.setFont(FUENTE_INPUT);
+		txtPassword.setFont(inputFont);
 		txtPassword.setBorder(
-				BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(new Color(200, 200, 200), 1),
-						BorderFactory.createEmptyBorder(5, 10, 5, 10)));
+			BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(new Color(200, 200, 200), 1),
+				BorderFactory.createEmptyBorder(5, 10, 5, 10)
+			)
+		);
 		formPanel.add(txtPassword);
 
 		JLabel lblConfirmPass = new JLabel("Confirmar Contraseña");
-		lblConfirmPass.setFont(FUENTE_LABEL);
-		lblConfirmPass.setForeground(COLOR_TEXTO);
+		lblConfirmPass.setFont(labelFont);
+		lblConfirmPass.setForeground(textColor);
 		formPanel.add(lblConfirmPass);
 
 		txtConfirmPassword = new JPasswordField();
-		txtConfirmPassword.setFont(FUENTE_INPUT);
+		txtConfirmPassword.setFont(inputFont);
 		txtConfirmPassword.setBorder(
-				BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(new Color(200, 200, 200), 1),
-						BorderFactory.createEmptyBorder(5, 10, 5, 10)));
+			BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(new Color(200, 200, 200), 1),
+				BorderFactory.createEmptyBorder(5, 10, 5, 10)
+			)
+		);
 		formPanel.add(txtConfirmPassword);
 
 		contentPane.add(formPanel, BorderLayout.CENTER);
@@ -155,9 +165,9 @@ public class signupView extends JFrame {
 		actionPanel.setOpaque(false);
 
 		btnCreate = new JButton("Crear Cuenta");
-		btnCreate.setFont(FUENTE_BOTON);
-		btnCreate.setForeground(COLOR_SECUNDARIO);
-		btnCreate.setBackground(COLOR_PRINCIPAL);
+		btnCreate.setFont(buttonFont);
+		btnCreate.setForeground(secondaryColor);
+		btnCreate.setBackground(mainColor);
 		btnCreate.setFocusPainted(false);
 		btnCreate.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		btnCreate.setPreferredSize(new Dimension(0, 45));
@@ -165,8 +175,8 @@ public class signupView extends JFrame {
 		actionPanel.add(btnCreate);
 
 		btnBack = new JButton("Volver al Login");
-		btnBack.setFont(FUENTE_LABEL);
-		btnBack.setForeground(COLOR_SECUNDARIO);
+		btnBack.setFont(labelFont);
+		btnBack.setForeground(secondaryColor);
 		btnBack.setContentAreaFilled(false);
 		btnBack.setBorderPainted(false);
 		btnBack.setFocusPainted(false);
@@ -176,20 +186,20 @@ public class signupView extends JFrame {
 		contentPane.add(actionPanel, BorderLayout.SOUTH);
 	}
 
-	public JTextField getTxtNombre() {
-		return txtNombre;
+	public JTextField getTxtName() {
+		return txtName;
 	}
 
-	public void setTxtNombre(JTextField txtNombre) {
-		this.txtNombre = txtNombre;
+	public void setTxtName(JTextField txtName) {
+		this.txtName = txtName;
 	}
 
-	public JTextField getTxtEdad() {
-		return txtEdad;
+	public JTextField getTxtAge() {
+		return txtAge;
 	}
 
-	public void setTxtEdad(JTextField txtEdad) {
-		this.txtEdad = txtEdad;
+	public void setTxtAge(JTextField txtAge) {
+		this.txtAge = txtAge;
 	}
 
 	public JTextField getTxtEmail() {
