@@ -10,6 +10,7 @@ public class Reserva {
     
     
     // Este constructor sobra
+    // what should we do with this constructor so?
     public Reserva(int idReserva, int idUsuario, int idMesa) {
         this.idReserva = idReserva;
         this.idUsuario = idUsuario;

@@ -19,7 +19,7 @@ import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 
-public class signupView extends JFrame {
+public class SignupView extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -42,7 +42,7 @@ public class signupView extends JFrame {
 	private final Font inputFont = new Font("Segoe UI", Font.PLAIN, 14);
 	private final Font buttonFont = new Font("Segoe UI", Font.BOLD, 14);
 
-	public signupView() {
+	public SignupView() {
 		setTitle("Registro - Gestor de Restaurante");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(500, 650);
@@ -260,7 +260,7 @@ public class signupView extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					signupView frame = new signupView();
+					SignupView frame = new SignupView();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
