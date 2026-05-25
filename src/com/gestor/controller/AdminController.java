@@ -6,7 +6,7 @@ import java.util.List;
 import javax.swing.JButton;
 
 import com.gestor.model.entity.Table;
-import com.gestor.service.mesaService;
+import com.gestor.service.TableService;
 import com.gestor.view.admin.AdminMainView;
 import com.gestor.view.admin.FormCrearProducto;
 import com.gestor.view.admin.GestorMesasView;
@@ -16,12 +16,12 @@ import com.gestor.view.admin.signupadminView;
 public class AdminController {
 
     private AdminMainView view;
-    private mesaService ms;
+    private TableService ms;
 
     public AdminController(AdminMainView v) {
 
         this.view = v;
-        this.ms = new mesaService();
+        this.ms = new TableService();
 
         actualizarColoresMesas();
 
@@ -67,7 +67,7 @@ public class AdminController {
 
         List<JButton> botones = view.getTablesList();
 
-        List<Table> mesasBD = ms.obtenerMesasCreadas();
+        List<Table> mesasBD = ms.getCreatedTables();
 
         for (int i = 0; i < botones.size() && i < mesasBD.size(); i++) {
 

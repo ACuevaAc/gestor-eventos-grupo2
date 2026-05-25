@@ -6,13 +6,13 @@ import java.util.List;
 import javax.swing.JButton;
 
 import com.gestor.model.entity.Table;
-import com.gestor.service.mesaService;
+import com.gestor.service.TableService;
 import com.gestor.view.admin.AdminMainView;
 import com.gestor.view.admin.GestorMesasView;
 
 public class gestorMesasController {
 	private GestorMesasView view;
-	private mesaService ms;
+	private TableService ms;
 	private AdminController aCont;
 	
 	public gestorMesasController() {
@@ -23,7 +23,7 @@ public class gestorMesasController {
 		this.view=v;
 		this.aCont=cont;
 		
-		ms= new mesaService();
+		ms= new TableService();
 		cargarMesas();
 		v.getBtnRegistrarModificar().addActionListener(e-> registrarMesa());
 		v.getBtnAtras().addActionListener(e-> volverMenu());
@@ -44,13 +44,13 @@ public class gestorMesasController {
 		mesa.setMax(num_max);
 		mesa.setName(nom);
 		mesa.setBooked(false);
-		ms.crearMesa(mesa);
+		ms.createTable(mesa);
 		
 		aCont.actualizarColoresMesas();
 	}
 	public void cargarMesas() {
 	    List<JButton> lista = aCont.getAdminView().getTablesList();
-	    int totalMesas = ms.obtenerIdsMesas();
+	    int totalMesas = ms.getTableIds();
 	    for (JButton boton : lista) {
 	        boton.setBackground(null); 
 	    }

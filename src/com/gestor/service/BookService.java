@@ -12,65 +12,56 @@ import java.util.List;
 import com.config.ConexionDB;
 import com.gestor.model.entity.Book;
 
-public class Reserva_Service {
+public class BookService {
 
     private Connection conn;
 
-    public Reserva_Service() {
+    public BookService() {
 
         try {
-
             this.conn = ConexionDB.obtener();
-
         } catch (ClassNotFoundException | SQLException e) {
-
-            System.err.println("Error: Could not establish connection in Reserva_Service.");
+            System.err.println("Error: Could not establish connection in BookService.");
             e.printStackTrace();
         }
     }
 
-    public List<Book> getReservas() {
-
-        List<Book> lista = new ArrayList<>();
+    public List<Book> getBooks() {
+        List<Book> list = new ArrayList<>();
 
         String sql = "SELECT * FROM reserva";
 
         try (
-                Statement st = conn.createStatement();
-                ResultSet rs = st.executeQuery(sql)
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(sql)
         ) {
-
             while (rs.next()) {
-
-                LocalDateTime fechaBD =
-                        rs.getObject("fecha_reserva", LocalDateTime.class);
-
-                lista.add(
-                        new Book(
-                                rs.getInt("id"),
-                                rs.getInt("id_usuario"),
-                                rs.getInt("id_mesa"),
-                                fechaBD
-                        )
+                LocalDateTime dateDB = rs.getObject("fecha_reserva", LocalDateTime.class);
+                list.add(
+                    new Book(
+                        rs.getInt("id"),
+                        rs.getInt("id_usuario"),
+                        rs.getInt("id_mesa"),
+                        dateDB
+                    )
                 );
             }
 
         } catch (SQLException e) {
-
             e.printStackTrace();
         }
 
-        return lista;
+        return list;
     }
 
-    public void realizarReserva(int idUser,int idTable,LocalDateTime date) {
+    public void makeReservation(int userId, int tableId, LocalDateTime date) {
     	
     	String sql ="INSERT INTO reserva (id_usuario, id_mesa, fecha_reserva) VALUES (?, ?, ?)";
     	
         try (PreparedStatement st = conn.prepareStatement(sql)) {
 
-            st.setInt(1, idUser);
-            st.setInt(2, idTable);
+            st.setInt(1, userId);
+            st.setInt(2, tableId);
             st.setObject(3, date);
 
             st.executeUpdate();
@@ -78,9 +69,8 @@ public class Reserva_Service {
             System.out.println("LOG Reserva_Service -> Reserva realizada");
 
         } catch (SQLException e) {
-
             System.err.println(
-                    "Error al insertar reserva: " + e.getMessage()
+                "Error al insertar reserva: " + e.getMessage()
             );
         }
     }

@@ -3,7 +3,7 @@ package com.gestor.controller;
 import javax.swing.JOptionPane;
 
 import com.gestor.model.entity.User;
-import com.gestor.service.usuarioService;
+import com.gestor.service.UserService;
 import com.gestor.view.LoginView;
 import com.gestor.view.SignupView;
 import com.gestor.view.admin.AdminMainView;
@@ -12,9 +12,9 @@ import com.gestor.view.user.UserMainView;
 public class loginController {
 
     private LoginView view;
-    private usuarioService uService;
+    private UserService uService;
 
-    public loginController(LoginView v, usuarioService us) {
+    public loginController(LoginView v, UserService us) {
 
         this.view = v;
         this.uService = us;

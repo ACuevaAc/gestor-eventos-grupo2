@@ -22,15 +22,15 @@ import javax.swing.border.EmptyBorder;
 import com.gestor.controller.UserTableController;
 import com.gestor.model.entity.Table;
 import com.gestor.model.entity.User;
-import com.gestor.service.Reserva_Service;
-import com.gestor.service.mesaService;
+import com.gestor.service.BookService;
+import com.gestor.service.TableService;
 
 public class UserMainView extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private Reserva_Service rs;
-	private mesaService ms;
+	private BookService rs;
+	private TableService ms;
 
 	private final Color backgroundColor = new Color(248, 249, 250);
 	private final Font tableFont = new Font("Segoe UI", Font.BOLD, 18);
@@ -41,8 +41,8 @@ public class UserMainView extends JFrame {
 
 		super("Reservar mesas");
 
-		this.rs = new Reserva_Service();
-		this.ms = new mesaService();
+		this.rs = new BookService();
+		this.ms = new TableService();
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(850, 850);
@@ -57,7 +57,7 @@ public class UserMainView extends JFrame {
 
 		JPanel tablesPanel = new JPanel(new GridLayout(4, 1, 0, 20));
 		tablesPanel.setOpaque(false);
-		List<Table> tables = ms.obtenerMesasCreadas();
+		List<Table> tables = ms.getCreatedTables();
 
 		int[] scheme = { 3, 2, 3, 2 };
 		int tableIndex = 0;
@@ -81,8 +81,8 @@ public class UserMainView extends JFrame {
 					if (button.getBackground().equals(Color.GREEN)) {
 						int opcion = JOptionPane.showConfirmDialog(this, "¿Reservar " + table.getName() + "?", "Reserva", JOptionPane.YES_NO_OPTION);
 						if (opcion == JOptionPane.YES_OPTION) {
-							rs.realizarReserva(user.getId(), tableId, LocalDateTime.now());
-							ms.reservarMesa(tableId);
+							rs.makeReservation(user.getId(), tableId, LocalDateTime.now());
+							ms.bookTable(tableId);
 							button.setBackground(Color.RED);
 							JOptionPane.showMessageDialog(this, "Mesa reservada correctamente");
 							dispose();

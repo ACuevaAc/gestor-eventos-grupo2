@@ -41,7 +41,7 @@ public class ProductService {
         String sql = "SELECT id, nombre, imagen, precio FROM producto";
         
         try (Statement st = conn.createStatement();
-             ResultSet rs = st.executeQuery(sql)) {
+            ResultSet rs = st.executeQuery(sql)) {
             
             while(rs.next()) {
                 list.add(new Product(

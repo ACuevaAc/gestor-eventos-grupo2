@@ -6,17 +6,17 @@ import javax.swing.JOptionPane;
 
 import com.gestor.model.entity.User;
 import com.gestor.service.SecurityService;
-import com.gestor.service.usuarioService;
+import com.gestor.service.UserService;
 import com.gestor.view.LoginView;
 import com.gestor.view.SignupView;
 
 public class registerController {
 	
-	private usuarioService uService;
+	private UserService uService;
 	private SignupView view;
 	private loginController cont;
 
-	public registerController(SignupView v, loginController loginController, usuarioService uService) {
+	public registerController(SignupView v, loginController loginController, UserService uService) {
 		this.view=v;
 		this.cont=loginController;
 		this.uService=uService;
@@ -58,7 +58,7 @@ public class registerController {
 		
 		boolean registrar=false;
 		if(validacion()) {
-			registrar=uService.registrar(user);
+			registrar=uService.register(user);
 		}
 		
 		if(registrar) {
