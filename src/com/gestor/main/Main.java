@@ -5,7 +5,7 @@ import com.gestor.controller.LoginController;
 import com.gestor.service.UserService;
 import com.gestor.view.LoginView;
 
-public class main {
+public class Main {
 
 	public static void main(String[] args) {
 		FlatLightLaf.setup();

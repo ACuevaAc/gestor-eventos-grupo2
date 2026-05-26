@@ -124,4 +124,22 @@ public class TableService {
             e.printStackTrace();
         }
     }
+    public int getMaxQuantity(int tableId) {
+  
+   	    String sql = "SELECT numero_max FROM mesa WHERE id = ?";
+    	    try {
+    	        PreparedStatement ps = conn.prepareStatement(sql);
+    	        ps.setInt(1, tableId);
+    	        ResultSet rs = ps.executeQuery();
+
+    	        if (rs.next()) {
+    	            return rs.getInt("numero_max");
+    	        }
+    	    } catch (SQLException e) {
+    	        e.printStackTrace();
+    	    }
+    	    return 0;
+    
+	}
+    
 }

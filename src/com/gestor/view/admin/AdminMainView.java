@@ -91,10 +91,10 @@ public class AdminMainView extends JFrame {
 		stabilizeAction(btnStats);
 		
 		actionPanel.add(btnCreateTable);
-		actionPanel.add(btnStats);
 		actionPanel.add(btnNewAdmin);
 		actionPanel.add(btnEmptyAllTables);
 		actionPanel.add(btnNewProduct);
+		actionPanel.add(btnStats);
 		
 		contentPane.add(actionPanel, BorderLayout.SOUTH);
 	}
