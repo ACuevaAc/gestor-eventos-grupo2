@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
-import com.gestor.model.entity.Producto;
+import com.gestor.model.entity.Product;
 
 public class ListaDeProductosTipo2 extends JFrame {
 
@@ -20,9 +20,9 @@ public class ListaDeProductosTipo2 extends JFrame {
 	private JButton btnAñadir;
 	private JButton btnTerminar;
 	private JLabel lblPrecioTotal;
-	private JList<Producto> lista;
+	private JList<Product> lista;
 	private JScrollPane sCP;
-	private DefaultListModel<Producto> modelo;
+	private DefaultListModel<Product> modelo;
 	/**
 	 * Create the frame.
 	 */
@@ -48,8 +48,8 @@ public class ListaDeProductosTipo2 extends JFrame {
 		panel.add(btnTerminar, BorderLayout.EAST);
 		
 		//metodo para leer productos AQUI
-		modelo = new DefaultListModel<Producto>();
-		lista = new JList<Producto>(modelo);
+		modelo = new DefaultListModel<Product>();
+		lista = new JList<Product>(modelo);
 		sCP = new JScrollPane(lista);
 		
 		JPanel panel_Lista = new JPanel(new BorderLayout());

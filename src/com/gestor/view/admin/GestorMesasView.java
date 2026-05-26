@@ -1,11 +1,7 @@
 package com.gestor.view.admin;
 
 import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.EventQueue;
 import java.awt.GridLayout;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;

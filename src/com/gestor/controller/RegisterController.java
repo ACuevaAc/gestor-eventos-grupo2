@@ -4,35 +4,35 @@ import java.awt.Container;
 
 import javax.swing.JOptionPane;
 
-import com.gestor.model.entity.Usuario;
+import com.gestor.model.entity.User;
 import com.gestor.service.SecurityService;
-import com.gestor.service.usuarioService;
-import com.gestor.view.admin.AdminMainView;
-import com.gestor.view.admin.signupadminView;
+import com.gestor.service.UserService;
+import com.gestor.view.LoginView;
+import com.gestor.view.SignupView;
 
-public class signupadminController {
-	private signupadminView view;
-	private AdminController cont;
-	private usuarioService uService;
+public class RegisterController {
 	
-	public signupadminController(signupadminView v,AdminController c) {
-		
+	private UserService uService;
+	private SignupView view;
+	private LoginController cont;
+
+	public RegisterController(SignupView v, LoginController loginController, UserService uService) {
 		this.view=v;
-		this.cont=c;
-		this.uService=new usuarioService();
+		this.cont=loginController;
+		this.uService=uService;
 		
 		view.getBtnCreate().addActionListener(e-> registrar());
-		view.getBtnBack().addActionListener(e-> volver());
+		view.getBtnBack().addActionListener(e-> back());
 	}
-	public void volver() {
+	public void back() {
 		view.dispose();
-		AdminMainView v=new AdminMainView();
+		LoginView v=new LoginView();
 		v.setVisible(true);
-		new AdminController(v);
+		new LoginController(v,uService);
 	}
 	public boolean validacion() {
-		String nom=view.getTxtNombre().getText();
-		int edad=Integer.parseInt(view.getTxtEdad().getText());
+		String nom=view.getTxtName().getText();
+		int edad=Integer.parseInt(view.getTxtAge().getText());
 
 		String em=view.getTxtEmail().getText();
 		String emConf=view.getTxtConfirmEmail().getText();
@@ -46,18 +46,19 @@ public class signupadminController {
 		return em.equals(emConf) && psw.equals(pswConf);
 	}
 	public void registrar() {
-		Usuario user=new Usuario();
-		user.setNombreUsuario(view.getTxtNombre().getText());
-		user.setEmailUsuario(view.getTxtConfirmEmail().getText());
-		user.setEdad(Integer.parseInt(view.getTxtEdad().getText()));
-		String psw=String.valueOf(view.getTxtConfirmPassword().getPassword());
-		String hash=SecurityService.hashString(psw);
-		user.setPswUsuario(hash);
-		user.setRolUsuario("ADMIN");
+		User user=new User();
+
+		user.setName(view.getTxtName().getText());
+		user.setEmail(view.getTxtConfirmEmail().getText());
+		user.setAge(Integer.parseInt(view.getTxtAge().getText()));
+		String psw = String.valueOf(view.getTxtConfirmPassword().getPassword());
+		String hash = SecurityService.hashString(psw);
+		user.setPassword(hash);
+		user.setRole("USER");
 		
 		boolean registrar=false;
 		if(validacion()) {
-			registrar=uService.registrar(user);
+			registrar=uService.register(user);
 		}
 		
 		if(registrar) {
@@ -68,8 +69,8 @@ public class signupadminController {
 		}
 	}
 	public void limpiarCampos(Container cont) {
-		    view.getTxtNombre().setText("");
-		    view.getTxtEdad().setText("");
+		    view.getTxtName().setText("");
+		    view.getTxtAge().setText("");
 		    view.getTxtEmail().setText("");
 		    view.getTxtConfirmEmail().setText("");
 		    view.getTxtPassword().setText("");

@@ -20,29 +20,29 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import com.gestor.controller.UserTableController;
-import com.gestor.model.entity.Mesa;
-import com.gestor.model.entity.Usuario;
-import com.gestor.service.Reserva_Service;
-import com.gestor.service.mesaService;
+import com.gestor.model.entity.Table;
+import com.gestor.model.entity.User;
+import com.gestor.service.BookService;
+import com.gestor.service.TableService;
 
 public class UserMainView extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private Reserva_Service rs;
-	private mesaService ms;
+	private BookService rs;
+	private TableService ms;
 
 	private final Color backgroundColor = new Color(248, 249, 250);
-	private final Font tablesFont = new Font("Segoe UI", Font.BOLD, 18);
+	private final Font tableFont = new Font("Segoe UI", Font.BOLD, 18);
 	
 	private List<JButton> tablesList = new ArrayList<>();
 
-	public UserMainView(Usuario user) {
+	public UserMainView(User user) {
 
 		super("Reservar mesas");
 
-		this.rs = new Reserva_Service();
-		this.ms = new mesaService();
+		this.rs = new BookService();
+		this.ms = new TableService();
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(850, 850);
@@ -57,7 +57,7 @@ public class UserMainView extends JFrame {
 
 		JPanel tablesPanel = new JPanel(new GridLayout(4, 1, 0, 20));
 		tablesPanel.setOpaque(false);
-		List<Mesa> tables = ms.obtenerMesasCreadas();
+		List<Table> tables = ms.getCreatedTables();
 
 		int[] scheme = { 3, 2, 3, 2 };
 		int tableIndex = 0;
@@ -67,11 +67,11 @@ public class UserMainView extends JFrame {
 			row.setOpaque(false);
 
 			for (int i = 0; i < numMesas && tableIndex < tables.size(); i++) {
-				Mesa table = tables.get(tableIndex++);
-				JButton btn = createOvalButton(table.getNombre());
+				Table table = tables.get(tableIndex++);
+				JButton btn = createOvalButton(table.getName());
 				btn.putClientProperty("idMesa", table.getId());
 
-				if (table.isMesa_Reservada()) btn.setBackground(Color.RED);
+				if (table.isBooked()) btn.setBackground(Color.RED);
 				else btn.setBackground(Color.GREEN);
 
 				btn.addActionListener(e -> {
@@ -79,10 +79,10 @@ public class UserMainView extends JFrame {
 					int tableId = (int) button.getClientProperty("idMesa");
 
 					if (button.getBackground().equals(Color.GREEN)) {
-						int opcion = JOptionPane.showConfirmDialog(this, "¿Reservar " + table.getNombre() + "?", "Reserva", JOptionPane.YES_NO_OPTION);
+						int opcion = JOptionPane.showConfirmDialog(this, "¿Reservar " + table.getName() + "?", "Reserva", JOptionPane.YES_NO_OPTION);
 						if (opcion == JOptionPane.YES_OPTION) {
-							rs.realizarReserva(user.getIdUsuario(), tableId, LocalDateTime.now());
-							ms.reservarMesa(tableId);
+							rs.makeReservation(user.getId(), tableId, LocalDateTime.now());
+							ms.bookTable(tableId);
 							button.setBackground(Color.RED);
 							JOptionPane.showMessageDialog(this, "Mesa reservada correctamente");
 							dispose();
@@ -138,15 +138,14 @@ public class UserMainView extends JFrame {
 		this.tablesList = tablesList;
 	}
 
-	private JButton createOvalButton (String text) {
+	private JButton createOvalButton(String text) {
 		JButton btn = new JButton(text);
-		btn.setFont(tablesFont);
+		btn.setFont(tableFont);
 		btn.setForeground(Color.BLACK);
 		btn.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		btn.setFocusPainted(false);
 		btn.putClientProperty("JButton.buttonType", "roundRect");
 		btn.putClientProperty("JButton.cornerRadius", 999);
-
 		return btn;
 	}
 }

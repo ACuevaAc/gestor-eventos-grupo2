@@ -5,25 +5,25 @@ import java.util.List;
 
 import javax.swing.JButton;
 
-import com.gestor.model.entity.Mesa;
-import com.gestor.service.mesaService;
+import com.gestor.model.entity.Table;
+import com.gestor.service.TableService;
 import com.gestor.view.admin.AdminMainView;
 import com.gestor.view.admin.GestorMesasView;
 
-public class gestorMesasController {
+public class TableMenuController {
 	private GestorMesasView view;
-	private mesaService ms;
+	private TableService ms;
 	private AdminController aCont;
 	
-	public gestorMesasController() {
+	public TableMenuController() {
 		
 	}
-	public gestorMesasController(GestorMesasView v,AdminController cont) {
+	public TableMenuController(GestorMesasView v,AdminController cont) {
 		
 		this.view=v;
 		this.aCont=cont;
 		
-		ms= new mesaService();
+		ms= new TableService();
 		cargarMesas();
 		v.getBtnRegistrarModificar().addActionListener(e-> registrarMesa());
 		v.getBtnAtras().addActionListener(e-> volverMenu());
@@ -40,17 +40,17 @@ public class gestorMesasController {
 	public void registrarMesa() {
 		String nom=view.getTxtNombre().getText();
 		int num_max=(int) view.getcBgente().getSelectedItem();
-		Mesa mesa=new Mesa();
-		mesa.setNum_max(num_max);
-		mesa.setNombre(nom);
-		mesa.setMesa_Reservada(false);
-		ms.crearMesa(mesa);
+		Table mesa=new Table();
+		mesa.setMax(num_max);
+		mesa.setName(nom);
+		mesa.setBooked(false);
+		ms.createTable(mesa);
 		
 		aCont.actualizarColoresMesas();
 	}
 	public void cargarMesas() {
 	    List<JButton> lista = aCont.getAdminView().getTablesList();
-	    int totalMesas = ms.obtenerIdsMesas();
+	    int totalMesas = ms.getTableIds();
 	    for (JButton boton : lista) {
 	        boton.setBackground(null); 
 	    }

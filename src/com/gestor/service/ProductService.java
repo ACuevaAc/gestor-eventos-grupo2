@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.config.ConexionDB;
-import com.gestor.model.entity.Producto;
+import com.gestor.model.entity.Product;
 
 /**
  * @class ProductService
@@ -36,15 +36,15 @@ public class ProductService {
      * @description Retrieves all products currently stored in the database.
      * @returns {List<Producto>} A list of Product objects.
      */
-    public List<Producto> getAllProducts() {
-        List<Producto> list = new ArrayList<>();
+    public List<Product> getAllProducts() {
+        List<Product> list = new ArrayList<>();
         String sql = "SELECT id, nombre, imagen, precio FROM producto";
         
         try (Statement st = conn.createStatement();
-             ResultSet rs = st.executeQuery(sql)) {
+            ResultSet rs = st.executeQuery(sql)) {
             
             while(rs.next()) {
-                list.add(new Producto(
+                list.add(new Product(
                     rs.getInt("id"),
                     rs.getString("nombre"),
                     rs.getDouble("precio"),
@@ -64,17 +64,17 @@ public class ProductService {
      * @param {Producto} p - The product entity to persist.
      * @public
      */
-    public void createProduct(Producto p) {
+    public void createProduct(Product p) {
         String sql = "INSERT INTO producto (nombre, imagen, precio) VALUES (?, ?, ?)";
         
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setString(1, p.getNomProducto());
-            ps.setBytes(2, p.getImagen());
-            ps.setDouble(3, p.getPrecioProducto());
+            ps.setString(1, p.getName());
+            ps.setBytes(2, p.getImage());
+            ps.setDouble(3, p.getPrice());
             
             ps.execute();
         } catch (SQLException e) {
-            System.err.println("Error inserting product: " + p.getNomProducto());
+            System.err.println("Error inserting product: " + p.getName());
             e.printStackTrace();
         }
     }
