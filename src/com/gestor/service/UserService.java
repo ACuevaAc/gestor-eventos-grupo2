@@ -4,6 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.config.ConexionDB;
 import com.gestor.model.entity.User;
@@ -19,6 +22,41 @@ public class UserService {
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
+    }
+    
+    public List<User> getListUsers() {
+    	List<User> lista=new ArrayList<>();
+    	String sql="SELECT email,password,rol FROM usuario";
+    	try {
+			Statement st=con.createStatement();
+			ResultSet rs=st.executeQuery(sql);
+			
+			while(rs.next()) {
+				lista.add(new User(
+						rs.getString("email"),
+						rs.getString("password"),
+						rs.getString("rol")
+						));
+			}
+			return lista;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	return null;
+    	
+    }
+    public void deleteFromEmail(String email) {
+    	String sql="DELETE FROM usuario WHERE email=?";
+    	try {
+			PreparedStatement ps=con.prepareStatement(sql);
+			ps.setString(1, email);
+			
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
 
     public boolean existsEmail(String email) {

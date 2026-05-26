@@ -32,6 +32,7 @@ public class AdminMainView extends JFrame {
 	private JButton btnCreateTable;
 	private JButton btnEmptyAllTables;
 	private JButton btnStats;
+	private JButton btnListUsers;
 	
 	private List<JButton> tablesList = new ArrayList<>();
 
@@ -39,7 +40,7 @@ public class AdminMainView extends JFrame {
 		super("Administrador de mesas");
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(850, 850);
+		setSize(1050, 1050);
 		setMinimumSize(new Dimension(650, 750));
 		setLocationRelativeTo(null);
 
@@ -89,14 +90,20 @@ public class AdminMainView extends JFrame {
 		stabilizeAction(btnNewProduct);
 		btnStats = new JButton("Stats");
 		stabilizeAction(btnStats);
+		btnListUsers=new JButton("Users");
+		stabilizeAction(btnListUsers);
 		
 		actionPanel.add(btnCreateTable);
 		actionPanel.add(btnNewAdmin);
 		actionPanel.add(btnEmptyAllTables);
 		actionPanel.add(btnNewProduct);
 		actionPanel.add(btnStats);
+		actionPanel.add(btnListUsers);
 		
 		contentPane.add(actionPanel, BorderLayout.SOUTH);
+	}
+	public JButton getBtnListUsers() {
+		return btnListUsers;
 	}
 
 	public JButton getBtnStats() {

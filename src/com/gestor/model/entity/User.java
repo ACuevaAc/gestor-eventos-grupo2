@@ -16,6 +16,12 @@ public class User {
 		this.password = password;
 		this.role = role;
 	}
+	// Constructor para leer de la bd
+	public User(String email,String password,String role) {
+		this.email=email;
+		this.password=password;
+		this.role=role;
+	}
 
 	public User() {}
 
