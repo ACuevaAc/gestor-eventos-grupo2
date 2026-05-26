@@ -143,13 +143,6 @@ public class FormCrearProducto extends JFrame {
 	public void setBtnBack(JButton btnBack) {
 		this.btnBack = btnBack;
 	}
-
-	public static void main(String[] args) {
-		FormCrearProducto fp = new FormCrearProducto();
-		fp.setVisible(true);
-	}
-
-
 	public JLabel getLblRutaImagen() {
 		return lblRutaImagen;
 	}

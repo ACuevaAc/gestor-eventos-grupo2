@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -31,10 +32,11 @@ public class UserMainView extends JFrame {
 	private JPanel contentPane;
 	private BookService rs;
 	private TableService ms;
+	private JComboBox<Integer> cb;
 
 	private final Color backgroundColor = new Color(248, 249, 250);
 	private final Font tableFont = new Font("Segoe UI", Font.BOLD, 18);
-	
+
 	private List<JButton> tablesList = new ArrayList<>();
 
 	public UserMainView(User user) {
@@ -66,30 +68,48 @@ public class UserMainView extends JFrame {
 			JPanel row = new JPanel(new FlowLayout(FlowLayout.CENTER, 30, 10));
 			row.setOpaque(false);
 
-			for (int i = 0; i < numMesas && tableIndex < tables.size(); i++) {
+			for (int s = 0; s < numMesas && tableIndex < tables.size(); s++) {
 				Table table = tables.get(tableIndex++);
 				JButton btn = createOvalButton(table.getName());
 				btn.putClientProperty("idMesa", table.getId());
 
-				if (table.isBooked()) btn.setBackground(Color.RED);
-				else btn.setBackground(Color.GREEN);
+				if (table.isBooked())
+					btn.setBackground(Color.RED);
+				else
+					btn.setBackground(Color.GREEN);
 
 				btn.addActionListener(e -> {
 					JButton button = (JButton) e.getSource();
 					int tableId = (int) button.getClientProperty("idMesa");
 
 					if (button.getBackground().equals(Color.GREEN)) {
-						int opcion = JOptionPane.showConfirmDialog(this, "¿Reservar " + table.getName() + "?", "Reserva", JOptionPane.YES_NO_OPTION);
-						if (opcion == JOptionPane.YES_OPTION) {
+						int option = JOptionPane.showConfirmDialog(this, "¿Reservar " + table.getName() + "?",
+								"Reserva", JOptionPane.YES_NO_OPTION);
+						int[] Quantity = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+						cb = new JComboBox<Integer>();
+						for (int j = 0; j < 9; j++) {
+							cb.addItem(Quantity[j]);
+						}
+						int selectedOptionQuantity = JOptionPane.showConfirmDialog(null, cb, "Selecciona cuantas personas sois", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+						
+						if (option == JOptionPane.YES_OPTION) {
+							if (selectedOptionQuantity == JOptionPane.OK_OPTION) {
+					            int QuantitySelected = (int) cb.getSelectedItem();
+					            int maxQuantityforTable = ms.getMaxQuantity(tableId);
+					            if(QuantitySelected > maxQuantityforTable) {
+					            	JOptionPane.showMessageDialog(this, "Lo sentimos pero esta mesa solo se pueden reservar hasta "+ maxQuantityforTable+ " personas");
+					            	return;
+					            }
+							}
 							rs.makeReservation(user.getId(), tableId, LocalDateTime.now());
 							ms.bookTable(tableId);
 							button.setBackground(Color.RED);
 							JOptionPane.showMessageDialog(this, "Mesa reservada correctamente");
 							dispose();
-							ListaDeProductos v=new ListaDeProductos();
+							ListaDeProductos v = new ListaDeProductos();
 							v.setVisible(true);
-							new UserTableController(v,tableId);
-							
+							new UserTableController(v, tableId);
+
 						}
 					} else {
 						JOptionPane.showMessageDialog(this, "La mesa ya está reservada");
@@ -113,7 +133,7 @@ public class UserMainView extends JFrame {
 		});
 	}
 
-	private void updateTablesSize (int widthPanel, int heightPanel) {
+	private void updateTablesSize(int widthPanel, int heightPanel) {
 		int horizontalGap = 30;
 		int width = (widthPanel - (horizontalGap * 4)) / 3;
 		int height = (heightPanel - (20 * 4)) / 5;
