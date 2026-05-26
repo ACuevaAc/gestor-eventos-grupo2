@@ -9,12 +9,12 @@ import com.gestor.view.SignupView;
 import com.gestor.view.admin.AdminMainView;
 import com.gestor.view.user.UserMainView;
 
-public class loginController {
+public class LoginController {
 
     private LoginView view;
     private UserService uService;
 
-    public loginController(LoginView v, UserService us) {
+    public LoginController(LoginView v, UserService us) {
 
         this.view = v;
         this.uService = us;
@@ -30,7 +30,7 @@ public class loginController {
         SignupView v = new SignupView();
         v.setVisible(true);
 
-        new registerController(v, this, uService);
+        new RegisterController(v, this, uService);
     }
 
     public void login() {
