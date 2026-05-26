@@ -24,7 +24,7 @@ public class FreeChartService {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         String sql = "SELECT pro.nombre AS producto_nombre, SUM(p.cantidad) AS total_pedido "
                    + "FROM pide p "
-                   + "JOIN products pro ON p.id_producto = pro.id "
+                   + "JOIN producto pro ON p.id_producto = pro.id "
                    + "GROUP BY pro.id, pro.nombre";
 
         try (PreparedStatement ps = conn.prepareStatement(sql);
