@@ -4,22 +4,22 @@ import java.awt.Container;
 
 import javax.swing.JOptionPane;
 
-import com.gestor.model.entity.Usuario;
+import com.gestor.model.entity.User;
 import com.gestor.service.SecurityService;
-import com.gestor.service.usuarioService;
+import com.gestor.service.UserService;
 import com.gestor.view.admin.AdminMainView;
 import com.gestor.view.admin.signupadminView;
 
 public class signupadminController {
 	private signupadminView view;
 	private AdminController cont;
-	private usuarioService uService;
+	private UserService uService;
 	
 	public signupadminController(signupadminView v,AdminController c) {
 		
 		this.view=v;
 		this.cont=c;
-		this.uService=new usuarioService();
+		this.uService=new UserService();
 		
 		view.getBtnCreate().addActionListener(e-> registrar());
 		view.getBtnBack().addActionListener(e-> volver());
@@ -46,18 +46,18 @@ public class signupadminController {
 		return em.equals(emConf) && psw.equals(pswConf);
 	}
 	public void registrar() {
-		Usuario user=new Usuario();
-		user.setNombreUsuario(view.getTxtNombre().getText());
-		user.setEmailUsuario(view.getTxtConfirmEmail().getText());
-		user.setEdad(Integer.parseInt(view.getTxtEdad().getText()));
-		String psw=String.valueOf(view.getTxtConfirmPassword().getPassword());
-		String hash=SecurityService.hashString(psw);
-		user.setPswUsuario(hash);
-		user.setRolUsuario("ADMIN");
+		User user = new User();
+		user.setName(view.getTxtNombre().getText());
+		user.setEmail(view.getTxtConfirmEmail().getText());
+		user.setAge(Integer.parseInt(view.getTxtEdad().getText()));
+		String psw = String.valueOf(view.getTxtConfirmPassword().getPassword());
+		String hash = SecurityService.hashString(psw);
+		user.setPassword(hash);
+		user.setRole("ADMIN");
 		
 		boolean registrar=false;
 		if(validacion()) {
-			registrar=uService.registrar(user);
+			registrar=uService.register(user);
 		}
 		
 		if(registrar) {

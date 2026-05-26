@@ -16,29 +16,25 @@ public class FreeChartService {
     public FreeChartService() {
 
         try {
-
             this.conn = ConexionDB.obtener();
-
         } catch (ClassNotFoundException | SQLException e) {
-
             e.printStackTrace();
         }
     }
 
-	public DefaultCategoryDataset obtenerProductosMasPedidos() {
+	public DefaultCategoryDataset getMostOrderedProducts() {
 		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 		String sql = "SELECT P.ID_PRODUCTO, PRO.NOMBRE, P.CANTIDAD"
 				+ "FROM PIDE P, PRODUCTS PRO"
 				+ "WHERE P.ID_PRODUCTO = PRO.ID";
-		
 
 		try (PreparedStatement ps = conn.prepareStatement(sql);
-		     ResultSet rs = ps.executeQuery()) {
+			ResultSet rs = ps.executeQuery()) {
 
 			while (rs.next()) {
-				String producto = rs.getString("nombre");
-				int cantidad = rs.getInt("total_pedido");
-				dataset.addValue(cantidad, "Unidades Pedidas", producto);
+				String product = rs.getString("nombre");
+				int amount = rs.getInt("total_pedido");
+				dataset.addValue(amount, "Unidades Pedidas", product);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

@@ -6,110 +6,85 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.config.ConexionDB;
-import com.gestor.model.entity.Usuario;
+import com.gestor.model.entity.User;
 
-public class usuarioService {
+public class UserService {
 
     private Connection con;
 
-    public usuarioService() {
+    public UserService() {
 
         try {
-
             con = ConexionDB.obtener();
-
         } catch (ClassNotFoundException | SQLException e) {
-
             e.printStackTrace();
         }
     }
 
-    public boolean existeEmail(String email) {
-
+    public boolean existsEmail(String email) {
         String sql = "SELECT * FROM usuario WHERE email=?";
 
         try {
-
             PreparedStatement ps = con.prepareStatement(sql);
-
             ps.setString(1, email);
-
             ResultSet rs = ps.executeQuery();
-
             return rs.next();
-
         } catch (Exception ex) {
-
             ex.printStackTrace();
         }
 
         return false;
     }
 
-    public boolean registrar(Usuario usuario) {
+    public boolean register(User user) {
+        if (existsEmail(user.getEmail())) return false;
 
-        if (existeEmail(usuario.getEmailUsuario())) {
-
-            return false;
-        }
-
-        String sql =
-                "INSERT INTO usuario(nombre,email,edad,password,rol) VALUES (?,?,?,?,?)";
+        String sql = "INSERT INTO usuario(nombre,email,edad,password,rol) VALUES (?,?,?,?,?)";
 
         try {
-
             PreparedStatement ps = con.prepareStatement(sql);
 
-            ps.setString(1, usuario.getNombreUsuario());
-            ps.setString(2, usuario.getEmailUsuario());
-            ps.setInt(3, usuario.getEdad());
-            ps.setString(4, usuario.getPswUsuario());
-            ps.setString(5, usuario.getRolUsuario());
-
+            ps.setString(1, user.getName());
+            ps.setString(2, user.getEmail());
+            ps.setInt(3, user.getAge());
+            ps.setString(4, user.getPassword());
+            ps.setString(5, user.getRole());
             ps.executeUpdate();
 
             return true;
 
         } catch (Exception ex) {
-
             ex.printStackTrace();
         }
 
         return false;
     }
 
-    public Usuario login(String email, String psw) {
+    public User login(String email, String password) {
 
-        String sql =
-                "SELECT * FROM usuario WHERE email=? AND password=?";
+        String sql = "SELECT * FROM usuario WHERE email=? AND password=?";
 
         try {
-
             PreparedStatement ps = con.prepareStatement(sql);
-
             ps.setString(1, email);
-
-            String contra = SecurityService.hashString(psw);
-
-            ps.setString(2, contra);
+            String hash = SecurityService.hashString(password);
+            ps.setString(2, hash);
 
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
+                User u = new User();
 
-                Usuario u = new Usuario();
-
-                u.setIdUsuario(rs.getInt("id"));
-                u.setNombreUsuario(rs.getString("nombre"));
-                u.setEmailUsuario(rs.getString("email"));
-                u.setEdad(rs.getInt("edad"));
-                u.setRolUsuario(rs.getString("rol"));
+                u.setId(rs.getInt("id"));
+                u.setName(rs.getString("nombre"));
+                u.setEmail(rs.getString("email"));
+                u.setAge(rs.getInt("edad"));
+                u.setRole(rs.getString("rol"));
 
                 return u;
             }
 
         } catch (Exception ex) {
-
             ex.printStackTrace();
         }
 
@@ -121,20 +96,15 @@ public class usuarioService {
         String sql = "SELECT id FROM usuario WHERE email=?";
 
         try {
-
             PreparedStatement ps = con.prepareStatement(sql);
-
             ps.setString(1, mail);
-
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
-
                 return rs.getInt("id");
             }
 
         } catch (SQLException e) {
-
             e.printStackTrace();
         }
 

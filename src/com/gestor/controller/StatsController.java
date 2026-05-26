@@ -35,7 +35,7 @@ public class StatsController {
 	}
 	
 	public void mostrarEstadisticas() {
-		DefaultCategoryDataset dataset = productoDao.obtenerProductosMasPedidos();
+		DefaultCategoryDataset dataset = productoDao.getMostOrderedProducts();
 
 		JFreeChart grafico = ChartFactory.createBarChart(
 				"Top Productos Más Pedidos",

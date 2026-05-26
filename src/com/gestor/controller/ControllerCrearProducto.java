@@ -10,7 +10,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import com.gestor.model.entity.Producto;
+import com.gestor.model.entity.Product;
 import com.gestor.service.ProductService;
 import com.gestor.view.admin.AdminMainView;
 import com.gestor.view.admin.FormCrearProducto;
@@ -71,7 +71,7 @@ public class ControllerCrearProducto {
          
             byte[] imagenBytes = Files.readAllBytes(archivoImagen.toPath());
 
-            Producto nuevoProducto = new Producto(0, nombre, precio, imagenBytes);
+            Product nuevoProducto = new Product(0, nombre, precio, imagenBytes);
 
             ps.createProduct(nuevoProducto);
             JOptionPane.showMessageDialog(view, "Producto creado exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);

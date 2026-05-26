@@ -4,19 +4,19 @@ import java.awt.Container;
 
 import javax.swing.JOptionPane;
 
-import com.gestor.model.entity.Usuario;
+import com.gestor.model.entity.User;
 import com.gestor.service.SecurityService;
-import com.gestor.service.usuarioService;
+import com.gestor.service.UserService;
 import com.gestor.view.LoginView;
 import com.gestor.view.SignupView;
 
 public class registerController {
 	
-	private usuarioService uService;
+	private UserService uService;
 	private SignupView view;
 	private loginController cont;
 
-	public registerController(SignupView v, loginController loginController, usuarioService uService) {
+	public registerController(SignupView v, loginController loginController, UserService uService) {
 		this.view=v;
 		this.cont=loginController;
 		this.uService=uService;
@@ -46,18 +46,19 @@ public class registerController {
 		return em.equals(emConf) && psw.equals(pswConf);
 	}
 	public void registrar() {
-		Usuario user=new Usuario();
-		user.setNombreUsuario(view.getTxtName().getText());
-		user.setEmailUsuario(view.getTxtConfirmEmail().getText());
-		user.setEdad(Integer.parseInt(view.getTxtAge().getText()));
-		String psw=String.valueOf(view.getTxtConfirmPassword().getPassword());
-		String hash=SecurityService.hashString(psw);
-		user.setPswUsuario(hash);
-		user.setRolUsuario("USER");
+		User user=new User();
+
+		user.setName(view.getTxtName().getText());
+		user.setEmail(view.getTxtConfirmEmail().getText());
+		user.setAge(Integer.parseInt(view.getTxtAge().getText()));
+		String psw = String.valueOf(view.getTxtConfirmPassword().getPassword());
+		String hash = SecurityService.hashString(psw);
+		user.setPassword(hash);
+		user.setRole("USER");
 		
 		boolean registrar=false;
 		if(validacion()) {
-			registrar=uService.registrar(user);
+			registrar=uService.register(user);
 		}
 		
 		if(registrar) {

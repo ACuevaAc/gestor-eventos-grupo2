@@ -11,143 +11,107 @@ import java.util.List;
 import com.config.ConexionDB;
 import com.gestor.model.entity.Table;
 
-public class mesaService {
+public class TableService {
 
     public Connection conn;
 
-    public mesaService() {
+    public TableService() {
 
         try {
-
             this.conn = ConexionDB.obtener();
-
         } catch (ClassNotFoundException | SQLException e) {
-
             e.printStackTrace();
         }
     }
 
-    public int obtenerIdsMesas() {
-
+    public int getTableIds() {
         String sql = "SELECT COUNT(*) FROM mesa";
 
         try {
-
             Statement st = conn.createStatement();
-
             ResultSet rs = st.executeQuery(sql);
 
             if (rs.next()) {
-
                 return rs.getInt(1);
             }
 
         } catch (SQLException e) {
-
             e.printStackTrace();
         }
 
         return 0;
     }
 
-    public List<Table> obtenerMesasCreadas() {
-
-        List<Table> lista = new ArrayList<>();
+    public List<Table> getCreatedTables() {
+        List<Table> list = new ArrayList<>();
 
         String sql = "SELECT * FROM mesa";
 
         try {
-
             Statement st = conn.createStatement();
-
             ResultSet rs = st.executeQuery(sql);
 
             while (rs.next()) {
-
-                lista.add(
-                        new Table(
-                                rs.getInt("id"),
-                                rs.getInt("numero_max"),
-                                rs.getString("nombre"),
-                                rs.getBoolean("reservado")
-                        )
+                list.add(
+                    new Table(
+                        rs.getInt("id"),
+                        rs.getInt("numero_max"),
+                        rs.getString("nombre"),
+                        rs.getBoolean("reservado")
+                    )
                 );
             }
 
         } catch (SQLException e) {
-
             e.printStackTrace();
         }
 
-        return lista;
+        return list;
     }
 
-    public void reservarMesa(int idMesa) {
-
-        String sql =
-                "UPDATE mesa SET reservado = true WHERE id=?";
+    public void bookTable (int tableId) {
+        String sql = "UPDATE mesa SET reservado = true WHERE id=?";
 
         try {
-
             PreparedStatement ps = conn.prepareStatement(sql);
 
-            ps.setInt(1, idMesa);
-
+            ps.setInt(1, tableId);
             ps.executeUpdate();
-
         } catch (SQLException e) {
-
             e.printStackTrace();
         }
     }
 
-    public void liberarMesa(int idMesa) {
-
-        String sql =
-                "UPDATE mesa SET reservado = false WHERE id=?";
+    public void releaseTable(int tableId) {
+        String sql = "UPDATE mesa SET reservado = false WHERE id=?";
 
         try {
-
             PreparedStatement ps = conn.prepareStatement(sql);
 
-            ps.setInt(1, idMesa);
-
+            ps.setInt(1, tableId);
             ps.executeUpdate();
-
         } catch (SQLException e) {
-
             e.printStackTrace();
         }
     }
 
     public void deleteTable() {
-
         String sql = "DELETE FROM mesa";
 
         try {
-
             Statement st = conn.createStatement();
 
             int filasBorradas = st.executeUpdate(sql);
-
-            System.out.println(
-                    "LOG MesaService: mesas borradas -> "
-                            + filasBorradas
-            );
-
+            System.out.println("LOG MesaService: mesas borradas -> " + filasBorradas);
         } catch (SQLException e) {
-
             e.printStackTrace();
         }
     }
 
-    public void crearMesa(Table m) {
-
-        String sql =
-                "INSERT INTO mesa (numero_max, nombre, reservado) VALUES (?, ?, ?)";
+    public void createTable(Table m) {
+        String sql = "INSERT INTO mesa (numero_max, nombre, reservado) VALUES (?, ?, ?)";
 
         try {
-
             PreparedStatement ps = conn.prepareStatement(sql);
 
             ps.setInt(1, m.getMax());
@@ -157,7 +121,6 @@ public class mesaService {
             ps.execute();
 
         } catch (SQLException e) {
-
             e.printStackTrace();
         }
     }
