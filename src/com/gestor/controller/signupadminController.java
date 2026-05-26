@@ -10,12 +10,12 @@ import com.gestor.service.UserService;
 import com.gestor.view.admin.AdminMainView;
 import com.gestor.view.admin.signupadminView;
 
-public class SignupAdminController {
+public class signupadminController {
 	private signupadminView view;
 	private AdminController cont;
 	private UserService uService;
 	
-	public SignupAdminController(signupadminView v,AdminController c) {
+	public signupadminController(signupadminView v,AdminController c) {
 		
 		this.view=v;
 		this.cont=c;

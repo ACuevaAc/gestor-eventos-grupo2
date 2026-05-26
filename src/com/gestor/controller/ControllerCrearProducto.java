@@ -15,12 +15,12 @@ import com.gestor.service.ProductService;
 import com.gestor.view.admin.AdminMainView;
 import com.gestor.view.admin.FormCrearProducto;
 
-public class CreateProductController {
+public class ControllerCrearProducto {
     private FormCrearProducto view;
     private ProductService ps;
     private AdminController aCont;
     
-    public CreateProductController(AdminController ac, FormCrearProducto v) {
+    public ControllerCrearProducto(AdminController ac, FormCrearProducto v) {
         this.aCont = ac;
         this.view = v;
         this.ps = new ProductService();
