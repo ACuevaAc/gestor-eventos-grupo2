@@ -35,8 +35,8 @@ public class AdminController {
     public void checkStats() {
     	view.dispose();
     	StatsAdminProducts v=new StatsAdminProducts();
-    	v.setVisible(true);
     	new StatsController(v);
+    	v.setVisible(true);      
     }
     
     public void crearProducto() {
