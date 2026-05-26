@@ -10,15 +10,15 @@ import com.gestor.service.TableService;
 import com.gestor.view.admin.AdminMainView;
 import com.gestor.view.admin.GestorMesasView;
 
-public class gestorMesasController {
+public class TableMenuController {
 	private GestorMesasView view;
 	private TableService ms;
 	private AdminController aCont;
 	
-	public gestorMesasController() {
+	public TableMenuController() {
 		
 	}
-	public gestorMesasController(GestorMesasView v,AdminController cont) {
+	public TableMenuController(GestorMesasView v,AdminController cont) {
 		
 		this.view=v;
 		this.aCont=cont;
