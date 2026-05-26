@@ -35,15 +35,15 @@ public class AdminController {
     public void checkStats() {
     	view.dispose();
     	StatsAdminProducts v=new StatsAdminProducts();
+    	v.setVisible(true);
     	new StatsController(v);
-    	v.setVisible(true);      
     }
     
     public void crearProducto() {
     	view.dispose();
     	FormCrearProducto v=new FormCrearProducto();
     	v.setVisible(true);
-    	new CreateProductController(this,v);
+    	new ControllerCrearProducto(this,v);
     }
 
     public void deleteTable() {
@@ -99,7 +99,7 @@ public class AdminController {
         GestorMesasView v = new GestorMesasView();
         v.setVisible(true);
 
-        new TableMenuController(v, this);
+        new gestorMesasController(v, this);
     }
 
     public void createNewAdmin() {
@@ -109,6 +109,6 @@ public class AdminController {
         signupadminView v = new signupadminView();
         v.setVisible(true);
 
-        new SignupAdminController(v, this);
+        new signupadminController(v, this);
     }
 }

@@ -1,7 +1,7 @@
 package com.gestor.main;
 
 import com.formdev.flatlaf.FlatLightLaf;
-import com.gestor.controller.LoginController;
+import com.gestor.controller.loginController;
 import com.gestor.service.UserService;
 import com.gestor.view.LoginView;
 
@@ -11,7 +11,7 @@ public class main {
 		FlatLightLaf.setup();
 		LoginView log = new LoginView();
 		UserService u = new UserService();
-		LoginController l = new LoginController(log, u);
+		loginController l = new loginController(log, u);
 		log.setVisible(true);
 
 	}

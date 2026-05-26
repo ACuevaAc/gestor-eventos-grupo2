@@ -10,13 +10,13 @@ import com.gestor.service.UserService;
 import com.gestor.view.LoginView;
 import com.gestor.view.SignupView;
 
-public class RegisterController {
+public class registerController {
 	
 	private UserService uService;
 	private SignupView view;
-	private LoginController cont;
+	private loginController cont;
 
-	public RegisterController(SignupView v, LoginController loginController, UserService uService) {
+	public registerController(SignupView v, loginController loginController, UserService uService) {
 		this.view=v;
 		this.cont=loginController;
 		this.uService=uService;
@@ -28,7 +28,7 @@ public class RegisterController {
 		view.dispose();
 		LoginView v=new LoginView();
 		v.setVisible(true);
-		new LoginController(v,uService);
+		new loginController(v,uService);
 	}
 	public boolean validacion() {
 		String nom=view.getTxtName().getText();
