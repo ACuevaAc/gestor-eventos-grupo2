@@ -42,9 +42,20 @@ public class UserTableController {
         view.getBtnBack().addActionListener(e -> retrocederProducto());
         view.getBtnAñadir().addActionListener(e -> añadirAlPedido());
         view.getBtnTerminar().addActionListener(e -> finalizarVentana());
+        view.getBtnExit().addActionListener(e -> exitWithoutCancel());
+        view.getBtnExitandClose().addActionListener(e -> exitAndCancel());
     }
 
-    private void mostrarProductoActual() {
+    private void exitAndCancel() {
+		view.dispose();
+    	orderService.deleteTableOrder(idMesa);
+    	}
+
+	private void exitWithoutCancel() {
+    	view.dispose();
+	}
+
+	private void mostrarProductoActual() {
         if (listaProductos == null || listaProductos.isEmpty()) return;
         
         Product prod = listaProductos.get(indiceActual);

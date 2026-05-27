@@ -16,6 +16,8 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import com.gestor.model.entity.Product;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class ListaDeProductos extends JFrame {
 
@@ -32,7 +34,10 @@ public class ListaDeProductos extends JFrame {
 	private JButton btnNext;
 	private JComboBox<Integer> CantCB;
 	private JLabel lblCantidad,lblTituloProducto,lblPrecio;
-
+	private JPanel ExitPanel;
+	private JButton btnExit;
+	private JButton btnExitandClose;
+	
 	/**
 	 * Create the frame.
 	 */
@@ -54,7 +59,7 @@ public class ListaDeProductos extends JFrame {
 		btnAñadir = new JButton("Añadir");
 		panel.add(btnAñadir, BorderLayout.CENTER);
 
-		btnTerminar = new JButton("Terminar");
+		btnTerminar = new JButton("Pagar y terminar");
 		panel.add(btnTerminar, BorderLayout.EAST);
 
 		// metodo para leer productos AQUI
@@ -120,6 +125,21 @@ public class ListaDeProductos extends JFrame {
 		gl_panelNext.setVerticalGroup(gl_panelNext.createParallelGroup(Alignment.LEADING).addGroup(gl_panelNext
 				.createSequentialGroup().addGap(105).addComponent(btnNext).addContainerGap(106, Short.MAX_VALUE)));
 		panelNext.setLayout(gl_panelNext);
+		
+		ExitPanel = new JPanel();
+		contentPane.add(ExitPanel, BorderLayout.NORTH);
+		ExitPanel.setLayout(new BorderLayout(0, 0));
+		
+		btnExit = new JButton("Salir");
+		ExitPanel.add(btnExit, BorderLayout.EAST);
+		
+		btnExitandClose = new JButton("Salir y cancelar");
+		btnExitandClose.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
+		ExitPanel.add(btnExitandClose, BorderLayout.WEST);
 
 	}
 
@@ -143,6 +163,22 @@ public class ListaDeProductos extends JFrame {
 
 	public void setCantCB(JComboBox<Integer> cantCB) {
 		CantCB = cantCB;
+	}
+
+	public JButton getBtnExit() {
+		return btnExit;
+	}
+
+	public void setBtnExit(JButton btnExit) {
+		this.btnExit = btnExit;
+	}
+
+	public JButton getBtnExitandClose() {
+		return btnExitandClose;
+	}
+
+	public void setBtnExitandClose(JButton btnExitandClose) {
+		this.btnExitandClose = btnExitandClose;
 	}
 
 	public JLabel getLblCantidad() {
@@ -224,5 +260,4 @@ public class ListaDeProductos extends JFrame {
 	public void setBtnNext(JButton btnNext) {
 		this.btnNext = btnNext;
 	}
-	
 }
