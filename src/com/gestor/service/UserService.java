@@ -75,7 +75,18 @@ public class UserService {
     }
 
     public boolean register(User user) {
-        if (existsEmail(user.getEmail())) return false;
+        if (user == null || user.getEmail() == null || user.getEmail().trim().isEmpty()) {
+            throw new IllegalArgumentException("User details and email cannot be empty.");
+        }
+
+        if (existsEmail(user.getEmail())) {
+            throw new IllegalArgumentException("The email address is already registered in the system.");
+        }
+
+        if (user.getAge() < 18) {
+            throw new IllegalArgumentException("Access denied. Users must be at least 18 years old.");
+        }
+
 
         String sql = "INSERT INTO usuario(nombre,email,edad,password,rol) VALUES (?,?,?,?,?)";
 
