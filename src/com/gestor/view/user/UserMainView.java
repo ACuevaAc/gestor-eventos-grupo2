@@ -39,7 +39,7 @@ public class UserMainView extends JFrame {
 
 	private final Color backgroundColor = new Color(248, 249, 250);
 	private final Font tableFont = new Font("Segoe UI", Font.BOLD, 18);
-	
+
 	private JPanel SearchPanel;
 	private JTextField FilterTXT;
 	private List<JButton> tablesList = new ArrayList<>();
@@ -95,16 +95,20 @@ public class UserMainView extends JFrame {
 						for (int j = 0; j < 9; j++) {
 							cb.addItem(Quantity[j]);
 						}
-						int selectedOptionQuantity = JOptionPane.showConfirmDialog(null, cb, "Selecciona cuantas personas sois", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
-						
+						int selectedOptionQuantity = JOptionPane.showConfirmDialog(null, cb,
+								"Selecciona cuantas personas sois", JOptionPane.OK_CANCEL_OPTION,
+								JOptionPane.QUESTION_MESSAGE);
+
 						if (option == JOptionPane.YES_OPTION) {
 							if (selectedOptionQuantity == JOptionPane.OK_OPTION) {
-					            int QuantitySelected = (int) cb.getSelectedItem();
-					            int maxQuantityforTable = ms.getMaxQuantity(tableId);
-					            if(QuantitySelected > maxQuantityforTable) {
-					            	JOptionPane.showMessageDialog(this, "Lo sentimos pero esta mesa solo se pueden reservar hasta "+ maxQuantityforTable+ " personas");
-					            	return;
-					            }
+								int QuantitySelected = (int) cb.getSelectedItem();
+								int maxQuantityforTable = ms.getMaxQuantity(tableId);
+								if (QuantitySelected > maxQuantityforTable) {
+									JOptionPane.showMessageDialog(this,
+											"Lo sentimos pero esta mesa solo se pueden reservar hasta "
+													+ maxQuantityforTable + " personas");
+									return;
+								}
 							}
 							rs.makeReservation(user.getId(), tableId, LocalDateTime.now());
 							ms.bookTable(tableId);
@@ -140,24 +144,25 @@ public class UserMainView extends JFrame {
 		SearchPanel = new JPanel();
 		contentPane.add(SearchPanel, BorderLayout.NORTH);
 		SearchPanel.setLayout(new BorderLayout(0, 0));
-		
+
 		FilterTXT = new JTextField();
 		FilterTXT.setColumns(10);
 		FilterTXT.getDocument().addDocumentListener(new DocumentListener() {
-			
+
 			@Override
 			public void removeUpdate(DocumentEvent e) {
-				FilterTables(FilterTXT.getText());				
+				FilterTables(FilterTXT.getText());
 			}
+
 			@Override
 			public void insertUpdate(DocumentEvent e) {
-				FilterTables(FilterTXT.getText());								
+				FilterTables(FilterTXT.getText());
 			}
-			
+
 			@Override
 			public void changedUpdate(DocumentEvent e) {
-				FilterTables(FilterTXT.getText());				
-				
+				FilterTables(FilterTXT.getText());
+
 			}
 		});
 		SearchPanel.add(FilterTXT);
@@ -187,6 +192,7 @@ public class UserMainView extends JFrame {
 	public void setTablesList(List<JButton> tablesList) {
 		this.tablesList = tablesList;
 	}
+
 	private void FilterTables(String text) {
 		String filter = text.toLowerCase().trim();
 
@@ -194,15 +200,16 @@ public class UserMainView extends JFrame {
 			String nombreMesa = btn.getText().toLowerCase();
 
 			if (nombreMesa.contains(filter)) {
-				btn.setVisible(true);  
+				btn.setVisible(true);
 			} else {
-				btn.setVisible(false); 
+				btn.setVisible(false);
 			}
 		}
 
 		contentPane.revalidate();
 		contentPane.repaint();
 	}
+
 	private JButton createOvalButton(String text) {
 		JButton btn = new JButton(text);
 		btn.setFont(tableFont);
