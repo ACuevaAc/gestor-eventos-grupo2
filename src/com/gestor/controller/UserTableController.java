@@ -7,25 +7,31 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 import com.gestor.model.entity.Product;
+import com.gestor.model.entity.User;
 import com.gestor.service.OrderService;
 import com.gestor.service.ProductService;
+import com.gestor.service.TableService;
 import com.gestor.view.user.ListaDeProductos;
+import com.gestor.view.user.UserMainView;
 
 public class UserTableController {
     private ListaDeProductos view;
     private int idMesa;
     private ProductService productService;
     private OrderService orderService;
-    
     private List<Product> listaProductos;
     private int indiceActual = 0;
     private double totalAcumuladoMesa = 0.0;
-
-    public UserTableController(ListaDeProductos v, int id) {
+    private User user;
+    private TableService ts;
+    
+    public UserTableController(ListaDeProductos v, int id, User user) {
         this.view = v;
         this.idMesa = id;
         this.productService = new ProductService();
         this.orderService = new OrderService();
+        this.ts = new TableService();
+        this.user = user;
         
         this.totalAcumuladoMesa = orderService.calculateTableTotal(idMesa);
         actualizarTextoTotal();
@@ -49,10 +55,15 @@ public class UserTableController {
     private void exitAndCancel() {
 		view.dispose();
     	orderService.deleteTableOrder(idMesa);
+    	ts.releaseTable(idMesa);
+    	UserMainView u = new UserMainView(user);
+    	u.setVisible(true);
     	}
 
 	private void exitWithoutCancel() {
     	view.dispose();
+    	UserMainView u = new UserMainView(user);
+    	u.setVisible(true);
 	}
 
 	private void mostrarProductoActual() {

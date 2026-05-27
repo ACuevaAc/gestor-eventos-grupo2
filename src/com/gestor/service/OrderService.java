@@ -109,7 +109,7 @@ public class OrderService {
 	}
 
 	public void deleteTableOrder(int tableId) {
-		String sql = "DELETE FROM BOOKING WHERE ID_MESA = ?";
+		String sql = "DELETE FROM RESERVA WHERE ID_MESA = ?";
 		try {
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setInt(1, tableId);
