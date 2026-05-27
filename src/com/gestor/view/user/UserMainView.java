@@ -18,7 +18,10 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 import com.gestor.controller.UserTableController;
 import com.gestor.model.entity.Table;
@@ -36,7 +39,9 @@ public class UserMainView extends JFrame {
 
 	private final Color backgroundColor = new Color(248, 249, 250);
 	private final Font tableFont = new Font("Segoe UI", Font.BOLD, 18);
-
+	
+	private JPanel SearchPanel;
+	private JTextField FilterTXT;
 	private List<JButton> tablesList = new ArrayList<>();
 
 	public UserMainView(User user) {
@@ -131,6 +136,31 @@ public class UserMainView extends JFrame {
 				updateTablesSize(tablesPanel.getWidth(), tablesPanel.getHeight());
 			}
 		});
+
+		SearchPanel = new JPanel();
+		contentPane.add(SearchPanel, BorderLayout.NORTH);
+		SearchPanel.setLayout(new BorderLayout(0, 0));
+		
+		FilterTXT = new JTextField();
+		FilterTXT.setColumns(10);
+		FilterTXT.getDocument().addDocumentListener(new DocumentListener() {
+			
+			@Override
+			public void removeUpdate(DocumentEvent e) {
+				FilterTables(FilterTXT.getText());				
+			}
+			@Override
+			public void insertUpdate(DocumentEvent e) {
+				FilterTables(FilterTXT.getText());								
+			}
+			
+			@Override
+			public void changedUpdate(DocumentEvent e) {
+				FilterTables(FilterTXT.getText());				
+				
+			}
+		});
+		SearchPanel.add(FilterTXT);
 	}
 
 	private void updateTablesSize(int widthPanel, int heightPanel) {
@@ -157,7 +187,22 @@ public class UserMainView extends JFrame {
 	public void setTablesList(List<JButton> tablesList) {
 		this.tablesList = tablesList;
 	}
+	private void FilterTables(String text) {
+		String filter = text.toLowerCase().trim();
 
+		for (JButton btn : tablesList) {
+			String nombreMesa = btn.getText().toLowerCase();
+
+			if (nombreMesa.contains(filter)) {
+				btn.setVisible(true);  
+			} else {
+				btn.setVisible(false); 
+			}
+		}
+
+		contentPane.revalidate();
+		contentPane.repaint();
+	}
 	private JButton createOvalButton(String text) {
 		JButton btn = new JButton(text);
 		btn.setFont(tableFont);

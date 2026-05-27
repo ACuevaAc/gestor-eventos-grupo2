@@ -16,6 +16,10 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.JTextField;
+import java.awt.CardLayout;
 
 public class AdminMainView extends JFrame {
 
@@ -35,6 +39,8 @@ public class AdminMainView extends JFrame {
 	private JButton btnListUsers;
 	
 	private List<JButton> tablesList = new ArrayList<>();
+	private JPanel SearchPanel;
+	private JTextField FilterTXT;
 
 	public AdminMainView() {
 		super("Administrador de mesas");
@@ -101,7 +107,33 @@ public class AdminMainView extends JFrame {
 		actionPanel.add(btnListUsers);
 		
 		contentPane.add(actionPanel, BorderLayout.SOUTH);
+	
+		SearchPanel = new JPanel();
+		contentPane.add(SearchPanel, BorderLayout.NORTH);
+		SearchPanel.setLayout(new BorderLayout(0, 0));
+		
+		FilterTXT = new JTextField();
+		FilterTXT.setColumns(10);
+		FilterTXT.getDocument().addDocumentListener(new DocumentListener() {
+			
+			@Override
+			public void removeUpdate(DocumentEvent e) {
+				FilterTables(FilterTXT.getText());				
+			}
+			@Override
+			public void insertUpdate(DocumentEvent e) {
+				FilterTables(FilterTXT.getText());								
+			}
+			
+			@Override
+			public void changedUpdate(DocumentEvent e) {
+				FilterTables(FilterTXT.getText());				
+				
+			}
+		});
+		SearchPanel.add(FilterTXT);
 	}
+	
 	public JButton getBtnListUsers() {
 		return btnListUsers;
 	}
@@ -129,7 +161,23 @@ public class AdminMainView extends JFrame {
 	public void setBtnEmptyAllTables(JButton btnEmptyAllTables) {
 		this.btnEmptyAllTables = btnEmptyAllTables;
 	}
+	
+	private void FilterTables(String text) {
+		String filter = text.toLowerCase().trim();
 
+		for (JButton btn : tablesList) {
+			String nombreMesa = btn.getText().toLowerCase();
+
+			if (nombreMesa.contains(filter)) {
+				btn.setVisible(true);  
+			} else {
+				btn.setVisible(false); 
+			}
+		}
+
+		contentPane.revalidate();
+		contentPane.repaint();
+	}
 	private void updateTablesSize (int widthPanel, int heightPanel) {
 		int horizontalGap = 30;
 		int width = (widthPanel - (horizontalGap * 4)) / 3;

@@ -141,5 +141,18 @@ public class TableService {
     	    return 0;
     
 	}
-    
+    public void findByName(String name) {
+    	String sql = "SELECT * FROM mesa WHERE nombre Like '?%'";
+    	try {
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(2, name);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				
+			}
+    	} catch (SQLException e) {
+			e.printStackTrace();
+		}
+    	
+    }
 }
