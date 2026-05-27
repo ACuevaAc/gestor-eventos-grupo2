@@ -12,51 +12,51 @@ import com.gestor.view.admin.StatsAdminProducts;
 
 public class StatsController {
 
-	private StatsAdminProducts vista;
-	private FreeChartService productoDao;
+	private StatsAdminProducts view;
+	private FreeChartService givenProduct;
 
 	public StatsController(StatsAdminProducts v) {
-		this.vista = v;
-		this.productoDao = new FreeChartService();
-		inicializarControlador();
-		mostrarEstadisticas(); 
+		this.view = v;
+		this.givenProduct = new FreeChartService();
+		startController();
+		showStatistics(); 
 	}
 
-	private void inicializarControlador() {
-		vista.setTitle("Gestor Eventos - Estadísticas del Sistema");
-		vista.getBtnVolver().addActionListener(e -> volver());		
+	private void startController() {
+		view.setTitle("Gestor Eventos - Estadísticas del Sistema");
+		view.getBtnVolver().addActionListener(e -> goBack());		
 	}
 
-	public void volver() {
-		vista.dispose();
+	public void goBack() {
+		view.dispose();
 		AdminMainView v = new AdminMainView();
 		v.setVisible(true);
 		new AdminController(v);
 	}
 	
-	public void mostrarEstadisticas() {
-		DefaultCategoryDataset datasetProductos = productoDao.getMostOrderedProducts();
+	public void showStatistics() {
+		DefaultCategoryDataset productsDataset = givenProduct.getMostOrderedProducts();
 		JFreeChart graficoProductos = ChartFactory.createBarChart(
 				"Top Productos Más Pedidos",
 				"Productos",
 				"Cantidad de Unidades",
-				datasetProductos,
+				productsDataset,
 				PlotOrientation.VERTICAL,
 				true,
 				true,
 				false
 		);
-		DefaultPieDataset datasetMesas = productoDao.getTablesByCapacity();
+		DefaultPieDataset tablesDataset = givenProduct.getTablesByCapacity();
 		JFreeChart graficoMesas = ChartFactory.createPieChart(
 				"Distribución de Mesas por Capacidad Máxima", // titulo
-				datasetMesas,                                 // Datos
+				tablesDataset,                                // Datos
 				true,                                         // Mostrar leyenda de colores
 				true,                                         // Tooltips activos
 				false                                         // URLs desactivadas
 		);
 
 	
-		vista.cargarGraficosEnPestanas(graficoProductos, graficoMesas);
-		vista.setVisible(true);
+		view.cargarGraficosEnPestanas(graficoProductos, graficoMesas);
+		view.setVisible(true);
 	}
 }

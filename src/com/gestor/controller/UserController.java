@@ -15,32 +15,31 @@ public class UserController {
 	private TableService ms;
 	
 	public UserController(UserMainView v) {
-		this.view=v;
-		ms=new TableService();
-		cargarMesasCreadas();
+		this.view = v;
+		ms = new TableService();
+		loadCreatedTables();
 	}
-	public void cargarMesasCreadas() {
-		List<JButton> lista = view.getTablesList();
-       List<Table> mesas=ms.getCreatedTables();
+
+	public void loadCreatedTables() {
+		List<JButton> list = view.getTablesList();
+		List<Table> tables = ms.getCreatedTables();
        
-       for(JButton boton: lista) {
-    	   boton.setBackground(null);
-       }
+		for(JButton button: list) {
+			button.setBackground(null);
+		}
        
-       for(int i=0;i<lista.size()&& i< mesas.size();i++) {
-    	   JButton boton=lista.get(i);
-    	   Table mesa=mesas.get(i);
+       for(int i=0; i < list.size() && i < tables.size(); i++) {
+			JButton button=list.get(i);
+			Table table = tables.get(i);
     	   
-    	   
-    	   if(mesa.isBooked()) {
-    		   boton.setBackground(Color.red);
-    	   } else {
-    		   boton.setBackground(Color.green);
-    	   }
-       }
-       
+			if(table.isBooked()) {
+				button.setBackground(Color.red);
+			} else {
+				button.setBackground(Color.green);
+			}
+		}
     }
-	}
+}
 	
 
 

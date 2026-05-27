@@ -8,7 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.config.ConexionDB;
+import com.config.DatabaseConnection;
 import com.gestor.model.entity.Table;
 
 public class TableService {
@@ -18,7 +18,7 @@ public class TableService {
     public TableService() {
 
         try {
-            this.conn = ConexionDB.obtener();
+            this.conn = DatabaseConnection.getConnection();
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
@@ -141,18 +141,5 @@ public class TableService {
     	    return 0;
     
 	}
-    public void findByName(String name) {
-    	String sql = "SELECT * FROM mesa WHERE nombre Like '?%'";
-    	try {
-			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setString(2, name);
-			ResultSet rs = ps.executeQuery();
-			if (rs.next()) {
-				
-			}
-    	} catch (SQLException e) {
-			e.printStackTrace();
-		}
-    	
-    }
+    
 }

@@ -32,48 +32,48 @@ public class CreateProductController {
     
     public void searchImage() {
         JFileChooser selector = new JFileChooser();
-        FileNameExtensionFilter filtro = new FileNameExtensionFilter("Imágenes (JPG, PNG)", "jpg", "jpeg", "png");
-        selector.setFileFilter(filtro);
+        FileNameExtensionFilter _filter = new FileNameExtensionFilter("Imágenes (JPG, PNG)", "jpg", "jpeg", "png");
+        selector.setFileFilter(_filter);
         
-        int resultado = selector.showOpenDialog(view);
+        int result = selector.showOpenDialog(view);
 
-        if (resultado == JFileChooser.APPROVE_OPTION) {
-            File archivoElegido = selector.getSelectedFile();
+        if (result == JFileChooser.APPROVE_OPTION) {
+            File file = selector.getSelectedFile();
 
-            view.setImagenSeleccionada(archivoElegido);
+            view.setImagenSeleccionada(file);
 
-            ImageIcon iconoOriginal = new ImageIcon(archivoElegido.getAbsolutePath());
-            view.setIconoOriginal(iconoOriginal);
+            ImageIcon originalIcon = new ImageIcon(file.getAbsolutePath());
+            view.setIconoOriginal(originalIcon);
             
-            Image escalada = iconoOriginal.getImage().getScaledInstance(60, 60, Image.SCALE_SMOOTH);
-            view.setImagenEscalada(escalada);
+            Image scaledIcon = originalIcon.getImage().getScaledInstance(60, 60, Image.SCALE_SMOOTH);
+            view.setImagenEscalada(scaledIcon);
 
             view.getLblRutaImagen().setText("");
-            view.getLblRutaImagen().setIcon(new ImageIcon(escalada));
+            view.getLblRutaImagen().setIcon(new ImageIcon(scaledIcon));
         }
     }
     public void createProduct() {
         try {
-            String nombre = view.getTxtNombre().getText().trim();
-            String precioTexto = view.getTxtPrecio().getText().trim();
-            File archivoImagen = view.getImagenSeleccionada();
+            String name = view.getTxtNombre().getText().trim();
+            String textPrice = view.getTxtPrecio().getText().trim();
+            File image = view.getImagenSeleccionada();
 
-            if (nombre.isEmpty() || precioTexto.isEmpty()) {
+            if (name.isEmpty() || textPrice.isEmpty()) {
                 JOptionPane.showMessageDialog(view, "Por favor, rellena todos los campos obligatorios.", "Campos vacíos", JOptionPane.WARNING_MESSAGE);
                 return;
             }
 
-            if (archivoImagen == null) {
+            if (image == null) {
                 JOptionPane.showMessageDialog(view, "Debes seleccionar una imagen para el producto.", "Falta imagen", JOptionPane.WARNING_MESSAGE);
                 return;
             }
-            double precio = Double.parseDouble(precioTexto);
+            double price = Double.parseDouble(textPrice);
          
-            byte[] imagenBytes = Files.readAllBytes(archivoImagen.toPath());
+            byte[] imageBytes = Files.readAllBytes(image.toPath());
 
-            Product nuevoProducto = new Product(0, nombre, precio, imagenBytes);
+            Product product = new Product(0, name, price, imageBytes);
 
-            ps.createProduct(nuevoProducto);
+            ps.createProduct(product);
             JOptionPane.showMessageDialog(view, "Producto creado exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
             back();
 
@@ -92,7 +92,6 @@ public class CreateProductController {
         v.setVisible(true);
         new AdminController(v);
         
-        }
-    
+    }
 }
 
