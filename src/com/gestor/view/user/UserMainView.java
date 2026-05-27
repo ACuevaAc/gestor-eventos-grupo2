@@ -117,7 +117,7 @@ public class UserMainView extends JFrame {
 							dispose();
 							ListaDeProductos v = new ListaDeProductos();
 							v.setVisible(true);
-							new UserTableController(v, tableId);
+							new UserTableController(v, tableId,user);
 
 						}
 					} else {
