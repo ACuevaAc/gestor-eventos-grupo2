@@ -25,6 +25,28 @@ public class UserService {
     }
 
     
+    public List<User> getListByName(String name) {
+    	List<User> list=new ArrayList<>();
+    	String sql="SELECT email,password,rol FROM usuario WHERE email LIKE ?";
+    	try {
+			PreparedStatement ps=con.prepareStatement(sql);
+			ps.setString(1, "%"+name+"%");
+			ResultSet rs=ps.executeQuery();
+			while(rs.next()) {
+				list.add(new User(
+						rs.getString("email"),
+						rs.getString("password"),
+						rs.getString("rol")
+						));
+			}
+			return list;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	return null;
+    }
+    
     public List<User> getListUsers() {
     	List<User> lista=new ArrayList<>();
     	String sql="SELECT email,password,rol FROM usuario";

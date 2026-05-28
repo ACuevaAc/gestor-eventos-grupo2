@@ -95,6 +95,7 @@ public class signupadminView extends JFrame {
 		formPanel.add(lblEdad);
 
 		txtEdad = new JTextField();
+		txtEdad.setToolTipText("Debe ser mayor de edad");
 		txtEdad.setFont(FUENTE_INPUT);
 		txtEdad.setBorder(
 				BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(new Color(200, 200, 200), 1),

@@ -82,7 +82,6 @@ public class OrderService {
 		}
 		return list;
 	}
-
 	/**
 	 * @method calculateTableTotal
 	 * @description Computes the aggregated financial sum of all active orders for a
@@ -117,8 +116,6 @@ public class OrderService {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-
-	}
-
+		}    			
+    }
 }
