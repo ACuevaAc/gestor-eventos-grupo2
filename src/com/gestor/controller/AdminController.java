@@ -13,6 +13,7 @@ import com.gestor.view.admin.FormCrearProducto;
 import com.gestor.view.admin.GestorMesasView;
 import com.gestor.view.admin.ListUsersView;
 import com.gestor.view.admin.StatsAdminProducts;
+import com.gestor.view.admin.ViewSummaryBook;
 import com.gestor.view.admin.signupadminView;
 
 public class AdminController {
@@ -33,6 +34,13 @@ public class AdminController {
         view.getBtnNewProduct().addActionListener(e-> createProduct());
         view.getBtnStats().addActionListener(e-> checkStats());
         view.getBtnListUsers().addActionListener(e-> listUsers());
+        view.getBtnSummary().addActionListener(e-> summaryBooks());
+    }
+    public void summaryBooks() {
+    	view.dispose();
+    	ViewSummaryBook v=new ViewSummaryBook();
+    	v.setVisible(true);
+    	new SummaryController(v);
     }
     public void listUsers() {
     	view.dispose();

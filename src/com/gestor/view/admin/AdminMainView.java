@@ -37,6 +37,7 @@ public class AdminMainView extends JFrame {
 	private JButton btnEmptyAllTables;
 	private JButton btnStats;
 	private JButton btnListUsers;
+	private JButton btnSummary;
 	
 	private List<JButton> tablesList = new ArrayList<>();
 	private JPanel SearchPanel;
@@ -88,16 +89,25 @@ public class AdminMainView extends JFrame {
 
 		btnCreateTable = new JButton("Create Table");
 		stabilizeAction(btnCreateTable);
+		btnCreateTable.setToolTipText("Crea nueva mesa del restaurante");
 		btnNewAdmin = new JButton("New Admin");
+		btnNewAdmin.setToolTipText("Crea un nuevo administrador");
 		stabilizeAction(btnNewAdmin);
 		btnEmptyAllTables = new JButton("Empty All Tables");
 		stabilizeAction(btnEmptyAllTables);
+		btnEmptyAllTables.setToolTipText("Limpia todas las mesas del restaurante");
 		btnNewProduct = new JButton("Create New Product");
+		btnNewProduct.setToolTipText("Crea un nuevo producto a la carta");
 		stabilizeAction(btnNewProduct);
 		btnStats = new JButton("Stats");
+		btnStats.setToolTipText("Comprueba los graficos de las estadisticas");
 		stabilizeAction(btnStats);
 		btnListUsers=new JButton("Users");
+		btnListUsers.setToolTipText("Busca/Elimina usuarios ");
 		stabilizeAction(btnListUsers);
+		btnSummary=new JButton("Summary books");
+		btnSummary.setToolTipText("Resumen de las reservas");
+		stabilizeAction(btnSummary);
 		
 		actionPanel.add(btnCreateTable);
 		actionPanel.add(btnNewAdmin);
@@ -105,6 +115,7 @@ public class AdminMainView extends JFrame {
 		actionPanel.add(btnNewProduct);
 		actionPanel.add(btnStats);
 		actionPanel.add(btnListUsers);
+		actionPanel.add(btnSummary);
 		
 		contentPane.add(actionPanel, BorderLayout.SOUTH);
 	
@@ -113,6 +124,7 @@ public class AdminMainView extends JFrame {
 		SearchPanel.setLayout(new BorderLayout(0, 0));
 		
 		FilterTXT = new JTextField();
+		FilterTXT.setToolTipText("Busca la mesa por su nombre");
 		FilterTXT.setColumns(10);
 		FilterTXT.getDocument().addDocumentListener(new DocumentListener() {
 			
@@ -132,6 +144,9 @@ public class AdminMainView extends JFrame {
 			}
 		});
 		SearchPanel.add(FilterTXT);
+	}
+	public JButton getBtnSummary() {
+		return btnSummary;
 	}
 	
 	public JButton getBtnListUsers() {

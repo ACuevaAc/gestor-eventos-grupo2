@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
@@ -18,6 +19,7 @@ public class ListUsersView extends JFrame {
 	private DefaultTableModel modelo;
 	private JTable tabla;
 	private JButton btnBack,btnDelete;
+	private JTextField txSearch;
 
 	/**
 	 * Launch the application.
@@ -56,11 +58,20 @@ public class ListUsersView extends JFrame {
 		btnDelete=new JButton("Borrar");
 		pnBotones.add(btnBack);
 		pnBotones.add(btnDelete);
+		JPanel pnSearch=new JPanel();
+		txSearch=new JTextField(20);
+		txSearch.setToolTipText("Escribe un correo para buscar");
+		pnSearch.add(txSearch);
+		contentPane.add(pnSearch,BorderLayout.NORTH);
+		
 		
 		contentPane.add(pnTabla,BorderLayout.CENTER);
 		contentPane.add(pnBotones,BorderLayout.SOUTH);
 		
 
+	}
+	public JTextField getSearch() {
+		return txSearch;
 	}
 	public JTable getTabla() {
 		return tabla;

@@ -23,8 +23,30 @@ public class ListUserController {
 		loadTable();
 		view.getBtnBack().addActionListener(e-> back());
 		view.getBtnDelete().addActionListener(e-> delete());
+		view.getSearch().addActionListener(e-> search());
 		
 		
+	}
+	public void search() {
+		String text=view.getSearch().getText();
+		List<User> list=us.getListByName(text);
+		if(text.isEmpty()) {
+			loadTable();
+		} else
+			filterUser(list);
+		
+	}
+	public void filterUser(List<User>list) {
+		DefaultTableModel model=view.getModelo();
+		model.setRowCount(0);
+		
+		for(User u:list) {
+			model.addRow(new Object[] {
+				u.getEmail(),
+				u.getPassword(),
+				u.getRole()	
+			});
+		}
 	}
 	public void loadTable() {
 		DefaultTableModel model = view.getModelo();
