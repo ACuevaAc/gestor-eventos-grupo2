@@ -6,6 +6,43 @@ This application facilitates a complete workflow for table management:
     - Users can register accounts, view available tables, and manage their personal bookings.
     - The admins oversee the entire ecosystem, modify table statuses, and manage user records.
     - The architecture is built using a layered architecture (DAO/Service) to ensure scalability and clean code.
+
+## Group Members
+This project has been developed as a team by:
+- **[Alejandro Cueva Acosta / ACuevaAc]** - Developer & Architect
+- **[Víctor Chacón García / ether]** - Developer & DevOp
+- **[Jose Manuel Ortiz / JosemaDev06 ]** - Developer & View Designer
+
+## Task Allocation (Reparto de Tareas)
+To optimize development, the workload was systematically distributed across specialized modules:
+
+| Member | Assigned Modules & Responsibilities |
+| :--- | :--- |
+| **[Alejandro Cueva Acosta]** | Core System Architecture, Administrative Control Modules and Statistics Designer |
+| **Víctor Chacón García** | Database Integration, Layered Validation Workflow, Git Workflow Management and Documentation. |
+| **[Jose Manuel Ortiz]** | Frontend Development, Java Swing Layout UI design and Statistics Designer |
+
+## Usage Instructions
+
+### 1. Execution
+1. Ensure your PostgreSQL database instance is up and running.
+2. Compile and package the project using your standard Java IDE.
+3. Execute the application lifecycle by running the main entry point:
+   ```bash
+   src/com/gestor/main/Main.java
+   ```
+
+### 2. User Workflow (How to use)
+
+**As a regular User:**
+- Open the application and navigate to the Signup screen to register a new account.
+- Log in using your fresh credentials.
+- Browse the real-time available tables and book your spot.
+
+**As an Administrator:**
+- Log in using the default secure infrastructure admin credentials provided below.
+- Access the administrative panel to manage table inventory states, view live registration telemetry charts, and overview user listings.
+
 ## Project Structure
 ```
 ── src
@@ -15,7 +52,6 @@ This application facilitates a complete workflow for table management:
             ├── controller
             ├── main
             ├── model
-            │   ├── dao
             │   └── entity
             ├── service
             └── view
