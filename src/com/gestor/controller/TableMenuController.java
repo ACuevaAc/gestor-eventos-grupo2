@@ -47,6 +47,10 @@ public class TableMenuController {
 		ms.createTable(mesa);
 		
 		aCont.actualizarColoresMesas();
+		view.dispose();
+		AdminMainView v=new AdminMainView();
+		v.setVisible(true);
+		new AdminController(v);
 	}
 	public void cargarMesas() {
 	    List<JButton> lista = aCont.getAdminView().getTablesList();
