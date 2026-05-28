@@ -23,6 +23,7 @@ public class UserService {
             e.printStackTrace();
         }
     }
+
     
     public List<User> getListUsers() {
     	List<User> lista=new ArrayList<>();

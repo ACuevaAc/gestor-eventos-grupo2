@@ -19,6 +19,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -77,16 +78,23 @@ public class UserMainView extends JFrame {
 				Table table = tables.get(tableIndex++);
 				JButton btn = createOvalButton(table.getName());
 				btn.putClientProperty("idMesa", table.getId());
-
-				if (table.isBooked())
+				int userId = user.getId();
+				int actualTableID = (int) btn.getClientProperty("idMesa");
+				
+				if (table.isBooked()) {
 					btn.setBackground(Color.RED);
-				else
+				} else {
 					btn.setBackground(Color.GREEN);
+				}
+				SwingUtilities.invokeLater(() -> {
+					if (rs.isUserAlreadyBooked(userId, actualTableID)) {
+						btn.setBackground(Color.BLUE);
+					}
+				});
 
 				btn.addActionListener(e -> {
 					JButton button = (JButton) e.getSource();
 					int tableId = (int) button.getClientProperty("idMesa");
-
 					if (button.getBackground().equals(Color.GREEN)) {
 						int option = JOptionPane.showConfirmDialog(this, "¿Reservar " + table.getName() + "?",
 								"Reserva", JOptionPane.YES_NO_OPTION);
@@ -112,16 +120,26 @@ public class UserMainView extends JFrame {
 							}
 							rs.makeReservation(user.getId(), tableId, LocalDateTime.now());
 							ms.bookTable(tableId);
-							button.setBackground(Color.RED);
+							button.setBackground(Color.BLUE); // Cambiado a azul para mantener coherencia
 							JOptionPane.showMessageDialog(this, "Mesa reservada correctamente");
 							dispose();
 							ListaDeProductos v = new ListaDeProductos();
 							v.setVisible(true);
-							new UserTableController(v, tableId,user);
+							new UserTableController(v, tableId, user);
 
 						}
 					} else {
-						JOptionPane.showMessageDialog(this, "La mesa ya está reservada");
+
+						boolean sameuserBooked = rs.isUserAlreadyBooked(userId, tableId);
+						if (sameuserBooked == true) {
+							dispose();
+							ListaDeProductos v = new ListaDeProductos();
+							v.setVisible(true);
+							new UserTableController(v, tableId, user);
+						} else {
+							JOptionPane.showMessageDialog(null, "Esta no es tu reserva", "Error",
+									JOptionPane.ERROR_MESSAGE);
+						}
 					}
 				});
 

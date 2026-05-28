@@ -32,6 +32,7 @@ public class UserTableController {
         this.tableId = id;
         this.productService = new ProductService();
         this.orderService = new OrderService();
+        this.bookService =new BookService();
         this.ts = new TableService();
         this.user = user;
         
