@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 
 import com.gestor.model.entity.Product;
 import com.gestor.model.entity.User;
+import com.gestor.service.BookService;
 import com.gestor.service.OrderService;
 import com.gestor.service.ProductService;
 import com.gestor.service.TableService;
@@ -18,6 +19,7 @@ public class UserTableController {
     private ListaDeProductos view;
     private int tableId;
     private ProductService productService;
+    private BookService bookService;
     private OrderService orderService;
     private List<Product> productList;
     private int currentIndex = 0;
@@ -55,6 +57,7 @@ public class UserTableController {
     private void exitAndCancel() {
 		view.dispose();
     	orderService.deleteTableOrder(tableId);
+    	bookService.deleteFromBooking(tableId);
     	ts.releaseTable(tableId);
     	UserMainView u = new UserMainView(user);
     	u.setVisible(true);
