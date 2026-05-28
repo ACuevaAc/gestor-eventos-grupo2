@@ -25,12 +25,12 @@ public class AdminController {
         this.view = v;
         this.ms = new TableService();
 
-        actualizarColoresMesas();
+        updateTableColors();
 
-        view.getBtnCreateTable().addActionListener(e -> crearMesa());
+        view.getBtnCreateTable().addActionListener(e -> createTable());
         view.getBtnNewAdmin().addActionListener(e -> createNewAdmin());
         view.getBtnEmptyAllTables().addActionListener(e -> deleteTable());
-        view.getBtnNewProduct().addActionListener(e-> crearProducto());
+        view.getBtnNewProduct().addActionListener(e-> createProduct());
         view.getBtnStats().addActionListener(e-> checkStats());
         view.getBtnListUsers().addActionListener(e-> listUsers());
     }
@@ -48,7 +48,7 @@ public class AdminController {
     	v.setVisible(true);      
     }
     
-    public void crearProducto() {
+    public void createProduct() {
     	view.dispose();
     	FormCrearProducto v=new FormCrearProducto();
     	v.setVisible(true);
@@ -56,41 +56,32 @@ public class AdminController {
     }
 
     public void deleteTable() {
-
         ms.deleteTable();
 
-        reiniciarMesas();
+        resetTables();
     }
-    public void reiniciarMesas() {
+    public void resetTables() {
+        List<JButton> buttons = view.getTablesList();
     	
-        List<JButton> botones = view.getTablesList();
-    	
-        for (int i = 0; i < botones.size(); i++) {
-
-            JButton boton = botones.get(i);
-           boton.setBackground(null);
+        for (int i = 0; i < buttons.size(); i++) {
+            JButton button = buttons.get(i);
+            button.setBackground(null);
         }
     }
 
-    public void actualizarColoresMesas() {
+    public void updateTableColors() {
+        List<JButton> buttons = view.getTablesList();
+        List<Table> tablesDB = ms.getCreatedTables();
 
-        List<JButton> botones = view.getTablesList();
+        for (int i = 0; i < buttons.size() && i < tablesDB.size(); i++) {
+            JButton button = buttons.get(i);
 
-        List<Table> mesasBD = ms.getCreatedTables();
+            Table table = tablesDB.get(i);
 
-        for (int i = 0; i < botones.size() && i < mesasBD.size(); i++) {
-
-            JButton boton = botones.get(i);
-
-            Table mesa = mesasBD.get(i);
-
-            if (mesa.isBooked()) {
-
-                boton.setBackground(Color.RED);
-
+            if (table.isBooked()) {
+                button.setBackground(Color.RED);
             } else {
-
-                boton.setBackground(Color.GREEN);
+                button.setBackground(Color.GREEN);
             }
         }
 
@@ -100,15 +91,13 @@ public class AdminController {
     public AdminMainView getAdminView() {
         return view;
     }
-    
-    public void crearMesa() {
+    public void createTable() {
     	List<Table> listaMesas=ms.getCreatedTables();
     	if(listaMesas.size()<10) {
     		view.setVisible(false);
     		GestorMesasView v = new GestorMesasView();
     		v.setVisible(true);
-
-        new TableMenuController(v, this);
+    		new TableMenuController(v, this);
     	} else
     		JOptionPane.showMessageDialog(null, "Has excedido el limite de mesas para crear, contacta con tu proveedor");
     }

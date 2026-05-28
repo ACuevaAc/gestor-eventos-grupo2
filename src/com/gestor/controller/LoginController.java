@@ -38,11 +38,11 @@ public class LoginController {
         String email = view.getTxtEmail().getText();
         String psw = String.valueOf(view.getPasswordField().getPassword());
 
-        User usuario = uService.login(email, psw);
+        User user = uService.login(email, psw);
 
-        if (usuario != null) {
+        if (user != null) {
 
-            if ("ADMIN".equalsIgnoreCase(usuario.getRole())) {
+            if ("ADMIN".equalsIgnoreCase(user.getRole())) {
 
                 System.out.println("LOG- ADMIN");
 
@@ -53,11 +53,11 @@ public class LoginController {
 
                 new AdminController(v);
 
-            } else if ("USER".equalsIgnoreCase(usuario.getRole())) {
+            } else if ("USER".equalsIgnoreCase(user.getRole())) {
 
                 view.dispose();
 
-                UserMainView v = new UserMainView(usuario);
+                UserMainView v = new UserMainView(user);
                 v.setVisible(true);
 
                 new UserController(v);

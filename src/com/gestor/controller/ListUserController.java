@@ -18,7 +18,7 @@ public class ListUserController {
 	public ListUserController(ListUsersView v) {
 		this.view=v;
 		
-		us=new UserService();
+		us = new UserService();
 		
 		loadTable();
 		view.getBtnBack().addActionListener(e-> back());
@@ -27,14 +27,16 @@ public class ListUserController {
 		
 	}
 	public void loadTable() {
-		DefaultTableModel modelo=view.getModelo();
-		modelo.setRowCount(0);
-		List<User> lista=us.getListUsers();
-		for(User us:lista) {
-			modelo.addRow(new Object[] {
-					us.getEmail(),
-					us.getPassword(),
-					us.getRole()
+		DefaultTableModel model = view.getModelo();
+		model.setRowCount(0);
+
+		List<User> list = us.getListUsers();
+
+		for(User us : list) {
+			model.addRow(new Object[] {
+				us.getEmail(),
+				us.getPassword(),
+				us.getRole()
 			});
 		}
 	}
@@ -45,9 +47,9 @@ public class ListUserController {
 		new AdminController(v);
 	}
 	public void delete() {
-		JTable tabla=view.getTabla();
-		int fila=tabla.getSelectedRow();
-		String email= (String) tabla.getValueAt(fila, 0);
+		JTable table = view.getTabla();
+		int row = table.getSelectedRow();
+		String email = (String) table.getValueAt(row, 0);
 		
 		us.deleteFromEmail(email);
 		loadTable();

@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
-import com.config.ConexionDB;
+import com.config.DatabaseConnection;
 
 public class FreeChartService {
 
@@ -14,7 +14,7 @@ public class FreeChartService {
 
     public FreeChartService() {
         try {
-            this.conn = ConexionDB.obtener();
+            this.conn = DatabaseConnection.getConnection();
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }

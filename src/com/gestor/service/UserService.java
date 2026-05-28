@@ -8,7 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.config.ConexionDB;
+import com.config.DatabaseConnection;
 import com.gestor.model.entity.User;
 
 public class UserService {
@@ -18,7 +18,7 @@ public class UserService {
     public UserService() {
 
         try {
-            con = ConexionDB.obtener();
+            con = DatabaseConnection.getConnection();
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }

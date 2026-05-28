@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.config.ConexionDB;
+import com.config.DatabaseConnection;
 import com.gestor.model.entity.Book;
 
 public class BookService {
@@ -19,7 +19,7 @@ public class BookService {
     public BookService() {
 
         try {
-            this.conn = ConexionDB.obtener();
+            this.conn = DatabaseConnection.getConnection();
         } catch (ClassNotFoundException | SQLException e) {
             System.err.println("Error: Could not establish connection in BookService.");
             e.printStackTrace();
@@ -102,13 +102,13 @@ public class BookService {
     }
 
     public int getCapacityLimit(int tableId) {
-        String sql = "SELECT numero_max FROM mesa WHERE id = ?";
+        String sql = "SELECT capacidad FROM mesa WHERE id = ?";
         
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, tableId);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
-                    return rs.getInt("numero_max");
+                    return rs.getInt("capacidad");
                 }
             }
         } catch (SQLException e) {
