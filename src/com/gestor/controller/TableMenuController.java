@@ -43,7 +43,10 @@ public class TableMenuController {
 		table.setName(nom);
 		table.setBooked(false);
 		ms.createTable(table);
-		
+		view.dispose();
+		AdminMainView v=new AdminMainView();
+		v.setVisible(true);
+		new AdminController(v);
 		aCont.updateTableColors();
 	}
 
