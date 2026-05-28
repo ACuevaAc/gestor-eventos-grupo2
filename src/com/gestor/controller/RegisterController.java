@@ -30,20 +30,20 @@ public class RegisterController {
 		v.setVisible(true);
 		new LoginController(v,uService);
 	}
-	public boolean validacion() {
-		String nom=view.getTxtName().getText();
-		int edad=Integer.parseInt(view.getTxtAge().getText());
+	public boolean validation () {
+		String name = view.getTxtName().getText();
+		int age = Integer.parseInt(view.getTxtAge().getText());
 
-		String em=view.getTxtEmail().getText();
-		String emConf=view.getTxtConfirmEmail().getText();
-		
-		String psw=String.valueOf(view.getTxtPassword().getPassword());
-		String pswConf=String.valueOf(view.getTxtConfirmPassword().getPassword());
-		
-		if(nom.isEmpty()||edad<1||em.isEmpty()||psw.isEmpty()) {
+		String email = view.getTxtEmail().getText();
+		String emailConfirm = view.getTxtConfirmEmail().getText();
+
+		String password = String.valueOf(view.getTxtPassword().getPassword());
+		String passwordConfirm = String.valueOf(view.getTxtConfirmPassword().getPassword());
+
+		if (name.isEmpty() || age < 1 || email.isEmpty() || password.isEmpty()) {
 			return false;
-		}				
-		return em.equals(emConf) && psw.equals(pswConf);
+		}
+		return email.equals(emailConfirm) && password.equals(passwordConfirm);
 	}
 	public void registrar() {
 		User user=new User();
@@ -51,31 +51,31 @@ public class RegisterController {
 		user.setName(view.getTxtName().getText());
 		user.setEmail(view.getTxtConfirmEmail().getText());
 		user.setAge(Integer.parseInt(view.getTxtAge().getText()));
-		String psw = String.valueOf(view.getTxtConfirmPassword().getPassword());
-		String hash = SecurityService.hashString(psw);
+		String password = String.valueOf(view.getTxtConfirmPassword().getPassword());
+		String hash = SecurityService.hashString(password);
 		user.setPassword(hash);
 		user.setRole("USER");
 		
-		boolean registrar=false;
-		if(validacion()) {
-			registrar=uService.register(user);
+		boolean register = false;
+
+		if (validation()) {
+			register = uService.register(user);
 		}
 		
-		if(registrar) {
+		if(register) {
 			JOptionPane.showMessageDialog(null, "Registrado con exito");
-			limpiarCampos(view.getContentPane());
+			clear(view.getContentPane());
 		} else {
 			JOptionPane.showMessageDialog(null, "Error en el registro");
 		}
 	}
-	public void limpiarCampos(Container cont) {
-		    view.getTxtName().setText("");
-		    view.getTxtAge().setText("");
-		    view.getTxtEmail().setText("");
-		    view.getTxtConfirmEmail().setText("");
-		    view.getTxtPassword().setText("");
-		    view.getTxtConfirmPassword().setText("");
-	
+	public void clear (Container cont) {
+		view.getTxtName().setText("");
+		view.getTxtAge().setText("");
+		view.getTxtEmail().setText("");
+		view.getTxtConfirmEmail().setText("");
+		view.getTxtPassword().setText("");
+		view.getTxtConfirmPassword().setText("");
 	}
 
 }

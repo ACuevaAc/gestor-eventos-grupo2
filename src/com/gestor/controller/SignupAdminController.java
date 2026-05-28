@@ -21,31 +21,31 @@ public class SignupAdminController {
 		this.cont=c;
 		this.uService=new UserService();
 		
-		view.getBtnCreate().addActionListener(e-> registrar());
-		view.getBtnBack().addActionListener(e-> volver());
+		view.getBtnCreate().addActionListener(e-> register());
+		view.getBtnBack().addActionListener(e-> goBack());
 	}
-	public void volver() {
+	public void goBack() {
 		view.dispose();
 		AdminMainView v=new AdminMainView();
 		v.setVisible(true);
 		new AdminController(v);
 	}
-	public boolean validacion() {
-		String nom=view.getTxtNombre().getText();
-		int edad=Integer.parseInt(view.getTxtEdad().getText());
+	public boolean validation() {
+		String name = view.getTxtNombre().getText();
+		int age = Integer.parseInt(view.getTxtEdad().getText());
 
-		String em=view.getTxtEmail().getText();
-		String emConf=view.getTxtConfirmEmail().getText();
-		
-		String psw=String.valueOf(view.getTxtPassword().getPassword());
-		String pswConf=String.valueOf(view.getTxtConfirmPassword().getPassword());
-		
-		if(nom.isEmpty()||edad<1||em.isEmpty()||psw.isEmpty()) {
+		String email = view.getTxtEmail().getText();
+		String emailConfirm = view.getTxtConfirmEmail().getText();
+
+		String password = String.valueOf(view.getTxtPassword().getPassword());
+		String passwordConfirm = String.valueOf(view.getTxtConfirmPassword().getPassword());
+
+		if(name.isEmpty() || age < 1 || email.isEmpty() || password.isEmpty()) {
 			return false;
 		}				
-		return em.equals(emConf) && psw.equals(pswConf);
+		return email.equals(emailConfirm) && password.equals(passwordConfirm);
 	}
-	public void registrar() {
+	public void register () {
 		User user = new User();
 		user.setName(view.getTxtNombre().getText());
 		user.setEmail(view.getTxtConfirmEmail().getText());
@@ -55,26 +55,25 @@ public class SignupAdminController {
 		user.setPassword(hash);
 		user.setRole("ADMIN");
 		
-		boolean registrar=false;
-		if(validacion()) {
-			registrar=uService.register(user);
+		boolean register = false;
+		if (validation()) {
+			register = uService.register(user);
 		}
 		
-		if(registrar) {
+		if(register) {
 			JOptionPane.showMessageDialog(null, "Registrado con exito");
-			limpiarCampos(view.getContentPane());
+			clear(view.getContentPane());
 		} else {
 			JOptionPane.showMessageDialog(null, "Error en el registro");
 		}
 	}
-	public void limpiarCampos(Container cont) {
-		    view.getTxtNombre().setText("");
-		    view.getTxtEdad().setText("");
-		    view.getTxtEmail().setText("");
-		    view.getTxtConfirmEmail().setText("");
-		    view.getTxtPassword().setText("");
-		    view.getTxtConfirmPassword().setText("");
-	
+	public void clear(Container cont) {
+		view.getTxtNombre().setText("");
+		view.getTxtEdad().setText("");
+		view.getTxtEmail().setText("");
+		view.getTxtConfirmEmail().setText("");
+		view.getTxtPassword().setText("");
+		view.getTxtConfirmPassword().setText("");
 	}
 
 }

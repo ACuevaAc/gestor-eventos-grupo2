@@ -23,44 +23,43 @@ public class TableMenuController {
 		this.view=v;
 		this.aCont=cont;
 		
-		ms= new TableService();
-		cargarMesas();
-		v.getBtnRegistrarModificar().addActionListener(e-> registrarMesa());
-		v.getBtnAtras().addActionListener(e-> volverMenu());
-		
-		
+		ms = new TableService();
+		loadTables();
+		v.getBtnRegistrarModificar().addActionListener(e-> registerTable());
+		v.getBtnAtras().addActionListener(e-> goBackMenu());
 	}
-	public void volverMenu() {
+	public void goBackMenu() {
 		view.dispose();
-		AdminMainView view=aCont.getAdminView();
+		AdminMainView view = aCont.getAdminView();
 		view.setVisible(true);
 		
-		aCont.actualizarColoresMesas();
+		aCont.updateTableColors();
 	}
-	public void registrarMesa() {
-		String nom=view.getTxtNombre().getText();
-		int num_max=(int) view.getcBgente().getSelectedItem();
-		Table mesa=new Table();
-		mesa.setMax(num_max);
-		mesa.setName(nom);
-		mesa.setBooked(false);
-		ms.createTable(mesa);
+	public void registerTable() {
+		String nom = view.getTxtNombre().getText();
+		int num_max = (int) view.getcBgente().getSelectedItem();
+		Table table = new Table();
+		table.setMax(num_max);
+		table.setName(nom);
+		table.setBooked(false);
+		ms.createTable(table);
 		
-		aCont.actualizarColoresMesas();
+		aCont.updateTableColors();
 	}
-	public void cargarMesas() {
-	    List<JButton> lista = aCont.getAdminView().getTablesList();
-	    int totalMesas = ms.getTableIds();
-	    for (JButton boton : lista) {
-	        boton.setBackground(null); 
+
+	public void loadTables() {
+	    List<JButton> list = aCont.getAdminView().getTablesList();
+	    int totalTables = ms.getTableIds();
+	    for (JButton button : list) {
+	        button.setBackground(null); 
 	    }
-	    int limite = Math.min(totalMesas, lista.size());
+	    int limite = Math.min(totalTables, list.size());
 	    for (int i = 0; i < limite; i++) {
-	        lista.get(i).setBackground(Color.GREEN);
+	        list.get(i).setBackground(Color.GREEN);
 	    }
 	    aCont.getAdminView().repaint();
-	    if (totalMesas > lista.size()) {
-	        System.out.println("LOG GestionMesasController: Hay " + totalMesas + " mesas en la BD, pero solo " + lista.size() + " botones en la pantalla.");
+	    if (totalTables > list.size()) {
+	        System.out.println("LOG GestionMesasController: Hay " + totalTables + " mesas en la BD, pero solo " + list.size() + " botones en la pantalla.");
 	    }
 	}
 

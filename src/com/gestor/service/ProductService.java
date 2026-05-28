@@ -8,7 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.config.ConexionDB;
+import com.config.DatabaseConnection;
 import com.gestor.model.entity.Product;
 
 /**
@@ -24,7 +24,7 @@ public class ProductService {
      */
     public ProductService() {
         try {
-            this.conn = ConexionDB.obtener();
+            this.conn = DatabaseConnection.getConnection();
         } catch (ClassNotFoundException | SQLException e) {
             System.err.println("Error: Could not establish connection in ProductoService.");
             e.printStackTrace();

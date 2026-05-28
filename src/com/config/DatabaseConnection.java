@@ -4,12 +4,12 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class ConexionDB {
+public class DatabaseConnection {
 	
-	private static Connection cnx=null;
+	private static Connection cnx = null;
 	
-	public static Connection obtener() throws SQLException, ClassNotFoundException {
-		if(cnx==null) {
+	public static Connection getConnection() throws SQLException, ClassNotFoundException {
+		if (cnx == null) {
 			try {
 				Class.forName("org.postgresql.Driver");
 				cnx=DriverManager.getConnection("jdbc:postgresql://5.78.178.225:5432/gegdb","adm","l9nMñ44.aa1.j0s3mA");
@@ -21,10 +21,9 @@ public class ConexionDB {
 		}
 		return cnx;
 	}
-	public static void cerrar() throws SQLException {
-		if(cnx!=null) {
-			cnx.close();
-		}
+
+	public static void close () throws SQLException {
+		if (cnx != null) cnx.close();
 	}
 }
 
