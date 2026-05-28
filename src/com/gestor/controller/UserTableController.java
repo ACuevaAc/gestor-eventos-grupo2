@@ -7,6 +7,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 import com.gestor.model.entity.Product;
+import com.gestor.model.entity.SummaryOrders;
 import com.gestor.model.entity.User;
 import com.gestor.service.BookService;
 import com.gestor.service.OrderService;
@@ -14,6 +15,7 @@ import com.gestor.service.ProductService;
 import com.gestor.service.TableService;
 import com.gestor.view.user.ListaDeProductos;
 import com.gestor.view.user.UserMainView;
+import com.gestor.view.user.UserPaymentSummaryDialog;
 
 public class UserTableController {
     private ListaDeProductos view;
@@ -27,12 +29,12 @@ public class UserTableController {
     private User user;
     private TableService ts;
     
-    public UserTableController (ListaDeProductos v, int id, User user) {
+    public UserTableController(ListaDeProductos v, int id, User user) {
         this.view = v;
         this.tableId = id;
         this.productService = new ProductService();
         this.orderService = new OrderService();
-        this.bookService =new BookService();
+        this.bookService = new BookService();
         this.ts = new TableService();
         this.user = user;
         
@@ -47,6 +49,7 @@ public class UserTableController {
             view.getLblTituloProducto().setText("No hay productos");
             view.getPrecioNum().setText("0 €");
         }
+        
         view.getBtnNext().addActionListener(e -> advanceProduct());
         view.getBtnBack().addActionListener(e -> previousProduct());
         view.getBtnAñadir().addActionListener(e -> addToOrder());
@@ -56,21 +59,21 @@ public class UserTableController {
     }
 
     private void exitAndCancel() {
-		view.dispose();
-    	orderService.deleteTableOrder(tableId);
-    	bookService.deleteFromBooking(tableId);
-    	ts.releaseTable(tableId);
-    	UserMainView u = new UserMainView(user);
-    	u.setVisible(true);
-    	}
+        view.dispose();
+        orderService.deleteTableOrder(tableId);
+        bookService.deleteFromBooking(tableId);
+        ts.releaseTable(tableId);
+        UserMainView u = new UserMainView(user);
+        u.setVisible(true);
+    }
 
-	private void exitWithoutCancel() {
-    	view.dispose();
-    	UserMainView u = new UserMainView(user);
-    	u.setVisible(true);
-	}
+    private void exitWithoutCancel() {
+        view.dispose();
+        UserMainView u = new UserMainView(user);
+        u.setVisible(true);
+    }
 
-	private void showCurrentProduct() {
+    private void showCurrentProduct() {
         if (productList == null || productList.isEmpty()) return;
         
         Product prod = productList.get(currentIndex);
@@ -126,12 +129,13 @@ public class UserTableController {
         );
     }
 
-    private void updateTotalText () {
+    private void updateTotalText() {
         view.getLblPrecioTotal().setText("Precio Total: " + String.format("%.2f", accumulatorTable) + " €");
     }
 
-    private void finishWindow () {
-        JOptionPane.showMessageDialog(view, "Pedido concluido correctamente para la Mesa " + this.tableId);
-        view.dispose(); 
+    private void finishWindow() {
+        List<SummaryOrders> currentOrder = orderService.getOrderDetailsByTable(tableId);
+        UserPaymentSummaryDialog checkout = new UserPaymentSummaryDialog(view, tableId, user, currentOrder);
+        checkout.setVisible(true);
     }
 }

@@ -9,6 +9,7 @@ import java.util.List;
 
 import com.config.DatabaseConnection;
 import com.gestor.model.entity.Order;
+import com.gestor.model.entity.SummaryOrders;
 
 /**
  * @class OrderService
@@ -107,6 +108,35 @@ public class OrderService {
 		return 0.0;
 	}
 
+	public List<SummaryOrders> getOrderDetailsByTable(int idMesa) {
+	    List<SummaryOrders> orderDetails = new ArrayList<>();
+	    
+	    String sql = "SELECT p.nombre AS producto, o.cantidad, o.precio_total " +
+	                   "FROM pide o " +
+	                   "JOIN producto p ON o.id_producto = p.id " +
+	                   "WHERE o.id_mesa = ?";
+
+	    try (PreparedStatement pS = conn.prepareStatement(sql)) {
+	        
+	        pS.setInt(1, idMesa);
+	        try (ResultSet rs = pS.executeQuery()) {
+	            while (rs.next()) {
+	                String productName = rs.getString("producto");
+	                int quantity = rs.getInt("cantidad");
+	                double totalProductPrice = rs.getDouble("precio_total");
+	                
+	                orderDetails.add(new SummaryOrders(productName, quantity, totalProductPrice));
+	            }
+	        }
+	    } catch (SQLException e) {
+	        System.err.println("Error en getOrderDetailsByTable para la mesa ID: " + idMesa);
+	        e.printStackTrace();
+	    }
+	    
+	    return orderDetails;
+	}
+	
+	
 	public void deleteTableOrder(int tableId) {
 		String sql = "DELETE FROM pide WHERE id_mesa=?";
 		try {

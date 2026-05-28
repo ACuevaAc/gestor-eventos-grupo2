@@ -12,6 +12,8 @@ import java.awt.event.ComponentEvent;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -19,7 +21,6 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.JTextField;
-import java.awt.CardLayout;
 
 public class AdminMainView extends JFrame {
 
@@ -84,40 +85,58 @@ public class AdminMainView extends JFrame {
 			}
 		});
 
-		JPanel actionPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 30, 40));
+		// Panel lateral izquierdo
+		JPanel actionPanel = new JPanel();
+		actionPanel.setLayout(new BoxLayout(actionPanel, BoxLayout.Y_AXIS));
 		actionPanel.setOpaque(false);
+		actionPanel.setBorder(new EmptyBorder(10, 0, 10, 40));
 
 		btnCreateTable = new JButton("Create Table");
 		stabilizeAction(btnCreateTable);
 		btnCreateTable.setToolTipText("Crea nueva mesa del restaurante");
+		
 		btnNewAdmin = new JButton("New Admin");
 		btnNewAdmin.setToolTipText("Crea un nuevo administrador");
 		stabilizeAction(btnNewAdmin);
+		
 		btnEmptyAllTables = new JButton("Empty All Tables");
 		stabilizeAction(btnEmptyAllTables);
 		btnEmptyAllTables.setToolTipText("Limpia todas las mesas del restaurante");
+		
 		btnNewProduct = new JButton("Create New Product");
 		btnNewProduct.setToolTipText("Crea un nuevo producto a la carta");
 		stabilizeAction(btnNewProduct);
+		
 		btnStats = new JButton("Stats");
 		btnStats.setToolTipText("Comprueba los graficos de las estadisticas");
 		stabilizeAction(btnStats);
-		btnListUsers=new JButton("Users");
+		
+		btnListUsers = new JButton("Users");
 		btnListUsers.setToolTipText("Busca/Elimina usuarios ");
 		stabilizeAction(btnListUsers);
-		btnSummary=new JButton("Summary books");
+		
+		btnSummary = new JButton("Summary books");
 		btnSummary.setToolTipText("Resumen de las reservas");
 		stabilizeAction(btnSummary);
 		
+		// MODIFICACIÓN: Añadimos "Glue" entre cada elemento para repartir el espacio vertical equitativamente
+		actionPanel.add(Box.createVerticalGlue());
 		actionPanel.add(btnCreateTable);
+		actionPanel.add(Box.createVerticalGlue());
 		actionPanel.add(btnNewAdmin);
+		actionPanel.add(Box.createVerticalGlue());
 		actionPanel.add(btnEmptyAllTables);
+		actionPanel.add(Box.createVerticalGlue());
 		actionPanel.add(btnNewProduct);
+		actionPanel.add(Box.createVerticalGlue());
 		actionPanel.add(btnStats);
+		actionPanel.add(Box.createVerticalGlue());
 		actionPanel.add(btnListUsers);
+		actionPanel.add(Box.createVerticalGlue());
 		actionPanel.add(btnSummary);
+		actionPanel.add(Box.createVerticalGlue());
 		
-		contentPane.add(actionPanel, BorderLayout.SOUTH);
+		contentPane.add(actionPanel, BorderLayout.WEST);
 	
 		SearchPanel = new JPanel();
 		contentPane.add(SearchPanel, BorderLayout.NORTH);
@@ -140,11 +159,11 @@ public class AdminMainView extends JFrame {
 			@Override
 			public void changedUpdate(DocumentEvent e) {
 				FilterTables(FilterTXT.getText());				
-				
 			}
 		});
 		SearchPanel.add(FilterTXT);
 	}
+	
 	public JButton getBtnSummary() {
 		return btnSummary;
 	}
@@ -193,6 +212,7 @@ public class AdminMainView extends JFrame {
 		contentPane.revalidate();
 		contentPane.repaint();
 	}
+	
 	private void updateTablesSize (int widthPanel, int heightPanel) {
 		int horizontalGap = 30;
 		int width = (widthPanel - (horizontalGap * 4)) / 3;
@@ -246,13 +266,17 @@ public class AdminMainView extends JFrame {
 	}
 
 	private void stabilizeAction(JButton btn) {
-		btn.setPreferredSize(new Dimension(200, 50));
+		Dimension d = new Dimension(200, 50);
+		btn.setPreferredSize(d);
+		// MODIFICACIÓN: Forzamos tanto el mínimo como el máximo para que BoxLayout respete el tamaño exacto del botón
+		btn.setMaximumSize(d);
+		btn.setMinimumSize(d);
+		btn.setAlignmentX(Box.LEFT_ALIGNMENT);
+		
 		btn.setFont(buttonFont);
 		btn.setBackground(actionColor);
 		btn.setForeground(Color.WHITE);
 		btn.putClientProperty("JButton.buttonType", "roundRect");
 		btn.putClientProperty("JButton.cornerRadius", 20);
 	}
-
-	
 }

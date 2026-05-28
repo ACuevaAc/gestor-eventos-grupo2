@@ -80,7 +80,7 @@ public class UserMainView extends JFrame {
 				btn.putClientProperty("idMesa", table.getId());
 				int userId = user.getId();
 				int actualTableID = (int) btn.getClientProperty("idMesa");
-				
+
 				if (table.isBooked()) {
 					btn.setBackground(Color.RED);
 				} else {
