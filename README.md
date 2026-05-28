@@ -11,7 +11,7 @@ This application facilitates a complete workflow for table management:
 This project has been developed as a team by:
 - **[Alejandro Cueva Acosta / ACuevaAc]** - Developer & Architect
 - **[Víctor Chacón García / ether]** - Developer & DevOp
-- **[Jose Manuel Ortiz / JosemaDev06 ]** - Developer & View Designer
+- **[Jose Manuel Ortiz Silva / JosemaDev06 ]** - Developer & View Designer
 
 ## Task Allocation
 To optimize development, the workload was systematically distributed across specialized modules:
@@ -20,7 +20,7 @@ To optimize development, the workload was systematically distributed across spec
 | :--- | :--- |
 | **Alejandro Cueva Acosta** | Core System Architecture, Administrative Control Modules and Statistics Designer |
 | **Víctor Chacón García** | Database Integration, Layered Validation Workflow, Git Workflow Management and Documentation. |
-| **Jose Manuel Ortiz** | Frontend Development, Java Swing Layout UI design and Statistics Designer |
+| **Jose Manuel Ortiz Silva** | Frontend Development, Java Swing Layout UI design and Statistics Designer |
 
 ## Usage Instructions
 
