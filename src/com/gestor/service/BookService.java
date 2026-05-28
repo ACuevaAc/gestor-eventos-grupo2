@@ -93,13 +93,13 @@ public class BookService {
 	}
 
 	public int getCapacityLimit(int tableId) {
-		String sql = "SELECT capacidad FROM mesa WHERE id = ?";
+		String sql = "SELECT numero_max FROM mesa WHERE id = ?";
 
 		try (PreparedStatement ps = conn.prepareStatement(sql)) {
 			ps.setInt(1, tableId);
 			try (ResultSet rs = ps.executeQuery()) {
 				if (rs.next()) {
-					return rs.getInt("capacidad");
+					return rs.getInt("numero_max");
 				}
 			}
 		} catch (SQLException e) {

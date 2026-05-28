@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.util.List;
 
 import javax.swing.JButton;
-import javax.swing.JOptionPane;
 
 import com.gestor.model.entity.Table;
 import com.gestor.service.TableService;
@@ -27,7 +26,7 @@ public class AdminController {
         this.ms = new TableService();
 
         updateTableColors();
-
+        
         view.getBtnCreateTable().addActionListener(e -> createTable());
         view.getBtnNewAdmin().addActionListener(e -> createNewAdmin());
         view.getBtnEmptyAllTables().addActionListener(e -> deleteTable());
@@ -99,15 +98,14 @@ public class AdminController {
     public AdminMainView getAdminView() {
         return view;
     }
+
     public void createTable() {
-    	List<Table> listaMesas=ms.getCreatedTables();
-    	if(listaMesas.size()<10) {
-    		view.setVisible(false);
-    		GestorMesasView v = new GestorMesasView();
-    		v.setVisible(true);
-    		new TableMenuController(v, this);
-    	} else
-    		JOptionPane.showMessageDialog(null, "Has excedido el limite de mesas para crear, contacta con tu proveedor");
+        view.setVisible(false);
+
+        GestorMesasView v = new GestorMesasView();
+        v.setVisible(true);
+
+        new TableMenuController(v, this);
     }
 
     public void createNewAdmin() {

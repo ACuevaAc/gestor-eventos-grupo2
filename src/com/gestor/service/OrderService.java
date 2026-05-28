@@ -82,37 +82,40 @@ public class OrderService {
 		}
 		return list;
 	}
-    /**
-     * @method calculateTableTotal
-     * @description Computes the aggregated financial sum of all active orders for a given table using SUM.
-     * @param {int} tableId - The identity of the target table.
-     * @returns {double} The total accumulated price of all items ordered by the table. Returns 0.0 if empty or error.
-     * @public
-     */
-    public double calculateTableTotal(int tableId) {
-        String sql = "SELECT SUM(precio_total) FROM pide WHERE id_mesa = ?";
-        
-        try (PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setInt(1, tableId);
-            try (ResultSet rs = ps.executeQuery()) {
-                if (rs.next()) return rs.getDouble(1);
-            }
-        } catch (SQLException e) {
-            System.err.println("Error calculating total for Table ID: " + tableId);
-            e.printStackTrace();
-        }
-        return 0.0;
-    }
-    public void deleteTableOrder(int tableId) {
-    	String sql="DELETE FROM pide WHERE id_mesa=?";
-    	try {
-			PreparedStatement ps=conn.prepareStatement(sql);
+	/**
+	 * @method calculateTableTotal
+	 * @description Computes the aggregated financial sum of all active orders for a
+	 *              given table using SUM.
+	 * @param {int} tableId - The identity of the target table.
+	 * @returns {double} The total accumulated price of all items ordered by the
+	 *          table. Returns 0.0 if empty or error.
+	 * @public
+	 */
+	public double calculateTableTotal(int tableId) {
+		String sql = "SELECT SUM(precio_total) FROM pide WHERE id_mesa = ?";
+
+		try (PreparedStatement ps = conn.prepareStatement(sql)) {
+			ps.setInt(1, tableId);
+			try (ResultSet rs = ps.executeQuery()) {
+				if (rs.next())
+					return rs.getDouble(1);
+			}
+		} catch (SQLException e) {
+			System.err.println("Error calculating total for Table ID: " + tableId);
+			e.printStackTrace();
+		}
+		return 0.0;
+	}
+
+	public void deleteTableOrder(int tableId) {
+		String sql = "DELETE FROM pide WHERE id_mesa=?";
+		try {
+			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setInt(1, tableId);
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-    			
+		}    			
     }
 }
