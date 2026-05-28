@@ -106,5 +106,17 @@ public class OrderService {
         }
         return 0.0;
     }
+    public void deleteTableOrder(int tableId) {
+    	String sql="DELETE FROM pide WHERE id_mesa=?";
+    	try {
+			PreparedStatement ps=conn.prepareStatement(sql);
+			ps.setInt(1, tableId);
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    			
+    }
     
 }
