@@ -31,6 +31,7 @@ public class FormCrearProducto extends JFrame {
 	 * Create the frame.
 	 */
 	public FormCrearProducto() {
+		super("Crear Producto");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 400);
 		setLocationRelativeTo(null);
@@ -43,9 +44,11 @@ public class FormCrearProducto extends JFrame {
 		contentPane.add(panelBotones, BorderLayout.SOUTH);
 
 		btnCreate = new JButton("Create");
+		btnCreate.setToolTipText("Crear Producto");
 		panelBotones.add(btnCreate);
 
 		btnBack = new JButton("Back");
+		btnBack.setToolTipText("Volver");
 		panelBotones.add(btnBack);
 
 		JPanel panelForm = new JPanel();

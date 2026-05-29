@@ -43,6 +43,7 @@ public class ListaDeProductos extends JFrame {
 	 * Create the frame.
 	 */
 	public ListaDeProductos() {
+		super("Carta del restaurante");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 450);
 		setMinimumSize(new Dimension(450, 450));
@@ -61,9 +62,11 @@ public class ListaDeProductos extends JFrame {
 		panel.add(lblPrecioTotal, BorderLayout.WEST);
 
 		btnAñadir = new JButton("Añadir");
+		btnAñadir.setToolTipText("Añadir Producto");
 		panel.add(btnAñadir, BorderLayout.CENTER);
 
 		btnTerminar = new JButton("Pagar y terminar");
+		btnTerminar.setToolTipText("Pagar la cuenta");
 		panel.add(btnTerminar, BorderLayout.EAST);
 
 		modelo = new DefaultListModel<Product>();
@@ -133,9 +136,11 @@ public class ListaDeProductos extends JFrame {
 		ExitPanel.setLayout(new BorderLayout(0, 0));
 		
 		btnExit = new JButton("Salir");
+		btnExit.setToolTipText("Salir y no cancelar la reserva");
 		ExitPanel.add(btnExit, BorderLayout.EAST);
 		
 		btnExitandClose = new JButton("Salir y cancelar");
+		btnExitandClose.setToolTipText("Cancelar reserva e irse");
 		btnExitandClose.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				

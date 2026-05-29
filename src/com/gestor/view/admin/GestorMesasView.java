@@ -24,6 +24,7 @@ public class GestorMesasView extends JFrame {
 	 * Create the frame.
 	 */
 	public GestorMesasView() {
+		super("Crear Mesa");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -36,9 +37,11 @@ public class GestorMesasView extends JFrame {
 		contentPane.add(panelBotones, BorderLayout.SOUTH);
 
 		btnRegistrarModificar = new JButton("Register");
+		btnRegistrarModificar.setToolTipText("Añadir Mesa");
 		panelBotones.add(btnRegistrarModificar);
 
 		btnAtras = new JButton("Back");
+		btnAtras.setToolTipText("Volver");
 		panelBotones.add(btnAtras);
 
 		JPanel panelMesa = new JPanel();
