@@ -53,8 +53,8 @@ public class UserMainView extends JFrame {
 		this.ms = new TableService();
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(850, 850);
-		setMinimumSize(new Dimension(650, 750));
+		setSize(1050, 1050);
+		setMinimumSize(new Dimension(1050, 1050));
 		setLocationRelativeTo(null);
 
 		contentPane = new JPanel();
@@ -120,7 +120,7 @@ public class UserMainView extends JFrame {
 							}
 							rs.makeReservation(user.getId(), tableId, LocalDateTime.now());
 							ms.bookTable(tableId);
-							button.setBackground(Color.BLUE); // Cambiado a azul para mantener coherencia
+							button.setBackground(Color.BLUE); 
 							JOptionPane.showMessageDialog(this, "Mesa reservada correctamente");
 							dispose();
 							ListaDeProductos v = new ListaDeProductos();
