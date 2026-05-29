@@ -108,7 +108,7 @@ public class OrderService {
 		return 0.0;
 	}
 
-	public List<SummaryOrders> getOrderDetailsByTable(int idMesa) {
+	public List<SummaryOrders> getOrderDetailsByTable(int tableId) {
 	    List<SummaryOrders> orderDetails = new ArrayList<>();
 	    
 	    String sql = "SELECT p.nombre AS producto, o.cantidad, o.precio_total " +
@@ -118,7 +118,7 @@ public class OrderService {
 
 	    try (PreparedStatement pS = conn.prepareStatement(sql)) {
 	        
-	        pS.setInt(1, idMesa);
+	        pS.setInt(1, tableId);
 	        try (ResultSet rs = pS.executeQuery()) {
 	            while (rs.next()) {
 	                String productName = rs.getString("producto");
@@ -129,7 +129,7 @@ public class OrderService {
 	            }
 	        }
 	    } catch (SQLException e) {
-	        System.err.println("Error en getOrderDetailsByTable para la mesa ID: " + idMesa);
+	        System.err.println("Error en getOrderDetailsByTable para la mesa ID: " + tableId);
 	        e.printStackTrace();
 	    }
 	    

@@ -36,7 +36,7 @@ public class StatsController {
 	
 	public void showStatistics() {
 		DefaultCategoryDataset productsDataset = givenProduct.getMostOrderedProducts();
-		JFreeChart graficoProductos = ChartFactory.createBarChart(
+		JFreeChart productsGraphic = ChartFactory.createBarChart(
 				"Top Productos Más Pedidos",
 				"Productos",
 				"Cantidad de Unidades",
@@ -48,15 +48,15 @@ public class StatsController {
 		);
 		DefaultPieDataset tablesDataset = givenProduct.getTablesByCapacity();
 		JFreeChart graficoMesas = ChartFactory.createPieChart(
-				"Distribución de Mesas por Capacidad Máxima", // titulo
-				tablesDataset,                                // Datos
-				true,                                         // Mostrar leyenda de colores
-				true,                                         // Tooltips activos
-				false                                         // URLs desactivadas
+				"Distribución de Mesas por Capacidad Máxima",
+				tablesDataset,
+				true,
+				true,
+				false
 		);
 
 	
-		view.cargarGraficosEnPestanas(graficoProductos, graficoMesas);
+		view.cargarGraficosEnPestanas(productsGraphic, graficoMesas);
 		view.setVisible(true);
 	}
 }
