@@ -40,7 +40,8 @@ public class ViewSummaryBook extends JFrame {
 	 */
 	public ViewSummaryBook() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 750, 600);
+		setLocationRelativeTo(null);
 		contentPane = new JPanel(new BorderLayout());
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);

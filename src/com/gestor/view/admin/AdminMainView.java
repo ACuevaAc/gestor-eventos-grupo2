@@ -49,7 +49,7 @@ public class AdminMainView extends JFrame {
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(1050, 1050);
-		setMinimumSize(new Dimension(650, 750));
+		setMinimumSize(new Dimension(1050, 1050));
 		setLocationRelativeTo(null);
 
 		contentPane = new JPanel();
@@ -118,8 +118,7 @@ public class AdminMainView extends JFrame {
 		btnSummary = new JButton("Summary books");
 		btnSummary.setToolTipText("Resumen de las reservas");
 		stabilizeAction(btnSummary);
-		
-		// MODIFICACIÓN: Añadimos "Glue" entre cada elemento para repartir el espacio vertical equitativamente
+	
 		actionPanel.add(Box.createVerticalGlue());
 		actionPanel.add(btnCreateTable);
 		actionPanel.add(Box.createVerticalGlue());

@@ -45,6 +45,7 @@ public class ListUsersView extends JFrame {
 		setBounds(100, 100, 750, 600);
 		contentPane = new JPanel(new BorderLayout());
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setLocationRelativeTo(null);
 		setContentPane(contentPane);
 		setLocationRelativeTo(null);
 		JPanel pnTabla=new JPanel();
