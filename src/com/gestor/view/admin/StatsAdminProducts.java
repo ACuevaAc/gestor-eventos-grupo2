@@ -24,6 +24,7 @@ public class StatsAdminProducts extends JFrame {
 	 * Create the frame.
 	 */
 	public StatsAdminProducts() {
+		super("Estadísticas");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 750, 550);
 		setLocationRelativeTo(null);

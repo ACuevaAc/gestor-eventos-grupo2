@@ -41,6 +41,7 @@ public class ListUsersView extends JFrame {
 	 * Create the frame.
 	 */
 	public ListUsersView() {
+		super("Usuarios Registrados");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 750, 600);
 		contentPane = new JPanel(new BorderLayout());
