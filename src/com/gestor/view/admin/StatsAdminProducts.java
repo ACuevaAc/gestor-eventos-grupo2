@@ -13,6 +13,12 @@ import org.jfree.chart.JFreeChart;
 
 import com.gestor.controller.StatsController;
 
+/**
+ * @class StatsAdminProducts
+ * @description Administrative analytics frame component rendering visual chart matrices and graphical metrics.
+ * Provides embedded layout structures leveraging third-party visualization chart libraries, wraps interaction layers 
+ * inside responsive tabbed pane selectors, handles dynamic layout repaints, and exposes navigational callback handles.
+ */
 public class StatsAdminProducts extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -21,8 +27,10 @@ public class StatsAdminProducts extends JFrame {
 	private ChartPanel panelGrafico;
 
 	/**
-	 * Create the frame.
-	 */
+     * @constructor
+     * @description Constructs the analytical statistics display viewport canvas, setting window placement constraints,
+     * registering default cleanup window-close operations, and mounting the foundational interface panel configuration.
+     */
 	public StatsAdminProducts() {
 		super("Estadísticas");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -40,6 +48,13 @@ public class StatsAdminProducts extends JFrame {
 		panelBotones.add(btnVolver);
 	}
 
+	/**
+     * @method cargarGraficosEnPestanas
+     * @description Destroys existing presentation components within the central window zone, spawning a tab-based navigation matrix
+     * to host multiple operational visualization elements like top item charts or active floor layouts data vectors.
+     * @param {JFreeChart} graficoProd - Dataset presentation layer rendering item metric summaries.
+     * @param {JFreeChart} graficoMesas - Dataset presentation layer tracking resource allocation charts.
+     */
 	public void cargarGraficosEnPestanas(JFreeChart graficoProd, JFreeChart graficoMesas) {
 	    BorderLayout layout = (BorderLayout) contentPane.getLayout();
 	    java.awt.Component componenteCentral = layout.getLayoutComponent(BorderLayout.CENTER);
@@ -59,9 +74,12 @@ public class StatsAdminProducts extends JFrame {
 	    contentPane.repaint();
 	}
 
-
-
-
+	/**
+     * @method cargarGrafico
+     * @description Disposes of current chart panel instances to clean up framework hooks, mounting a single independent 
+     * chart instance while enforcing explicit display parameters and enabling input wheel scaling actions.
+     * @param {JFreeChart} grafico - The target presentation layer graphic configuration payload destined for canvas display.
+     */
 	public void cargarGrafico(JFreeChart grafico) {
 		if (panelGrafico != null) {
 			contentPane.remove(panelGrafico);
@@ -75,10 +93,20 @@ public class StatsAdminProducts extends JFrame {
 		contentPane.repaint();
 	}
 
+	/**
+     * @method getBtnVolver
+     * @description Exposes the operational visual interaction node deployed to clear current statistics and revert display hierarchies.
+     * @returns {JButton} Navigation fallback trigger component reference.
+     */
 	public JButton getBtnVolver() {
 		return btnVolver;
 	}
 
+	/**
+     * @method setBtnVolver
+     * @description Installs the explicit visual interaction node intended to dismiss analytics menus.
+     * @param {JButton} btnVolver - Target navigational rollback button asset.
+     */
 	public void setBtnVolver(JButton btnVolver) {
 		this.btnVolver = btnVolver;
 	}

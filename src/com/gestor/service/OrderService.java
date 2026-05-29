@@ -13,9 +13,9 @@ import com.gestor.model.entity.SummaryOrders;
 
 /**
  * @class OrderService
- * @description Manages database operations for the 'pide' table in the gegdb
- *              database. Handles order placements, quantities, and financial
- *              calculations per table.
+ * @description Domain service architectural component orchestrating client transactional operations,
+ * handling persistence logic for transaction line-items, executing aggregated database metrics computations,
+ * mapping relational join sub-queries, and handling cascade order removals.
  */
 public class OrderService {
 	private Connection conn;
@@ -108,6 +108,13 @@ public class OrderService {
 		return 0.0;
 	}
 
+	/**
+     * @method getOrderDetailsByTable
+     * @description Compiles de-normalized data projection structures by joining transaction lines with structural catalog indices,
+     * building itemized descriptive summaries for invoicing components.
+     * @param {int} tableId - Destination operational primary validation identifier.
+     * @returns {List<SummaryOrders>} Flattened data visualization metrics array listing descriptive itemized details.
+     */
 	public List<SummaryOrders> getOrderDetailsByTable(int tableId) {
 	    List<SummaryOrders> orderDetails = new ArrayList<>();
 	    
@@ -136,7 +143,12 @@ public class OrderService {
 	    return orderDetails;
 	}
 	
-	
+	/**
+     * @method deleteTableOrder
+     * @description Executes targeted transactional clear commands to erase historical line-item rows 
+     * containing identical physical asset allocation tracking numbers.
+     * @param {int} tableId - Unique inventory index parameter tracking properties slated for purging.
+     */
 	public void deleteTableOrder(int tableId) {
 		String sql = "DELETE FROM pide WHERE id_mesa=?";
 		try {

@@ -28,6 +28,12 @@ import com.gestor.service.BookService;
 import com.gestor.service.OrderService;
 import com.gestor.service.TableService;
 
+/**
+ * @class UserPaymentSummaryDialog
+ * @description Operational modal dialog framing individual billing processing routines and transaction details summaries.
+ * Binds explicit line-item consumption models onto immutable tabulated interfaces, calculates global financial totals,
+ * and executes cascading state rollbacks across booking registers, table allocation records, and active window containers.
+ */
 public class UserPaymentSummaryDialog extends JDialog {
 
 	private JTable productsTable;
@@ -42,6 +48,16 @@ public class UserPaymentSummaryDialog extends JDialog {
 	private JFrame parentFrame;
 	private User user;
 
+	/**
+     * @constructor
+     * @description Constructs the modal balance review dialog box, mapping contextual frame ownership matrices, 
+     * initializing underlying storage layout frameworks, configuring isolated table cell behaviors, 
+     * setting structural currency labels, and populating row values from summary indices.
+     * @param {JFrame} parentFrame - The supervisor view layout tracking element context.
+     * @param {int} tableId - Target physical asset location unique sequence index.
+     * @param {User} user - Active authorization credential profile token reference.
+     * @param {List<SummaryOrders>} orders - Collection containing structured consumer order summaries data models.
+     */
 	public UserPaymentSummaryDialog(JFrame parentFrame, int tableId, User user, List<SummaryOrders> orders) {
 		super(parentFrame, "Finalizar Pedido & Cuenta", true);
 		this.bookService = new BookService();
@@ -107,6 +123,13 @@ public class UserPaymentSummaryDialog extends JDialog {
 		loadData(orders);
 	}
 
+	/**
+     * @method loadData
+     * @private
+     * @description Parses order history summaries records, dynamically appending formatted visual metadata metrics 
+     * onto data grid models while tallying global monetary constraints.
+     * @param {List<SummaryOrders>} orders - Source collection payload mapped for rendering execution.
+     */
 	private void loadData(List<SummaryOrders> orders) {
 		double grandTotal = 0.0;
 
@@ -120,6 +143,12 @@ public class UserPaymentSummaryDialog extends JDialog {
 		lblTotal.setText(String.format("Total a pagar: %.2f €", grandTotal));
 	}
 
+	/**
+     * @method processPayment
+     * @private
+     * @description Intercepts finalization interaction sequences, dispatching visual confirmations before firing 
+     * state erasures, purging operational table orders logs, dropping reservation dependencies, and safely recycling component windows.
+     */
 	private void processPayment() {
 		int confirm = JOptionPane.showConfirmDialog(this, "¿Confirmas que deseas realizar el pago y abandonar la mesa?",
 				"Proceder al Pago", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);

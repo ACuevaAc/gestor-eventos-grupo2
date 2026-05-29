@@ -12,10 +12,21 @@ import java.util.List;
 import com.config.DatabaseConnection;
 import com.gestor.model.entity.Book;
 
+/**
+ * @class BookService
+ * @description Domain service architectural component orchestrating reservation management business logic,
+ * handling relational persistence connections, input metric verification constraints, inventory cap allocations, 
+ * data mapping layers, and cascade deletion sequences.
+ */
 public class BookService {
 
 	private Connection conn;
 
+	/**
+     * @constructor
+     * @description Initializes the reservation domain engine by establishing active connections 
+     * through shared infrastructure connection management components.
+     */
 	public BookService() {
 
 		try {
@@ -26,6 +37,12 @@ public class BookService {
 		}
 	}
 
+	/**
+     * @method getBooks
+     * @description Queries and pulls all global structural records from the tracking reservation schema, 
+     * mapping data tuple inputs directly into domain entity objects.
+     * @returns {List<Book>} Complete collection listing of verified system booking tracking entities.
+     */
 	public List<Book> getBooks() {
 		List<Book> list = new ArrayList<>();
 
@@ -44,6 +61,15 @@ public class BookService {
 		return list;
 	}
 
+	/**
+     * @method makeReservation
+     * @description Processes execution logic to provision venue asset assignments. Checks for relational allocation collisions, 
+     * evaluates capacity limit conditions against concurrent records, and commits insertion payloads to persistence contexts.
+     * @param {int} userId - Unique identity primary key matching the customer account owner.
+     * @param {int} tableId - Unique inventory tracker key matching the destination venue table asset.
+     * @param {LocalDateTime} date - Targeted explicit runtime timestamp mapping for the scheduling pipeline.
+     * @throws {IllegalArgumentException} Thrown if tracking parameters violate assignment isolation boundaries or if target seating cap constraints collide with active bounds.
+     */
 	public void makeReservation(int userId, int tableId, LocalDateTime date) {
 		if (isUserAlreadyBooked(userId, tableId)) {
 			throw new IllegalArgumentException(
@@ -76,6 +102,13 @@ public class BookService {
 		}
 	}
 
+	/**
+     * @method countReservationsByTable
+     * @description Queries database structures using optimized filtering keys to calculate the exact count 
+     * of concurrent occupant registrations sharing a specific asset index.
+     * @param {int} tableId - Relational identifier mapping targeting specific physical units.
+     * @returns {int} Non-negative scalar value representing aggregate registered occupant references.
+     */
 	public int countReservationsByTable(int tableId) {
 		String sql = "SELECT COUNT(*) FROM reserva WHERE id_mesa = ?";
 
@@ -92,6 +125,14 @@ public class BookService {
 		return 0;
 	}
 
+	/**
+     * @method isUserAlreadyBooked
+     * @description Evaluates identity context fields to identify pre-existing duplicate transaction collisions 
+     * for a concrete user tracking reference and a physical asset node.
+     * @param {int} userId - Unique identity primary key locator parameter.
+     * @param {int} tableId - Inventory asset component primary key parameter.
+     * @returns {boolean} True if matching index coordinates yield row records, false otherwise.
+     */
 	public int getCapacityLimit(int tableId) {
 		String sql = "SELECT numero_max FROM mesa WHERE id = ?";
 
@@ -109,6 +150,14 @@ public class BookService {
 		return 4;
 	}
 
+	/**
+     * @method isUserAlreadyBooked
+     * @description Evaluates identity context fields to identify pre-existing duplicate transaction collisions 
+     * for a concrete user tracking reference and a physical asset node.
+     * @param {int} userId - Unique identity primary key locator parameter.
+     * @param {int} tableId - Inventory asset component primary key parameter.
+     * @returns {boolean} True if matching index coordinates yield row records, false otherwise.
+     */
 	public boolean isUserAlreadyBooked(int userId, int tableId) {
 		String sql = "SELECT 1 FROM reserva WHERE id_usuario = ? AND id_mesa = ?";
 
@@ -124,6 +173,12 @@ public class BookService {
 		return false;
 	}
 
+	/**
+     * @method deleteFromBooking
+     * @description Executes isolated single-parameter cascading deletion commands across targeted relational 
+     * reservation entities bound to a physical resource position.
+     * @param {int} tableid - Unique identifier primary key specifying resource records scheduled for removal.
+     */
 	public void deleteFromBooking(int tableid) {
 		String sql = "DELETE FROM RESERVA WHERE ID_MESA = ?";
 		try {

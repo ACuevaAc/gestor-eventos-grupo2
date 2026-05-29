@@ -22,6 +22,12 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.JTextField;
 
+/**
+ * @class AdminMainView
+ * @description Primary administrative user interface frame container acting as the root cockpit viewport.
+ * Controls visual layout distributions for venue floor plans, custom real-time fuzzy text matrix filtering components,
+ * responsive structural resizing matrices, and explicit operational action triggers.
+ */
 public class AdminMainView extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -44,6 +50,12 @@ public class AdminMainView extends JFrame {
 	private JPanel SearchPanel;
 	private JTextField FilterTXT;
 
+	/**
+     * @constructor
+     * @description Constructs the primary administrator container canvas, registers initial structural dimensions, 
+     * mounts systemic layout managers, draws physical seating schemes, and wires live listener hooks to track 
+     * UI interaction matrices.
+     */
 	public AdminMainView() {
 		super("Administrador de mesas");
 		
@@ -163,38 +175,85 @@ public class AdminMainView extends JFrame {
 		SearchPanel.add(FilterTXT);
 	}
 	
+	/**
+     * @method getBtnSummary
+     * @description Exposes the control trigger interface used to navigate toward structural reservation logs.
+     * @returns {JButton} The target action button instance references.
+     */
 	public JButton getBtnSummary() {
 		return btnSummary;
 	}
 	
+	/**
+     * @method getBtnListUsers
+     * @description Exposes the control trigger interface tracking active profile search and erasure pathways.
+     * @returns {JButton} The target action button instance references.
+     */
 	public JButton getBtnListUsers() {
 		return btnListUsers;
 	}
 
+	/**
+     * @method getBtnStats
+     * @description Exposes the interaction component deployed to initialize analytical business chart rendering hooks.
+     * @returns {JButton} The target action button instance references.
+     */
 	public JButton getBtnStats() {
 		return btnStats;
 	}
 
+	/**
+     * @method setBtnStats
+     * @description Externally configures or replaces the structural button reference responsible for analytical stats display.
+     * @param {JButton} btnStats - Target trigger element mapping.
+     */
 	public void setBtnStats(JButton btnStats) {
 		this.btnStats = btnStats;
 	}
 
+	/**
+     * @method getBtnNewProduct
+     * @description Exposes the control interface tracking inventory insertion workflow menus.
+     * @returns {JButton} The target action button instance references.
+     */
 	public JButton getBtnNewProduct() {
 		return btnNewProduct;
 	}
 
+	/**
+     * @method setBtnNewProduct
+     * @description Binds an explicit interface button implementation to control card catalog expansions.
+     * @param {JButton} btnNewProduct - Target interactive system action.
+     */
 	public void setBtnNewProduct(JButton btnNewProduct) {
 		this.btnNewProduct = btnNewProduct;
 	}
 
+	/**
+     * @method getBtnEmptyAllTables
+     * @description Resolves the component trigger responsible for launching total cascade state erasure protocols across floor assets.
+     * @returns {JButton} The target action button instance references.
+     */
 	public JButton getBtnEmptyAllTables() {
 		return btnEmptyAllTables;
 	}
 
+	/**
+     * @method setBtnEmptyAllTables
+     * @description Encapsulates systemic access rules to bind transactional state clearing elements.
+     * @param {JButton} btnEmptyAllTables - Target reset management button resource.
+     */
 	public void setBtnEmptyAllTables(JButton btnEmptyAllTables) {
 		this.btnEmptyAllTables = btnEmptyAllTables;
 	}
 	
+	/**
+     * @method FilterTables
+     * @private
+     * @description Parses text entries to run immediate matching comparison operations across stored layout titles, 
+     * changing visibility boolean states to hide elements that do not match the filter string.
+     * @param {String} text - Input query character stream metrics processed for filtering parameters.
+     */
 	private void FilterTables(String text) {
 		String filter = text.toLowerCase().trim();
 
@@ -212,6 +271,14 @@ public class AdminMainView extends JFrame {
 		contentPane.repaint();
 	}
 	
+	/**
+     * @method updateTablesSize
+     * @private
+     * @description Dynamically recalibrates width and height boundaries mapping across visual layout matrices,
+     * maintaining proportional constraints during frame changes.
+     * @param {int} widthPanel - Active real-time calculated width state value of the parent wrapper container.
+     * @param {int} heightPanel - Active real-time calculated height state value of the parent wrapper container.
+     */
 	private void updateTablesSize (int widthPanel, int heightPanel) {
 		int horizontalGap = 30;
 		int width = (widthPanel - (horizontalGap * 4)) / 3;
@@ -229,30 +296,67 @@ public class AdminMainView extends JFrame {
 		contentPane.revalidate();
 	}
 
+	/**
+     * @method getBtnNewAdmin
+     * @description Returns the graphical registration anchor deployed to create administrative accounts records.
+     * @returns {JButton} The structural creation action component.
+     */
 	public JButton getBtnNewAdmin() {
 		return btnNewAdmin;
 	}
-
+	
+	/**
+     * @method setBtnNewAdmin
+     * @description Installs a target button blueprint wrapper designated to orchestrate admin signup cascades.
+     * @param {JButton} btnNewAdmin - Target interactive menu action component.
+     */
 	public void setBtnNewAdmin(JButton btnNewAdmin) {
 		this.btnNewAdmin = btnNewAdmin;
 	}
 
+	/**
+     * @method getBtnCreateTable
+     * @description Exposes the interactive frame component that initiates floor plan inventory expansion wizard configurations.
+     * @returns {JButton} The structural infrastructure configuration component.
+     */
 	public JButton getBtnCreateTable() {
 		return btnCreateTable;
 	}
 
+	/**
+     * @method getBtnCreateTable
+     * @description Exposes the interactive frame component that initiates floor plan inventory expansion wizard configurations.
+     * @returns {JButton} The structural infrastructure configuration component.
+     */
 	public void setBtnCreateTable(JButton btnCreateTable) {
 		this.btnCreateTable = btnCreateTable;
 	}
 
+	/**
+     * @method getTablesList
+     * @description Exposes the array layout collection holding physical item component references mapped to screen elements.
+     * @returns {List<JButton>} Dynamic structural array cataloging visible interface interaction buttons.
+     */
 	public List<JButton> getTablesList() {
 		return tablesList;
 	}
 
+	/**
+     * @method setTablesList
+     * @description Overwrites the structural tracking layout list with an external button tracking collection mapping framework.
+     * @param {List<JButton>} tablesList - Target programmatic layout container collection.
+     */
 	public void setTablesList(List<JButton> tablesList) {
 		this.tablesList = tablesList;
 	}
 
+	/**
+     * @method createOvalButton
+     * @private
+     * @description Factoring mechanism configuration blueprint rendering isolated custom rounded graphic buttons matching designated text attributes.
+     * @param {String} text - Title parameter assigned onto the face of the visual rendering button element.
+     * @returns {JButton} Customized layout button configured for table visualizations.
+     */
 	private JButton createOvalButton(String text) {
 		JButton btn = new JButton(text);
 		btn.setFont(tableFont);
@@ -264,6 +368,13 @@ public class AdminMainView extends JFrame {
 		return btn;
 	}
 
+	/**
+     * @method stabilizeAction
+     * @private
+     * @description Enforces strict unified geometric boundaries, standard color layouts, font choices, 
+     * and flat layout scaling behaviors onto control menu button assets.
+     * @param {JButton} btn - Target interface control element subjected to structural design constraints.
+     */
 	private void stabilizeAction(JButton btn) {
 		Dimension d = new Dimension(200, 50);
 		btn.setPreferredSize(d);
