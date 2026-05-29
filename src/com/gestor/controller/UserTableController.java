@@ -17,6 +17,12 @@ import com.gestor.view.user.ListaDeProductos;
 import com.gestor.view.user.UserMainView;
 import com.gestor.view.user.UserPaymentSummaryDialog;
 
+/**
+ * @class UserTableController
+ * @description Controller architectural component managing the customer terminal ordering subsystem,
+ * handling catalog sliding carousel interfaces, sequential tracking indices, real-time accumulation pricing matrices,
+ * transactional data payloads, binary image stream decoding, and order termination cascades.
+ */
 public class UserTableController {
     private ListaDeProductos view;
     private int tableId;
@@ -29,6 +35,14 @@ public class UserTableController {
     private User user;
     private TableService ts;
     
+    /**
+     * @constructor
+     * @description Initializes the client catalog interaction context, queries downstream pricing structures, 
+     * caches operational inventory parameters, establishes baseline layouts, and hooks behavioral event listener streams.
+     * @param {ListaDeProductos} v - Catalog navigation and item allocation view frame container.
+     * @param {int} id - Unique identifier matching the targeting transaction table record.
+     * @param {User} user - Current active authentication context profile mapping.
+     */
     public UserTableController(ListaDeProductos v, int id, User user) {
         this.view = v;
         this.tableId = id;
@@ -58,6 +72,12 @@ public class UserTableController {
         view.getBtnExitandClose().addActionListener(e -> exitAndCancel());
     }
 
+    /**
+     * @method exitAndCancel
+     * @private
+     * @description Dismantles visualization frames, executes cascade purge transactions across relational orders, 
+     * booking registries, and changes resource table tracking parameters to empty states before redirecting routes.
+     */
     private void exitAndCancel() {
         view.dispose();
         orderService.deleteTableOrder(tableId);
@@ -67,12 +87,24 @@ public class UserTableController {
         u.setVisible(true);
     }
 
+    /**
+     * @method exitWithoutCancel
+     * @private
+     * @description Destroys the current context module frame without executing status rollback transactions, 
+     * gracefully shifting visibility states back to primary parent workflows.
+     */
     private void exitWithoutCancel() {
         view.dispose();
         UserMainView u = new UserMainView(user);
         u.setVisible(true);
     }
 
+    /**
+     * @method showCurrentProduct
+     * @private
+     * @description Extracts item entities matching the active collection carousel index, populates layout textual values, 
+     * processes binary database stream arrays into graphical image formats, and triggers downscaling layout interpolation.
+     */
     private void showCurrentProduct() {
         if (productList == null || productList.isEmpty()) return;
         
@@ -92,6 +124,12 @@ public class UserTableController {
         }
     }
 
+    /**
+     * @method advanceProduct
+     * @private
+     * @description Updates tracking indexes to forward boundaries, resetting positions back to baseline 
+     * indices if thresholds collide with upper limits.
+     */
     private void advanceProduct() {
         if (productList == null || productList.isEmpty()) return;
         if (currentIndex < productList.size() - 1) {
@@ -102,6 +140,12 @@ public class UserTableController {
         showCurrentProduct();
     }
 
+    /**
+     * @method previousProduct
+     * @private
+     * @description Shifts matching navigation tracking pointers backwards, looping boundaries back to terminal array locations 
+     * if operations try to dip below starting thresholds.
+     */
     private void previousProduct() {
         if (productList == null || productList.isEmpty()) return;
         if (currentIndex > 0) {
@@ -112,6 +156,12 @@ public class UserTableController {
         showCurrentProduct();
     }
 
+    /**
+     * @method addToOrder
+     * @private
+     * @description Parses interface selected quantity states, evaluates product properties, 
+     * delegates transactional line-item logging tasks to core order domains, and appends raw totals to the operational accumulator tracking layer.
+     */
     private void addToOrder() {
         if (productList == null || productList.isEmpty()) return;
 
@@ -129,10 +179,22 @@ public class UserTableController {
         );
     }
 
+    /**
+     * @method updateTotalText
+     * @private
+     * @description Formats system metrics tracking accumulators according to precise floating point layout schemas 
+     * and maps values directly onto view components.
+     */
     private void updateTotalText() {
         view.getLblPrecioTotal().setText("Precio Total: " + String.format("%.2f", accumulatorTable) + " €");
     }
 
+    /**
+     * @method finishWindow
+     * @private
+     * @description Queries comprehensive ongoing billing details matching active allocation indices and passes data payloads 
+     * as parameters into checkout modal context layers.
+     */
     private void finishWindow() {
         List<SummaryOrders> currentOrder = orderService.getOrderDetailsByTable(tableId);
         UserPaymentSummaryDialog checkout = new UserPaymentSummaryDialog(view, tableId, user, currentOrder);
