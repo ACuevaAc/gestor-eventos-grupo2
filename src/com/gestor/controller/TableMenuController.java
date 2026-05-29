@@ -56,8 +56,8 @@ public class TableMenuController {
 	    for (JButton button : list) {
 	        button.setBackground(null); 
 	    }
-	    int limite = Math.min(totalTables, list.size());
-	    for (int i = 0; i < limite; i++) {
+	    int limit = Math.min(totalTables, list.size());
+	    for (int i = 0; i < limit; i++) {
 	        list.get(i).setBackground(Color.GREEN);
 	    }
 	    aCont.getAdminView().repaint();

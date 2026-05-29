@@ -55,9 +55,9 @@ public class FreeChartService {
              ResultSet rs = ps.executeQuery()) {
 
             while (rs.next()) {
-                int capacidad = rs.getInt("numero_max");
-                int totalMesas = rs.getInt("total_mesas");
-                dataset.setValue("Mesas para " + capacidad + " pers.", totalMesas);
+                int capacity = rs.getInt("numero_max");
+                int totalTables = rs.getInt("total_mesas");
+                dataset.setValue("Mesas para " + capacity + " pers.", totalTables);
             }
         } catch (SQLException e) {
             System.err.println("Error en getTablesByCapacity: " + e.getMessage());

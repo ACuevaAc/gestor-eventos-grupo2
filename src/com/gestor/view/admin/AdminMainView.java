@@ -268,7 +268,6 @@ public class AdminMainView extends JFrame {
 	private void stabilizeAction(JButton btn) {
 		Dimension d = new Dimension(200, 50);
 		btn.setPreferredSize(d);
-		// MODIFICACIÓN: Forzamos tanto el mínimo como el máximo para que BoxLayout respete el tamaño exacto del botón
 		btn.setMaximumSize(d);
 		btn.setMinimumSize(d);
 		btn.setAlignmentX(Box.LEFT_ALIGNMENT);
