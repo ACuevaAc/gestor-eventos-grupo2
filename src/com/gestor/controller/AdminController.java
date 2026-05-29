@@ -154,8 +154,12 @@ public class AdminController {
      * @description Triggers global deletion routines across operational inventory maps, purging states before calling local clear reset processes.
      */
 	public void deleteTable() {
-		ms.deleteTable();
-		resetTables();
+		
+		int response=JOptionPane.showConfirmDialog(null, "¿Deseas borrar todas las mesas?");
+		if(response==0) {
+			ms.deleteTable();
+			resetTables();
+		}
 	}
 
 	/**
