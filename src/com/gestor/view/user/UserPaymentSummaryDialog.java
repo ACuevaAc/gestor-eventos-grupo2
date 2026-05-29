@@ -52,7 +52,7 @@ public class UserPaymentSummaryDialog extends JDialog {
 		this.orderService = new OrderService();
 
 		setSize(500, 650);
-		setLocationRelativeTo(parentFrame);
+		setLocationRelativeTo(null);
 		setLayout(new BorderLayout(10, 10));
 		getContentPane().setBackground(new Color(248, 249, 250));
 

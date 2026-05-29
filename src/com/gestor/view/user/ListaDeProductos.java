@@ -1,6 +1,7 @@
 package com.gestor.view.user;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 
 import javax.swing.DefaultListModel;
 import javax.swing.GroupLayout;
@@ -43,7 +44,10 @@ public class ListaDeProductos extends JFrame {
 	 */
 	public ListaDeProductos() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 450, 450);
+		setMinimumSize(new Dimension(450, 450));
+		setMaximumSize(new Dimension(450,450));
+		setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -62,7 +66,6 @@ public class ListaDeProductos extends JFrame {
 		btnTerminar = new JButton("Pagar y terminar");
 		panel.add(btnTerminar, BorderLayout.EAST);
 
-		// metodo para leer productos AQUI
 		modelo = new DefaultListModel<Product>();
 
 		JPanel panel_Lista = new JPanel(new BorderLayout());
@@ -89,7 +92,6 @@ public class ListaDeProductos extends JFrame {
 		lblTituloProducto.setBounds(83, 10, 103, 21);
 		panelProduct.add(lblTituloProducto);
 
-		// de test Icon foto = new ImageIcon("resources/ñam.jpg");
 		lblFoto = new JLabel();
 		lblFoto.setBounds(10, 41, 260, 131);
 		panelProduct.add(lblFoto);
@@ -141,11 +143,6 @@ public class ListaDeProductos extends JFrame {
 		});
 		ExitPanel.add(btnExitandClose, BorderLayout.WEST);
 
-	}
-
-	public static void main(String[] args) {
-		ListaDeProductos ldp = new ListaDeProductos();
-		ldp.setVisible(true);
 	}
 	
 	public void setPrecioNum(JLabel lblPrecioNum) {
