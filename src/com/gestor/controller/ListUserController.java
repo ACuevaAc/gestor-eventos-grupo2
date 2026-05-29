@@ -2,6 +2,7 @@ package com.gestor.controller;
 
 import java.util.List;
 
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -71,10 +72,12 @@ public class ListUserController {
 	public void delete() {
 		JTable table = view.getTabla();
 		int row = table.getSelectedRow();
-		String email = (String) table.getValueAt(row, 0);
-		
-		us.deleteFromEmail(email);
-		loadTable();
+		if(row!=-1) {
+			String email = (String) table.getValueAt(row, 0);
+			us.deleteFromEmail(email);
+			loadTable();
+		} else
+			JOptionPane.showMessageDialog(null, "Selecciona un usuario");
 	}
 
 }
