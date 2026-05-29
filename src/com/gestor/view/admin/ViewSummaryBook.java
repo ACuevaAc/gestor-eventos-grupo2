@@ -11,6 +11,12 @@ import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+/**
+ * @class ViewSummaryBook
+ * @description Administrative history view viewport acting as a centralized logging console dashboard.
+ * Houses structural tabular layouts presenting global venue booking collections, coordinates relational parameters
+ * mapping customer identities to active physical layout assets, and provides navigation workflows to revert context states.
+ */
 public class ViewSummaryBook extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -18,10 +24,12 @@ public class ViewSummaryBook extends JFrame {
 	private DefaultTableModel model;
 	private JTable table;
 	private JButton btnBack;
-
+	
 	/**
-	 * Create the frame.
-	 */
+     * @constructor
+     * @description Constructs the logging registry frame container, registering structural frame bounds,
+     * mounting tabular schema vectors to parse booking payloads, and configuring positional view containers.
+     */
 	public ViewSummaryBook() {
 		super("Pedido del usuario");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -43,12 +51,30 @@ public class ViewSummaryBook extends JFrame {
 		contentPane.add(pnBoton,BorderLayout.SOUTH);
 
 	}
+
+	/**
+     * @method getModelo
+     * @description Exposes the underlying operational layout schema tracking dynamic row adjustments.
+     * @returns {DefaultTableModel} Data collection management grid array.
+     */
 	public DefaultTableModel getModelo() {
 		return model;
 	}
+
+	/**
+     * @method getTabla
+     * @description Exposes the target interface table container deployed to present active booking entities.
+     * @returns {JTable} Structured presentation layer layout component references.
+     */
 	public JTable getTabla() {
 		return table;
 	}
+
+	/**
+     * @method getBack
+     * @description Resolves the explicit navigation callback node tasked with unwinding history layers from viewports.
+     * @returns {JButton} Programmatic frame rollback interface node.
+     */
 	public JButton getBack() {
 		return btnBack;
 	}

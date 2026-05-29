@@ -11,10 +11,21 @@ import java.util.List;
 import com.config.DatabaseConnection;
 import com.gestor.model.entity.User;
 
+/**
+ * @class UserService
+ * @description Domain service architectural component managing user profile lifecycles and authentication ecosystems,
+ * handling credentials verification checkpoints, transactional identity registrations, primitive field validation rules,
+ * pattern matching lookups, and secure data entity extraction.
+ */
 public class UserService {
 
     private Connection con;
 
+    /**
+     * @constructor
+     * @description Initializes the user identity engine, fetching active data resource connections 
+     * through shared infrastructure connection factories.
+     */
     public UserService() {
 
         try {
@@ -25,6 +36,13 @@ public class UserService {
     }
 
     
+    /**
+     * @method getListByName
+     * @description Queries persistent profiles using parameterized pattern criteria matching to look up emails, 
+     * returning structural account snapshots containing credentials and authorization properties.
+     * @param {String} name - Text pattern value used for partial address matching criteria filter mappings.
+     * @returns {List<User>} Collection listing array matching target credentials projections, or null if database processing fails.
+     */
     public List<User> getListByName(String name) {
     	List<User> list=new ArrayList<>();
     	String sql="SELECT email,password,rol FROM usuario WHERE email LIKE ?";
@@ -47,6 +65,12 @@ public class UserService {
     	return null;
     }
     
+    /**
+     * @method getListUsers
+     * @description Generates a generic index statement tracking down complete structural credential payloads 
+     * from database accounts metadata indices.
+     * @returns {List<User>} Complete flat directory map containing standard authorization models, or null if the resource connection breaks.
+     */
     public List<User> getListUsers() {
     	List<User> lista=new ArrayList<>();
     	String sql="SELECT email,password,rol FROM usuario";
@@ -69,6 +93,13 @@ public class UserService {
     	return null;
     	
     }
+
+    /**
+     * @method deleteFromEmail
+     * @description Executes isolated target structural data purge macros using atomic filtering keys to erase users 
+     * matching unique administrative contact indices.
+     * @param {String} email - Unique messaging communication index assigned to accounts scheduled for physical layout removal.
+     */
     public void deleteFromEmail(String email) {
     	String sql="DELETE FROM usuario WHERE email=?";
     	try {
@@ -82,6 +113,13 @@ public class UserService {
 		}
     }
 
+    /**
+     * @method existsEmail
+     * @description Checks structural tracking indices to identify pre-existing unique contact addresses, 
+     * blocking sequence collisions during parallel creation registrations.
+     * @param {String} email - Target validation string parameter locator.
+     * @returns {boolean} True if matching coordinates yield data records, false otherwise.
+     */
     public boolean existsEmail(String email) {
         String sql = "SELECT * FROM usuario WHERE email=?";
 
@@ -97,6 +135,14 @@ public class UserService {
         return false;
     }
 
+    /**
+     * @method register
+     * @description Verifies user structure states against demographic age constraints and duplicate profile limits, 
+     * mapping property sets into target insertion schemas before persisting components.
+     * @param {User} user - Domain entity snapshot payload holding complete sign-up data definitions.
+     * @returns {boolean} True if insertion operations complete successfully, false upon context exceptions.
+     * @throws {IllegalArgumentException} Thrown if contact credentials mismatch structural configurations, duplicate signatures exist, or age inputs drop under legal boundaries.
+     */
     public boolean register(User user) {
         if (user == null || user.getEmail() == null || user.getEmail().trim().isEmpty()) {
             throw new IllegalArgumentException("User details and email cannot be empty.");
@@ -132,6 +178,14 @@ public class UserService {
         return false;
     }
 
+    /**
+     * @method login
+     * @description Orchestrates the session validation checkpoint lifecycle, processing passing text tokens into 
+     * cryptographic hash targets to verify database matches and fetch authorization profiles.
+     * @param {String} email - Target structural identification mapping property criteria.
+     * @param {String} password - Raw entry passcode token processed using core security hash algorithms.
+     * @returns {User} Complete contextual user entity configuration wrapper if tokens align, or null upon credential collision errors.
+     */
     public User login(String email, String password) {
 
         String sql = "SELECT * FROM usuario WHERE email=? AND password=?";
@@ -163,6 +217,13 @@ public class UserService {
         return null;
     }
 
+    /**
+     * @method getId
+     * @description Locates structural database matrices to pull unique primary sequence identifiers 
+     * linked to specific user contact properties.
+     * @param {String} mail - Absolute target identifier text query criteria input.
+     * @returns {int} Non-negative primary sequential reference record key, or -1 if mappings are empty or fault.
+     */
     public int getId(String mail) {
 
         String sql = "SELECT id FROM usuario WHERE email=?";

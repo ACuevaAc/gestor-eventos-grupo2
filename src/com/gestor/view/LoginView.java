@@ -18,6 +18,13 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+/**
+ * @class LoginView
+ * @description Authentication gateway interface canvas serving as the initial security checkpoint viewport.
+ * Houses structured input fields capturing user identity credentials, provides visual text masking properties 
+ * for security assets protection, initializes custom interface style lookups, and exposes structural handles 
+ * to wire controller actions and workflow redirections.
+ */
 public class LoginView extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -46,6 +53,11 @@ public class LoginView extends JFrame {
 	private JButton btnLogIn;
 	private JButton btnSignUp;
 
+	/**
+     * @constructor
+     * @description Constructs the authentication frame window, enforcing window placement profiles, 
+     * generating compound padded borders around credential fields, and establishing user action entry nodes.
+     */
 	public LoginView() {
 		setTitle("Gestor de Restaurante - Acceso");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -141,34 +153,74 @@ public class LoginView extends JFrame {
 		contentPane.add(actionPanel, BorderLayout.SOUTH);
 	}
 
+	/**
+     * @method getTxtEmail
+     * @description Exposes the text input field responsible for collecting account identification tracking strings.
+     * @returns {JTextField} Alphanumeric communication handle locator structure.
+     */
 	public JTextField getTxtEmail() {
 		return txtEmail;
 	}
 
+	/**
+     * @method setTxtEmail
+     * @description Binds an input data tracker handling user login nomenclature coordinates.
+     * @param {JTextField} txtEmail - Target electronic messaging field resource.
+     */
 	public void setTxtEmail(JTextField txtEmail) {
 		this.txtEmail = txtEmail;
 	}
 
+	/**
+     * @method getPasswordField
+     * @description Exposes the text tracking container processing entry verification tokens under mask properties.
+     * @returns {JPasswordField} Secure identity string component reference.
+     */
 	public JPasswordField getPasswordField() {
 		return passwordField;
 	}
 
+	/**
+     * @method setPasswordField
+     * @description Registers an isolated masked validation field asset tracking credential pass strings.
+     * @param {JPasswordField} passwordField - Target masked interaction element framework.
+     */
 	public void setPasswordField(JPasswordField passwordField) {
 		this.passwordField = passwordField;
 	}
 
+	/**
+     * @method getBtnLogIn
+     * @description Resolves the primary execution trigger deploying confirmation loops onto input authorization credentials.
+     * @returns {JButton} Session setup transaction action button.
+     */
 	public JButton getBtnLogIn() {
 		return btnLogIn;
 	}
 
+	/**
+     * @method setBtnLogIn
+     * @description Installs the explicit visual control button engine managing execution login workflows.
+     * @param {JButton} btnLogIn - Target action processing trigger component.
+     */
 	public void setBtnLogIn(JButton btnLogIn) {
 		this.btnLogIn = btnLogIn;
 	}
 
+	/**
+     * @method getBtnSignUp
+     * @description Returns the wizard navigation redirection link deployed to transition view contexts onto profile creation screens.
+     * @returns {JButton} Interface redirection navigation button.
+     */
 	public JButton getBtnSignUp() {
 		return btnSignUp;
 	}
 
+	/**
+     * @method setBtnSignUp
+     * @description Registers a specific navigation action element responsible for launching structural enrollment flows.
+     * @param {JButton} btnSignUp - Target frame swap interaction node asset.
+     */
 	public void setBtnSignUp(JButton btnSignUp) {
 		this.btnSignUp = btnSignUp;
 	}

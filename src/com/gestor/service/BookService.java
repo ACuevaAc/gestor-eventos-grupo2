@@ -150,6 +150,14 @@ public class BookService {
 		return 4;
 	}
 
+	/**
+     * @method isUserAlreadyBooked
+     * @description Evaluates identity context fields to identify pre-existing duplicate transaction collisions 
+     * for a concrete user tracking reference and a physical asset node.
+     * @param {int} userId - Unique identity primary key locator parameter.
+     * @param {int} tableId - Inventory asset component primary key parameter.
+     * @returns {boolean} True if matching index coordinates yield row records, false otherwise.
+     */
 	public boolean isUserAlreadyBooked(int userId, int tableId) {
 		String sql = "SELECT 1 FROM reserva WHERE id_usuario = ? AND id_mesa = ?";
 
@@ -165,6 +173,12 @@ public class BookService {
 		return false;
 	}
 
+	/**
+     * @method deleteFromBooking
+     * @description Executes isolated single-parameter cascading deletion commands across targeted relational 
+     * reservation entities bound to a physical resource position.
+     * @param {int} tableid - Unique identifier primary key specifying resource records scheduled for removal.
+     */
 	public void deleteFromBooking(int tableid) {
 		String sql = "DELETE FROM RESERVA WHERE ID_MESA = ?";
 		try {

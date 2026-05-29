@@ -8,10 +8,21 @@ import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
 import com.config.DatabaseConnection;
 
+/**
+ * @class FreeChartService
+ * @description Domain service architectural component managing business intelligence visualization models,
+ * querying reporting metrics, executing relational join aggregate queries, and mapping data snapshots 
+ * directly into specialized JFreeChart dataset structures (Category and Pie datasets).
+ */
 public class FreeChartService {
 
     public Connection conn;
 
+    /**
+     * @constructor
+     * @description Initializes the data analytics reporting sub-system context, pulling active relational database 
+     * connections via shared transactional connection utilities.
+     */
     public FreeChartService() {
         try {
             this.conn = DatabaseConnection.getConnection();
@@ -20,6 +31,12 @@ public class FreeChartService {
         }
     }
 
+    /**
+     * @method getMostOrderedProducts
+     * @description Issues a synchronous relational query matching sales lines and catalog items, compiling volumetric 
+     * item aggregations grouped by unique object identifiers to feed categorical layout bar chart structures.
+     * @returns {DefaultCategoryDataset} Data representation matrix specifying units sold mapped against structural product labels.
+     */
     public DefaultCategoryDataset getMostOrderedProducts() {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         String sql = "SELECT pro.nombre AS producto_nombre, SUM(p.cantidad) AS total_pedido "
@@ -42,7 +59,12 @@ public class FreeChartService {
         return dataset;
     }
 
-  // Agrupa mesa por numero de comensales
+    /**
+     * @method getTablesByCapacity
+     * @description Executes inventory analytical checks, isolating physical location entities by matching configuration bounds, 
+     * applying statistical group counting metrics based on capacity rules, and translating records into categorical pie charts.
+     * @returns {DefaultPieDataset} Proportional data allocation map tracking venue asset ratios categorized by peak seating capacities.
+     */
     public DefaultPieDataset getTablesByCapacity() {
         DefaultPieDataset dataset = new DefaultPieDataset();
         

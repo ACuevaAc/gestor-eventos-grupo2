@@ -30,6 +30,13 @@ import com.gestor.model.entity.User;
 import com.gestor.service.BookService;
 import com.gestor.service.TableService;
 
+/**
+ * @class UserMainView
+ * @description Primary client dashboard presentation layer providing an interactive structural grid floor plan viewport.
+ * Fetches layout asset tracking catalogs, processes transactional booking requests with real-time capacity thresholds checks, 
+ * maps stateful visual color codes matching account privileges, triggers proportional matrix resizing recalculations,
+ * and tracks string filtering inputs to selectively toggle button visibility matrices.
+ */
 public class UserMainView extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -45,6 +52,13 @@ public class UserMainView extends JFrame {
 	private JTextField FilterTXT;
 	private List<JButton> tablesList = new ArrayList<>();
 
+	/**
+     * @constructor
+     * @description Initializes the core floor plan matrix, binds local business logic engines, maps multi-tier 
+     * structural layout schema nodes, instantiates interactive button entities wrapped inside conditional transaction boundaries, 
+     * and installs structural text input monitors and window resize tracking hooks.
+     * @param {User} user - The active customer session profile mapping execution scopes.
+     */
 	public UserMainView(User user) {
 
 		super("Reservar mesas");
@@ -186,6 +200,14 @@ public class UserMainView extends JFrame {
 		SearchPanel.add(FilterTXT);
 	}
 
+	/**
+     * @method updateTablesSize
+     * @private
+     * @description Recalculates dimensional scale indices relative to parent canvas size configurations, 
+     * bounding absolute geometric ratios and enforcing safe proportional thresholds across registered button arrays.
+     * @param {int} widthPanel - Dynamic width boundaries of the active layout tracking container.
+     * @param {int} heightPanel - Dynamic height boundaries of the active layout tracking container.
+     */
 	private void updateTablesSize(int widthPanel, int heightPanel) {
 		int horizontalGap = 30;
 		int width = (widthPanel - (horizontalGap * 4)) / 3;
@@ -203,14 +225,31 @@ public class UserMainView extends JFrame {
 		contentPane.revalidate();
 	}
 
+	/**
+     * @method getTablesList
+     * @description Returns the core tracking collection holding registered structural floor button elements.
+     * @returns {List<JButton>} Dynamic vector list holding system button handles.
+     */
 	public List<JButton> getTablesList() {
 		return tablesList;
 	}
 
+	/**
+     * @method setTablesList
+     * @description Replaces or registers a collection array mapping target visual dashboard asset triggers.
+     * @param {List<JButton>} tablesList - Source list array holding layout tracking button references.
+     */
 	public void setTablesList(List<JButton> tablesList) {
 		this.tablesList = tablesList;
 	}
 
+	/**
+     * @method FilterTables
+     * @private
+     * @description Iterates through stored button arrays evaluating current nomenclature labels against matching
+     * lowercase query strings, selectively toggling element visibility layers.
+     * @param {String} text - Alphanumeric lookup criterion string token.
+     */
 	private void FilterTables(String text) {
 		String filter = text.toLowerCase().trim();
 
@@ -228,6 +267,14 @@ public class UserMainView extends JFrame {
 		contentPane.repaint();
 	}
 
+	/**
+     * @method createOvalButton
+     * @private
+     * @description Builds a structured custom button instance configured with precise typeface settings,
+     * hand cursor vectors, focus border suppressions, and native round-rect parameters.
+     * @param {String} text - Descriptive labeling string destined for visual rendering.
+     * @returns {JButton} Formatted button component instance wrapper.
+     */
 	private JButton createOvalButton(String text) {
 		JButton btn = new JButton(text);
 		btn.setFont(tableFont);

@@ -21,6 +21,12 @@ import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 
+/**
+ * @class signupadminView
+ * @description Administrative registration window interface acting as the account creation wizard cockpit.
+ * Handles demographic information fields validation matrices, captures credential input constraints,
+ * manages responsive borders configurations, and exposes operational transaction hooks for administrative provisioning.
+ */
 public class signupadminView extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -44,6 +50,11 @@ public class signupadminView extends JFrame {
 	private final Font FUENTE_INPUT = new Font("Segoe UI", Font.PLAIN, 14);
 	private final Font FUENTE_BOTON = new Font("Segoe UI", Font.BOLD, 14);
 
+	/**
+     * @constructor
+     * @description Constructs the administrative sign-up viewport container, mapping display boundary thresholds,
+     * mounting structural input field managers, and binding action listeners to execute profile provisioning loops.
+     */
 	public signupadminView() {
 		setTitle("Registro - Gestor de Restaurante");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -180,69 +191,148 @@ public class signupadminView extends JFrame {
 
 		contentPane.add(actionPanel, BorderLayout.SOUTH);
 	}
+	/**
+     * @method getTxtNombre
+     * @description Exposes the text tracking controller capturing the user's descriptive nomenclature string.
+     * @returns {JTextField} Core alphanumeric entry component context.
+     */
+    public JTextField getTxtNombre() {
+        return txtNombre;
+    }
 
-	public JTextField getTxtNombre() {
-		return txtNombre;
-	}
+    /**
+     * @method setTxtNombre
+     * @description Injects an operational interface string text input handling structural profile identities.
+     * @param {JTextField} txtNombre - Target nomenclature text entry element reference.
+     */
+    public void setTxtNombre(JTextField txtNombre) {
+        this.txtNombre = txtNombre;
+    }
 
-	public void setTxtNombre(JTextField txtNombre) {
-		this.txtNombre = txtNombre;
-	}
+    /**
+     * @method getTxtEdad
+     * @description Exposes the data tracker monitoring user chronological demographic parameters.
+     * @returns {JTextField} Numeric tracking entry field.
+     */
+    public JTextField getTxtEdad() {
+        return txtEdad;
+    }
 
-	public JTextField getTxtEdad() {
-		return txtEdad;
-	}
+    /**
+     * @method setTxtEdad
+     * @description Binds a text tracking field module designated to capture administrative age boundaries metrics.
+     * @param {JTextField} txtEdad - Target quantitative entry container.
+     */
+    public void setTxtEdad(JTextField txtEdad) {
+        this.txtEdad = txtEdad;
+    }
 
-	public void setTxtEdad(JTextField txtEdad) {
-		this.txtEdad = txtEdad;
-	}
+    /**
+     * @method getTxtEmail
+     * @description Exposes the primary data tracker field capturing account administration unique messaging channels.
+     * @returns {JTextField} Unique coordinate locator input entry element.
+     */
+    public JTextField getTxtEmail() {
+        return txtEmail;
+    }
 
-	public JTextField getTxtEmail() {
-		return txtEmail;
-	}
+    /**
+     * @method setTxtEmail
+     * @description Binds an input text structure responsible for processing target unique communication parameters.
+     * @param {JTextField} txtEmail - Target administrative electronic tracking contact.
+     */
+    public void setTxtEmail(JTextField txtEmail) {
+        this.txtEmail = txtEmail;
+    }
 
-	public void setTxtEmail(JTextField txtEmail) {
-		this.txtEmail = txtEmail;
-	}
+    /**
+     * @method getTxtConfirmEmail
+     * @description Exposes the duplicate checking string module validating structural coordinate inputs.
+     * @returns {JTextField} Structural validation text checker interface component.
+     */
+    public JTextField getTxtConfirmEmail() {
+        return txtConfirmEmail;
+    }
 
-	public JTextField getTxtConfirmEmail() {
-		return txtConfirmEmail;
-	}
+    /**
+     * @method setTxtConfirmEmail
+     * @description Registers a specific text entry field to operate as an administrative verification checkpoint anchor.
+     * @param {JTextField} txtConfirmEmail - Target duplicate coordinate confirmation field.
+     */
+    public void setTxtConfirmEmail(JTextField txtConfirmEmail) {
+        this.txtConfirmEmail = txtConfirmEmail;
+    }
 
-	public void setTxtConfirmEmail(JTextField txtConfirmEmail) {
-		this.txtConfirmEmail = txtConfirmEmail;
-	}
+    /**
+     * @method getTxtPassword
+     * @description Exposes the masked structural component masking credential verification tokens.
+     * @returns {JPasswordField} Cryptographic entry security input resource tracking component.
+     */
+    public JPasswordField getTxtPassword() {
+        return txtPassword;
+    }
 
-	public JPasswordField getTxtPassword() {
-		return txtPassword;
-	}
+    /**
+     * @method setTxtPassword
+     * @description Configures or installs a secure credential masking entry field handling pass tokens.
+     * @param {JPasswordField} txtPassword - Target secure identification string token field.
+     */
+    public void setTxtPassword(JPasswordField txtPassword) {
+        this.txtPassword = txtPassword;
+    }
 
-	public void setTxtPassword(JPasswordField txtPassword) {
-		this.txtPassword = txtPassword;
-	}
+    /**
+     * @method getTxtConfirmPassword
+     * @description Exposes the duplicate verification secure container checking structural pass credentials keys stability.
+     * @returns {JPasswordField} Cryptographic token confirmation tracker reference.
+     */
+    public JPasswordField getTxtConfirmPassword() {
+        return txtConfirmPassword;
+    }
 
-	public JPasswordField getTxtConfirmPassword() {
-		return txtConfirmPassword;
-	}
+    /**
+     * @method setTxtConfirmPassword
+     * @description Configures an isolated masked field deployment designed to confirm identity credential tokens layout maps.
+     * @param {JPasswordField} txtConfirmPassword - Target password double check field asset.
+     */
+    public void setTxtConfirmPassword(JPasswordField txtConfirmPassword) {
+        this.txtConfirmPassword = txtConfirmPassword;
+    }
 
-	public void setTxtConfirmPassword(JPasswordField txtConfirmPassword) {
-		this.txtConfirmPassword = txtConfirmPassword;
-	}
+    /**
+     * @method getBtnCreate
+     * @description Resolves the primary execution workflow node tasked with dispatching profile creation validations and structural insertion loops.
+     * @returns {JButton} The administrative signup action button instance.
+     */
+    public JButton getBtnCreate() {
+        return btnCreate;
+    }
 
-	public JButton getBtnCreate() {
-		return btnCreate;
-	}
+    /**
+     * @method setBtnCreate
+     * @description Replaces or wires the explicit creation workflow interaction button engine.
+     * @param {JButton} btnCreate - Target account submission trigger management node.
+     */
+    public void setBtnCreate(JButton btnCreate) {
+        this.btnCreate = btnCreate;
+    }
 
-	public void setBtnCreate(JButton btnCreate) {
-		this.btnCreate = btnCreate;
-	}
+    /**
+     * @method getBtnBack
+     * @description Returns the navigation menu rollback action button deployed to pop active views from the display frame stacks.
+     * @returns {JButton} Visual cancellation workflow navigation element.
+     */
+    public JButton getBtnBack() {
+        return btnBack;
+    }
 
-	public JButton getBtnBack() {
-		return btnBack;
-	}
-
-	public void setBtnBack(JButton btnBack) {
-		this.btnBack = btnBack;
-	}
+    /**
+     * @method setBtnBack
+     * @description Hooks a custom navigation callback node onto the application's interface panel matrix layout boundaries.
+     * @param {JButton} btnBack - Target frame dismiss view resource trigger.
+     */
+    public void setBtnBack(JButton btnBack) {
+        this.btnBack = btnBack;
+    }
 
 }

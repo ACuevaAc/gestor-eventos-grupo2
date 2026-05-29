@@ -9,6 +9,12 @@ import com.gestor.model.entity.SummaryOrders;
 import java.awt.*;
 import java.util.List;
 
+/**
+ * @class AdminTableDetailView
+ * @description Administrative modal dialog interface wrapper displaying real-time billing breakdowns.
+ * Renders itemized product lists, total volume counts, and granular financial thresholds inside structured tables
+ * mapping data states from custom view projections.
+ */
 public class AdminTableDetailView extends JDialog {
 
 	private static final long serialVersionUID = 1L;
@@ -16,6 +22,14 @@ public class AdminTableDetailView extends JDialog {
 	private DefaultTableModel tableModel;
 	private JLabel lblTotal;
 
+	/**
+     * @constructor
+     * @description Constructs the modal detailed invoice view dashboard container, establishing modal focus boundaries,
+     * building the visual list structures, configuring cell tracking constraints, and triggering local dataset injection hooks.
+     * @param {JFrame} parentFrame - Root parent cockpit viewport frame managing context focus constraints.
+     * @param {String} tableName - The descriptive layout title representing the targeted floor plan asset.
+     * @param {List<SummaryOrders>} orders - Consolidated structural line-item projection collection payload.
+     */
 	public AdminTableDetailView(JFrame parentFrame, String tableName, List<SummaryOrders> orders) {
 		super(parentFrame, "Detalles de la " + tableName, true); // true = Modal
 
@@ -31,6 +45,13 @@ public class AdminTableDetailView extends JDialog {
 
 		String[] columnNames = { "Producto", "Cantidad", "Precio Total (€)" };
 		tableModel = new DefaultTableModel(columnNames, 0) {
+			/**
+             * @method isCellEditable
+             * @description Overrides standard table models parameters to isolate cells from structural manual data entry alterations.
+             * @param {int} row - Horizontal sequence tracking entry coordinates.
+             * @param {int} column - Vertical field type positioning index coordinates.
+             * @returns {boolean} Absolute boolean false constraint preventing manual cell modifications.
+             */
 			@Override
 			public boolean isCellEditable(int row, int column) {
 				return false; // Evita que el admin edite las celdas escribiendo
@@ -59,6 +80,13 @@ public class AdminTableDetailView extends JDialog {
 		loadData(orders);
 	}
 
+	/**
+     * @method loadData
+     * @private
+     * @description Processes execution logic to populate grid layouts, running loops across entity lists,
+     * formatting text numeric currencies into explicit precision formats, and calculating final balance summaries.
+     * @param {List<SummaryOrders>} orders - Target data collection array holding data projection models.
+     */
 	private void loadData(List<SummaryOrders> orders) {
 		double grandTotal = 0.0;
 
