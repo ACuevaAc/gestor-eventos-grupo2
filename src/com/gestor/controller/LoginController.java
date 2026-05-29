@@ -9,11 +9,31 @@ import com.gestor.view.SignupView;
 import com.gestor.view.admin.AdminMainView;
 import com.gestor.view.user.UserMainView;
 
+/**
+ * @class LoginController
+ * @description Controller architectural component managing the authentication lifecycle gateway,
+ * handling credential processing, role-based session routing, and UI view transitions.
+ */
 public class LoginController {
 
+    /**
+     * @private
+     * @type {LoginView}
+     */
     private LoginView view;
+
+    /**
+     * @private
+     * @type {UserService}
+     */
     private UserService uService;
 
+    /**
+     * @constructor
+     * @description Initializes the authorization gate entry context and maps action listeners to interface components.
+     * @param {LoginView} v - The login credentials input collection view interface.
+     * @param {UserService} us - The service layer managing identity validation business logic.
+     */
     public LoginController(LoginView v, UserService us) {
 
         this.view = v;
@@ -23,6 +43,11 @@ public class LoginController {
         view.getBtnSignUp().addActionListener(e -> register());
     }
 
+    /**
+     * @method register
+     * @description Disposes of the active authentication window frame to transition the navigation routing 
+     * context into the profile registration workflow wizard.
+     */
     public void register() {
 
         view.dispose();
@@ -33,6 +58,11 @@ public class LoginController {
         new RegisterController(v, this, uService);
     }
 
+    /**
+     * @method login
+     * @description Extracts real-time credential payload input arrays, invokes backend validation pipelines, 
+     * and evaluates identity authorization tokens to branch interface routing toward user or administrative dashboards.
+     */
     public void login() {
 
         String email = view.getTxtEmail().getText();
