@@ -15,11 +15,36 @@ import com.gestor.service.ProductService;
 import com.gestor.view.admin.AdminMainView;
 import com.gestor.view.admin.FormCrearProducto;
 
+/**
+ * @class CreateProductController
+ * @description Controller architectural component managing the product creation inventory subsystem,
+ * handling binary image telemetry processing, user validation filters, and local view routing transitions.
+ */
 public class CreateProductController {
+    /**
+     * @private
+     * @type {FormCrearProducto}
+     */
     private FormCrearProducto view;
+
+    /**
+     * @private
+     * @type {ProductService}
+     */
     private ProductService ps;
+
+    /**
+     * @private
+     * @type {AdminController}
+     */
     private AdminController aCont;
     
+    /**
+     * @constructor
+     * @description Initializes the contextual asset ingestion execution flow, linking user event listeners to target triggers.
+     * @param {AdminController} ac - Main orchestration tracking parent administrative context.
+     * @param {FormCrearProducto} v - Catalog input wizard frame view representation container.
+     */
     public CreateProductController(AdminController ac, FormCrearProducto v) {
         this.aCont = ac;
         this.view = v;
@@ -30,6 +55,11 @@ public class CreateProductController {
         view.getBtnBuscarImagen().addActionListener(e -> searchImage());
     }
     
+    /**
+     * @method searchImage
+     * @description Spawns a system file selector dialog filtered by specific image extensions, 
+     * caching target references and generating downscaled layout thumbnails for user feedback.
+     */
     public void searchImage() {
         JFileChooser selector = new JFileChooser();
         FileNameExtensionFilter _filter = new FileNameExtensionFilter("Imágenes (JPG, PNG)", "jpg", "jpeg", "png");
@@ -52,6 +82,14 @@ public class CreateProductController {
             view.getLblRutaImagen().setIcon(new ImageIcon(scaledIcon));
         }
     }
+
+    /**
+     * @method createProduct
+     * @description Parses structural text specifications, transforms selected visual assets into binary arrays, 
+     * executes target model entity validation pipelines, and transfers persistence tasks to core backend services.
+     * @throws {NumberFormatException} Implicitly caught if text criteria mapping for data values violates double parsing schemas.
+     * @throws {IOException} Implicitly caught if disk storage asset reading fails during byte array extraction pipelines.
+     */
     public void createProduct() {
         try {
             String name = view.getTxtNombre().getText().trim();
@@ -86,6 +124,11 @@ public class CreateProductController {
     }
 
     
+    /**
+     * @method back
+     * @description Terminates active creation layout frames to return application navigation focus 
+     * to primary management dashboard control threads.
+     */
     public void back() {
         view.dispose();
         AdminMainView v=new AdminMainView();
